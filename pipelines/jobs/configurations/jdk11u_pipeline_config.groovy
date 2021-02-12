@@ -3,7 +3,7 @@ class Config11 {
         x64Mac    : [
                 os                  : 'mac',
                 arch                : 'x64',
-                additionalNodeLabels : 'macos10.14',
+                additionalNodeLabels : 'ci.project.openj9 && hw.arch.x86 && sw.os.osx.10_14',
                 test                : 'default',
                 configureArgs       : [
                         "openj9"      : '--enable-dtrace=auto --with-cmake',
@@ -14,7 +14,7 @@ class Config11 {
         x64MacXL    : [
                 os                   : 'mac',
                 arch                 : 'x64',
-                additionalNodeLabels : 'macos10.14',
+                additionalNodeLabels: 'macos10.14',
                 test                 : 'default',
                 additionalFileNameTag: "macosXL",
                 configureArgs        : '--with-noncompressedrefs --enable-dtrace=auto --with-cmake'
@@ -23,10 +23,12 @@ class Config11 {
         x64Linux  : [
                 os                  : 'linux',
                 arch                : 'x64',
+                additionalNodeLabels : 'ci.project.openj9 && hw.arch.x86 && sw.os.linux',
                 dockerImage         : 'adoptopenjdk/centos6_build_image',
                 dockerFile: [
                         openj9  : 'pipelines/build/dockerFiles/cuda.dockerfile'
                 ],
+                dockerNode          : 'sw.tool.docker && sw.config.uid1000',
                 test                : 'default',
                 configureArgs       : [
                         "openj9"      : '--enable-jitserver --enable-dtrace=auto',
@@ -42,7 +44,7 @@ class Config11 {
                 arch                : 'x64',
                 additionalNodeLabels: [
                         hotspot:    'win2012',
-                        openj9:     'win2012&&vs2017',
+                        openj9:     'ci.project.openj9 && hw.arch.x86 && sw.os.windows',
                         dragonwell: 'win2012'
                 ],
                 buildArgs : [
@@ -75,7 +77,7 @@ class Config11 {
                 arch                : 'ppc64',
                 additionalNodeLabels: [
                         hotspot: 'xlc13&&aix710',
-                        openj9:  'xlc13&&aix715'
+                        openj9:  'hw.arch.ppc64 && sw.os.aix.7_1'
                 ],
                 test                : 'default',
                 cleanWorkspaceAfterBuild: true
@@ -85,6 +87,9 @@ class Config11 {
                 os                  : 'linux',
                 arch                : 's390x',
                 test                : 'default',
+                additionalNodeLabels: [
+                        openj9:  'hw.arch.s390x && (sw.os.cent.7 || sw.os.rhel.7)'
+                ],
                 configureArgs       : '--enable-dtrace=auto'
         ],
 
@@ -100,6 +105,9 @@ class Config11 {
                 arch                : 'ppc64le',
                 additionalNodeLabels : 'centos7',
                 test                : 'default',
+                additionalNodeLabels: [
+                        openj9:  'hw.arch.ppc64le && (sw.os.cent.7 || sw.os.rhel.7)'
+                ],
                 configureArgs       : [
                         "hotspot"     : '--enable-dtrace=auto',
                         "openj9"      : '--enable-dtrace=auto --enable-jitserver'
@@ -118,12 +126,12 @@ class Config11 {
                 os                  : 'linux',
                 arch                : 'aarch64',
                 dockerImage         : 'adoptopenjdk/centos7_build_image',
-                test                : 'default',
+                dockerNode         : 'sw.tool.docker',
                 additionalNodeLabels: [
-                        dragonwell: 'dragonwell'
+                        openj9:  'hw.arch.aarch64 && sw.os.linux'
                 ],
-                additionalTestLabels: [
-                        dragonwell: 'dragonwell'
+                test                : [
+                        nightly: ['sanity.functional', 'sanity.openjdk']
                 ],
                 configureArgs       : [
                         "hotspot" : '--enable-dtrace=auto',
@@ -169,10 +177,12 @@ class Config11 {
         ],
         riscv64Linux      :  [
                 os                   : 'linux',
+                arch                 : 'riscv64',
                 dockerImage          : [
                         "openj9" : 'adoptopenjdk/centos6_build_image',
                 ],
-                arch                 : 'riscv64',
+                dockerNode         : 'sw.tool.docker && sw.config.uid1000',
+
                 crossCompile         : [
                         "openj9"     : 'x64'
                 ],
@@ -181,7 +191,8 @@ class Config11 {
                 ],
                 configureArgs        : [
                         "openj9"     : '--disable-ddr --openjdk-target=riscv64-unknown-linux-gnu --with-sysroot=/opt/fedora28_riscv_root'
-                ]
+                ],
+                test                 : false
         ]
   ]
 

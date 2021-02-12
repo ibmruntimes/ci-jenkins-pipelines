@@ -6,8 +6,9 @@ class Config8 {
                 additionalNodeLabels: [
                         hotspot : 'macos10.14',
                         corretto: 'build-macstadium-macos1010-1',
-                        openj9  : 'macos10.14'
+                        openj9  : 'ci.project.openj9 && hw.arch.x86 && sw.os.osx.10_14'
                 ],
+                cleanWorkspaceAfterBuild: true,
                 test                 : 'default'
         ],
 
@@ -23,11 +24,13 @@ class Config8 {
         x64Linux      : [
                 os                  : 'linux',
                 arch                : 'x64',
+                additionalNodeLabels : 'ci.project.openj9 && hw.arch.x86 && sw.os.linux',
                 dockerImage         : 'adoptopenjdk/centos6_build_image',
                 dockerFile: [
                         openj9  : 'pipelines/build/dockerFiles/cuda.dockerfile',
                         dragonwell: 'pipelines/build/dockerFiles/dragonwell.dockerfile'
                 ],
+                dockerNode          : 'sw.tool.docker && sw.config.uid1000',
                 test                 : 'default',
                 configureArgs       : [
                         "openj9"      : '--enable-jitserver',
@@ -38,7 +41,12 @@ class Config8 {
         x64Windows    : [
                 os                  : 'windows',
                 arch                : 'x64',
-                additionalNodeLabels: 'win2012',
+                additionalNodeLabels: [
+                        hotspot : 'win2012',
+                        corretto: 'win2012',
+                        openj9  : 'ci.project.openj9 && hw.arch.x86 && sw.os.windows',
+                        dragonwell: 'win2012'
+                ],
                 test                 : 'default'
         ],
 
@@ -54,7 +62,11 @@ class Config8 {
         x32Windows    : [
                 os                  : 'windows',
                 arch                : 'x86-32',
-                additionalNodeLabels: 'win2012',
+                additionalNodeLabels: [
+                        hotspot : 'win2012',
+                        corretto: 'win2012',
+                        openj9  : 'ci.project.openj9 && hw.arch.x86 && sw.os.windows'
+                ],
                 buildArgs : [
                         hotspot : '--jvm-variant client,server'
                 ],
@@ -66,15 +78,22 @@ class Config8 {
                 arch: 'ppc64',
                 additionalNodeLabels: [
                         hotspot: 'xlc13&&aix710',
-                        openj9:  'xlc13&&aix715'
+                        openj9:  'hw.arch.ppc64 && sw.os.aix.7_1'
                 ],
                 test                 : 'default',
+                configureArgs: [
+                    "openj9"        : '--disable-ccache'
+                ],
                 cleanWorkspaceAfterBuild: true
         ],
 
         s390xLinux    : [
                 os  : 'linux',
                 arch: 's390x',
+                cleanWorkspaceAfterBuild: true,
+                additionalNodeLabels: [
+                        openj9:  'hw.arch.s390x && (sw.os.cent.7 || sw.os.rhel.7)'
+                ],
                 test                 : 'default'
         ],
 
@@ -95,6 +114,10 @@ class Config8 {
                 arch: 'ppc64le',
                 additionalNodeLabels : 'centos7',
                 test                 : 'default',
+                cleanWorkspaceAfterBuild: true,
+                additionalNodeLabels: [
+                        openj9:  'hw.arch.ppc64le && (sw.os.cent.7 || sw.os.rhel.7)'
+                ],
                 configureArgs       : [
                         "openj9"      : '--enable-jitserver'
                 ]
@@ -113,6 +136,14 @@ class Config8 {
                 dockerFile: [
                         dragonwell: 'pipelines/build/dockerFiles/dragonwell_aarch64.dockerfile'
                 ],
+                dockerNode         : 'sw.tool.docker',
+                additionalNodeLabels: [
+                        openj9:  'hw.arch.aarch64 && sw.os.linux'
+                ],
+                test                : [
+                        nightly: ['sanity.functional', 'sanity.openjdk']
+                ],
+                cleanWorkspaceAfterBuild: true,
                 test                 : 'default'
         ],
 

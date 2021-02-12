@@ -250,7 +250,7 @@ class Regeneration implements Serializable {
     * @return
     */
     def formAdditionalBuildNodeLabels(Map<String, ?> configuration, String variant) {
-        def buildTag = "build"
+        def buildTag = "ci.role.build.release && ci.project.openj9"
         def labels = "${buildTag}"
 
         if (configuration.containsKey("additionalNodeLabels")) {
@@ -407,7 +407,7 @@ class Regeneration implements Serializable {
                 TEST_LIST: testList,
                 SCM_REF: "",
                 BUILD_ARGS: buildArgs,
-                NODE_LABEL: "${additionalNodeLabels}&&${platformConfig.os}&&${archLabel}",
+                NODE_LABEL: "${additionalNodeLabels}",
                 ADDITIONAL_TEST_LABEL: "${additionalTestLabels}",
                 KEEP_TEST_REPORTDIR: false,
                 ACTIVE_NODE_TIMEOUT: "",
