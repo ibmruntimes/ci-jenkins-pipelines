@@ -1,12 +1,12 @@
 {
     "repository"             : {
-        "build_url"          : "https://github.com/AdoptOpenJDK/openjdk-build.git",
-        "build_branch"       : "master",
-        "pipeline_url"       : "https://github.com/AdoptOpenJDK/ci-jenkins-pipelines.git",
-        "pipeline_branch"    : "master"
+        "build_url"          : "https://github.com/AdamBrousseau/openjdk-build.git",
+        "build_branch"       : "ibm_os",
+        "pipeline_url"       : "https://github.com/AdamBrousseau/ci-jenkins-pipelines.git",
+        "pipeline_branch"    : "ibm_os"
     },
     "jenkinsDetails"         : {
-        "rootUrl"            : "https://ci.adoptopenjdk.net",
+        "rootUrl"            : "https://hyc-runtimes-jenkins.swg-devops.com/",
         "rootDirectory"      : "build-scripts"
     },
     "templateDirectories" : {
