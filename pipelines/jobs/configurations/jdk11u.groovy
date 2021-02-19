@@ -9,10 +9,10 @@ targetConfigurations = [
         "riscv64Linux"  : [ "openj9" ]
 ]
 
-// 18:05 Tue, Thur
-triggerSchedule_nightly="TZ=UTC\n05 18 * * 2,4"
-// 17:05 Sat
-triggerSchedule_weekly="TZ=UTC\n05 17 * * 6"
+// Weeknights at H9:00pm
+triggerSchedule_nightly="H 21 * * 1-5"
+// H9:00am Sat
+triggerSchedule_weekly="H 9 * * 6"
 
 // scmReferences to use for weekly release build
 weekly_release_scmReferences=[

@@ -22,17 +22,14 @@ targetConfigurations = [
         ]
 ]
 
-// 23:30 Mon, Wed, Fri
-triggerSchedule_nightly="TZ=UTC\n30 23 * * 1,3,5"
-// 04:30 Sun
-triggerSchedule_weekly="TZ=UTC\n30 04 * * 7"
+// Weeknights at H9:00pm
+triggerSchedule_nightly="H 21 * * 1-5"
+// H9:00am Sat
+triggerSchedule_weekly="H 9 * * 6"
 
 // scmReferences to use for weekly release build
 weekly_release_scmReferences=[
-        "hotspot"        : "",
-        "openj9"         : "",
-        "corretto"       : "",
-        "dragonwell"     : ""
+        "openj9"         : ""
 ]
 
 return this
