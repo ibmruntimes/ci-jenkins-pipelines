@@ -112,6 +112,9 @@ class Config16 {
                         openj9:  'hw.arch.ppc64 && sw.os.aix.7_1'
                 ],
                 test                : 'default',
+                configureArgs: [
+                        openj9: '--disable-ccache'
+                ],
                 cleanWorkspaceAfterBuild: true
         ],
 

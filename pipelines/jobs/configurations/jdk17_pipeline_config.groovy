@@ -6,10 +6,7 @@ class Config17 {
                 additionalNodeLabels: 'ci.project.openj9 && hw.arch.x86 && sw.os.osx.10_14',
                 test                : 'default',
                 cleanWorkspaceAfterBuild: true,
-                configureArgs       : [
-                    hotspot : '--enable-dtrace',
-                    openj9 : '--enable-dtrace --with-mixedrefs'
-                ]
+                configureArgs       : '--enable-dtrace'
         ],
 
         x64MacXL    : [
@@ -39,7 +36,7 @@ class Config17 {
                         openj9      : '!(sw.os.cent.6||sw.os.rhel.6)'
                 ],
                 configureArgs       : [
-                        "openj9"      : '--enable-dtrace --enable-jitserver --with-mixedrefs',
+                        "openj9"      : '--enable-dtrace --enable-jitserver',
                         "hotspot"     : '--enable-dtrace'
                 ]
         ],
@@ -71,9 +68,6 @@ class Config17 {
                 arch                : 'x64',
                 additionalNodeLabels: 'ci.project.openj9 && hw.arch.x86 && sw.os.windows',
                 cleanWorkspaceAfterBuild: true,
-                configureArgs : [
-                    openj9 : ' --with-mixedrefs'
-                ],
                 test                : 'default'
         ],
 
@@ -119,7 +113,7 @@ class Config17 {
                 ],
                 test                : 'default',
                 configureArgs : [
-                    openj9 : '--with-mixedrefs'
+                    openj9 : '--disable-ccache'
                 ],
                 cleanWorkspaceAfterBuild: true
         ],
@@ -133,10 +127,7 @@ class Config17 {
                 additionalNodeLabels: [
                         openj9:  'hw.arch.s390x && (sw.os.cent.7 || sw.os.rhel.7)'
                 ],
-                configureArgs : [
-                    hotspot : '--enable-dtrace',
-                    openj9 : '--enable-dtrace --with-mixedrefs'
-                ]
+                configureArgs : '--enable-dtrace'
         ],
 
         s390xLinuxXL  : [
@@ -158,7 +149,7 @@ class Config17 {
                 ],
                 configureArgs       : [
                         "hotspot"     : '--enable-dtrace',
-                        "openj9"      : '--enable-dtrace --enable-jitserver --with-mixedrefs'
+                        "openj9"      : '--enable-dtrace --enable-jitserver'
                 ]
 
         ],
@@ -185,10 +176,7 @@ class Config17 {
                         nightly: ['sanity.functional', 'sanity.openjdk']
                 ],
                 cleanWorkspaceAfterBuild: true,
-                configureArgs       : [
-                        "hotspot"     : '--enable-dtrace',
-                        "openj9"      : '--enable-dtrace --with-mixedrefs'
-                ]
+                configureArgs       : '--enable-dtrace'
         ],
 
         aarch64LinuxXL    : [
