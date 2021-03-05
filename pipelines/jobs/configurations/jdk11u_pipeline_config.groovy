@@ -6,7 +6,7 @@ class Config11 {
                 additionalNodeLabels : 'ci.project.openj9 && hw.arch.x86 && sw.os.osx.10_14',
                 test                : 'default',
                 configureArgs       : [
-                        "openj9"      : '--enable-dtrace=auto --with-cmake',
+                        "openj9"      : '--enable-dtrace=auto',
                         "hotspot"     : '--enable-dtrace=auto'
                 ]
         ],
@@ -17,7 +17,19 @@ class Config11 {
                 additionalNodeLabels: 'macos10.14',
                 test                 : 'default',
                 additionalFileNameTag: "macosXL",
-                configureArgs        : '--with-noncompressedrefs --enable-dtrace=auto --with-cmake'
+                configureArgs        : '--with-noncompressedrefs --enable-dtrace=auto'
+        ],
+
+        x64MacIBM    : [
+                os                  : 'mac',
+                arch                : 'x64',
+                additionalNodeLabels : 'ci.project.openj9 && hw.arch.x86 && sw.os.osx.10_14',
+                test                : false,
+                configureArgs       : [
+                        "openj9"      : '--enable-dtrace=auto  --without-version-pre --without-version-opt --with-version-build=9 --with-vendor-name="IBM Corporation" --with-vendor-version-string="11.0.11.0-IBM" -with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://www.ibm.com/support/pages/java-sdk-support --with-vendor-vm-bug-url=https://www.ibm.com/support/pages/java-sdk-support --with-jdk-rc-name="IBM Java Platform"'
+                ],
+                additionalFileNameTag: "IBM",
+                buildArgs : "--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk11 -b ibm_sdk"
         ],
 
         x64Linux  : [
@@ -39,6 +51,23 @@ class Config11 {
                 ]
         ],
 
+        x64LinuxIBM  : [
+                os                  : 'linux',
+                arch                : 'x64',
+                additionalNodeLabels : 'ci.project.openj9 && hw.arch.x86 && sw.os.linux',
+                dockerImage         : 'adoptopenjdk/centos6_build_image',
+                dockerFile: [
+                        openj9  : 'pipelines/build/dockerFiles/cuda.dockerfile'
+                ],
+                dockerNode          : 'sw.tool.docker && sw.config.uid1000',
+                test                : false,
+                configureArgs       : [
+                        "openj9"      : '--enable-jitserver --enable-dtrace=auto --without-version-pre --without-version-opt --with-version-build=9 --with-vendor-name="IBM Corporation" --with-vendor-version-string="11.0.10.0-IBM" -with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://www.ibm.com/support/pages/java-sdk-support --with-vendor-vm-bug-url=https://www.ibm.com/support/pages/java-sdk-support --with-jdk-rc-name="IBM Java Platform"'
+                ],
+                additionalFileNameTag: "IBM",
+                buildArgs : "--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk11 -b ibm_sdk"
+        ],
+
         x64Windows: [
                 os                  : 'windows',
                 arch                : 'x64',
@@ -51,6 +80,22 @@ class Config11 {
                         hotspot : '--jvm-variant client,server'
                 ],
                 test                : 'default'
+        ],
+
+        x64WindowsIBM: [
+                os                  : 'windows',
+                arch                : 'x64',
+                additionalNodeLabels: [
+                        openj9:     'ci.project.openj9 && hw.arch.x86 && sw.os.windows'
+                ],
+                buildArgs : [
+                        openj9 : "--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk11 -b ibm_sdk"
+                ],
+                test                : false,
+                configureArgs       : [
+                        "openj9"      : '--without-version-pre --without-version-opt --with-version-build=9 --with-vendor-name="IBM Corporation" --with-vendor-version-string="11.0.10.0-IBM" -with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://www.ibm.com/support/pages/java-sdk-support --with-vendor-vm-bug-url=https://www.ibm.com/support/pages/java-sdk-support --with-jdk-rc-name="IBM Java Platform"'
+                ],
+                additionalFileNameTag: "IBM"
         ],
 
         x64WindowsXL    : [
@@ -83,6 +128,20 @@ class Config11 {
                 cleanWorkspaceAfterBuild: true
         ],
 
+        ppc64AixIBM    : [
+                os                  : 'aix',
+                arch                : 'ppc64',
+                additionalNodeLabels: [
+                        openj9:  'hw.arch.ppc64 && sw.os.aix.7_1'
+                ],
+                test                : false,
+                configureArgs       : [
+                        "openj9"      : '--without-version-pre --without-version-opt --with-version-build=9 --with-vendor-name="IBM Corporation" --with-vendor-version-string="11.0.10.0-IBM" -with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://www.ibm.com/support/pages/java-sdk-support --with-vendor-vm-bug-url=https://www.ibm.com/support/pages/java-sdk-support --with-jdk-rc-name="IBM Java Platform"'
+                ],
+                additionalFileNameTag: "IBM",
+                buildArgs : "--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk11 -b ibm_sdk"
+        ],
+
         s390xLinux    : [
                 os                  : 'linux',
                 arch                : 's390x',
@@ -91,6 +150,18 @@ class Config11 {
                         openj9:  'hw.arch.s390x && (sw.os.cent.7 || sw.os.rhel.7)'
                 ],
                 configureArgs       : '--enable-dtrace=auto'
+        ],
+
+        s390xLinuxIBM    : [
+                os                  : 'linux',
+                arch                : 's390x',
+                test                : false,
+                additionalNodeLabels: [
+                        openj9:  'hw.arch.s390x && (sw.os.cent.7 || sw.os.rhel.7)'
+                ],
+                configureArgs       : '--enable-dtrace=auto --without-version-pre --without-version-opt --with-version-build=9 --with-vendor-name="IBM Corporation" --with-vendor-version-string="11.0.10.0-IBM" -with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://www.ibm.com/support/pages/java-sdk-support --with-vendor-vm-bug-url=https://www.ibm.com/support/pages/java-sdk-support --with-jdk-rc-name="IBM Java Platform"',
+                additionalFileNameTag: "IBM",
+                buildArgs : "--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk11 -b ibm_sdk"
         ],
 
         sparcv9Solaris    : [
@@ -112,6 +183,22 @@ class Config11 {
                         "hotspot"     : '--enable-dtrace=auto',
                         "openj9"      : '--enable-dtrace=auto --enable-jitserver'
                 ]
+
+        ],
+
+        ppc64leLinuxIBM    : [
+                os                  : 'linux',
+                arch                : 'ppc64le',
+                additionalNodeLabels : 'centos7',
+                test                : 'default',
+                additionalNodeLabels: [
+                        openj9:  'hw.arch.ppc64le && (sw.os.cent.7 || sw.os.rhel.7)'
+                ],
+                configureArgs       : [
+                        "openj9"      : '--enable-dtrace=auto --enable-jitserver --without-version-pre --without-version-opt --with-version-build=9 --with-vendor-name="IBM Corporation" --with-vendor-version-string="11.0.10.0-IBM" -with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://www.ibm.com/support/pages/java-sdk-support --with-vendor-vm-bug-url=https://www.ibm.com/support/pages/java-sdk-support --with-jdk-rc-name="IBM Java Platform"'
+                ],
+                additionalFileNameTag: "IBM",
+                buildArgs : "--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk11 -b ibm_sdk"
 
         ],
 
