@@ -156,9 +156,12 @@ class Build {
         def jobName = "Test_openjdk${jdkVersion}_${variant}_${testType}_${arch_os}"
         if (buildConfig.ADDITIONAL_FILE_NAME_TAG) {
             switch (buildConfig.ADDITIONAL_FILE_NAME_TAG) {
-                case ~/.*XL.*/: 
+                case ~/.*XL.*/:
                     jobName += "_xl";
                     arch_os += "_xl";
+                    break
+                case "IBM":
+                    jobName += "_IBM"
                     break
             }
         }
