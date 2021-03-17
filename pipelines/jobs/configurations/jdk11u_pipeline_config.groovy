@@ -4,7 +4,7 @@ class Config11 {
                 os                  : 'mac',
                 arch                : 'x64',
                 additionalNodeLabels : 'ci.project.openj9 && hw.arch.x86 && sw.os.osx.10_14',
-                test                : 'default',
+                test                : false,
                 configureArgs       : [
                         "openj9"      : '--enable-dtrace=auto',
                         "hotspot"     : '--enable-dtrace=auto'
@@ -24,7 +24,7 @@ class Config11 {
                 os                  : 'mac',
                 arch                : 'x64',
                 additionalNodeLabels : 'ci.project.openj9 && hw.arch.x86 && sw.os.osx.10_14',
-                test                : false,
+                test                : 'default',
                 configureArgs       : [
                         "openj9"      : '--enable-dtrace=auto  --without-version-pre --without-version-opt --with-version-build=9 --with-vendor-name="IBM Corporation" --with-vendor-version-string="11.0.11.0-IBM" -with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://www.ibm.com/support/pages/java-sdk-support --with-vendor-vm-bug-url=https://www.ibm.com/support/pages/java-sdk-support --with-jdk-rc-name="IBM Java Platform"'
                 ],
@@ -41,7 +41,7 @@ class Config11 {
                         openj9  : 'pipelines/build/dockerFiles/cuda.dockerfile'
                 ],
                 dockerNode          : 'sw.tool.docker && sw.config.uid1000',
-                test                : 'default',
+                test                : false,
                 configureArgs       : [
                         "openj9"      : '--enable-jitserver --enable-dtrace=auto',
                         "hotspot"     : '--enable-dtrace=auto',
@@ -60,7 +60,7 @@ class Config11 {
                         openj9  : 'pipelines/build/dockerFiles/cuda.dockerfile'
                 ],
                 dockerNode          : 'sw.tool.docker && sw.config.uid1000',
-                test                : false,
+                test                : 'default',
                 configureArgs       : [
                         "openj9"      : '--enable-jitserver --enable-dtrace=auto --without-version-pre --without-version-opt --with-version-build=9 --with-vendor-name="IBM Corporation" --with-vendor-version-string="11.0.10.0-IBM" -with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://www.ibm.com/support/pages/java-sdk-support --with-vendor-vm-bug-url=https://www.ibm.com/support/pages/java-sdk-support --with-jdk-rc-name="IBM Java Platform"'
                 ],
@@ -79,7 +79,7 @@ class Config11 {
                 buildArgs : [
                         hotspot : '--jvm-variant client,server'
                 ],
-                test                : 'default'
+                test                : false
         ],
 
         x64WindowsIBM: [
@@ -91,7 +91,7 @@ class Config11 {
                 buildArgs : [
                         openj9 : "--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk11 -b ibm_sdk"
                 ],
-                test                : false,
+                test                : 'default',
                 configureArgs       : [
                         "openj9"      : '--without-version-pre --without-version-opt --with-version-build=9 --with-vendor-name="IBM Corporation" --with-vendor-version-string="11.0.10.0-IBM" -with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://www.ibm.com/support/pages/java-sdk-support --with-vendor-vm-bug-url=https://www.ibm.com/support/pages/java-sdk-support --with-jdk-rc-name="IBM Java Platform"'
                 ],
@@ -124,7 +124,7 @@ class Config11 {
                         hotspot: 'xlc13&&aix710',
                         openj9:  'hw.arch.ppc64 && sw.os.aix.7_1'
                 ],
-                test                : 'default',
+                test                : false,
                 cleanWorkspaceAfterBuild: true
         ],
 
@@ -134,7 +134,7 @@ class Config11 {
                 additionalNodeLabels: [
                         openj9:  'hw.arch.ppc64 && sw.os.aix.7_1'
                 ],
-                test                : false,
+                test                : 'default',
                 configureArgs       : [
                         "openj9"      : '--without-version-pre --without-version-opt --with-version-build=9 --with-vendor-name="IBM Corporation" --with-vendor-version-string="11.0.10.0-IBM" -with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://www.ibm.com/support/pages/java-sdk-support --with-vendor-vm-bug-url=https://www.ibm.com/support/pages/java-sdk-support --with-jdk-rc-name="IBM Java Platform"'
                 ],
@@ -145,7 +145,7 @@ class Config11 {
         s390xLinux    : [
                 os                  : 'linux',
                 arch                : 's390x',
-                test                : 'default',
+                test                : false,
                 additionalNodeLabels: [
                         openj9:  'hw.arch.s390x && (sw.os.cent.7 || sw.os.rhel.7)'
                 ],
@@ -155,7 +155,7 @@ class Config11 {
         s390xLinuxIBM    : [
                 os                  : 'linux',
                 arch                : 's390x',
-                test                : false,
+                test                : 'default',
                 additionalNodeLabels: [
                         openj9:  'hw.arch.s390x && (sw.os.cent.7 || sw.os.rhel.7)'
                 ],
@@ -175,7 +175,7 @@ class Config11 {
                 os                  : 'linux',
                 arch                : 'ppc64le',
                 additionalNodeLabels : 'centos7',
-                test                : 'default',
+                test                : false,
                 additionalNodeLabels: [
                         openj9:  'hw.arch.ppc64le && (sw.os.cent.7 || sw.os.rhel.7)'
                 ],
