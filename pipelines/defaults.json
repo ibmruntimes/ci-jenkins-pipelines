@@ -36,15 +36,17 @@
         "nightlyDefault"     : [
             "sanity.openjdk",
             "sanity.system",
-            "extended.system",
-            "sanity.perf",
             "sanity.functional",
-            "extended.functional"
+            "extended.functional",
+            "sanity.jck"
         ],
         "weeklyDefault"     : [
             "extended.openjdk",
+            "sanity.perf",
             "extended.perf",
-            "special.functional"
+            "extended.system",
+            "special.functional",
+            "extended.jck"
         ]
     },
     "importLibraryScript"    : "pipelines/build/common/import_lib.groovy",
