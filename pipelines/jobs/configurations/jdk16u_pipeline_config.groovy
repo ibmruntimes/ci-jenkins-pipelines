@@ -172,10 +172,7 @@ class Config16 {
                 additionalNodeLabels: [
                         openj9:  'hw.arch.aarch64 && sw.os.linux'
                 ],
-                test                : [
-                        nightly: ['sanity.functional', 'sanity.openjdk']
-                ],
-                cleanWorkspaceAfterBuild: true,
+                test                : 'default',
                 configureArgs       : '--enable-dtrace'
         ],
 

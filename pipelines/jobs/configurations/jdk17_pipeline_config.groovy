@@ -172,9 +172,7 @@ class Config17 {
                 additionalNodeLabels: [
                         openj9:  'hw.arch.aarch64 && sw.os.linux'
                 ],
-                test                : [
-                        nightly: ['sanity.functional', 'sanity.openjdk']
-                ],
+                test                : 'default',
                 cleanWorkspaceAfterBuild: true,
                 configureArgs       : '--enable-dtrace'
         ],

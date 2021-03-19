@@ -217,9 +217,7 @@ class Config11 {
                 additionalNodeLabels: [
                         openj9:  'hw.arch.aarch64 && sw.os.linux'
                 ],
-                test                : [
-                        nightly: ['sanity.functional', 'sanity.openjdk']
-                ],
+                test                : 'default',
                 configureArgs       : [
                         "hotspot" : '--enable-dtrace=auto',
                         "openj9" : '--enable-dtrace=auto',

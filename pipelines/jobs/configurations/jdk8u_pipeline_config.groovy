@@ -140,9 +140,7 @@ class Config8 {
                 additionalNodeLabels: [
                         openj9:  'hw.arch.aarch64 && sw.os.linux'
                 ],
-                test                : [
-                        nightly: ['sanity.functional', 'sanity.openjdk']
-                ],
+                test                : 'default',
                 cleanWorkspaceAfterBuild: true,
                 test                 : 'default'
         ],
