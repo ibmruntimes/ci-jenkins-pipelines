@@ -31,6 +31,7 @@ class Config8 {
                         dragonwell: 'pipelines/build/dockerFiles/dragonwell.dockerfile'
                 ],
                 dockerNode          : 'sw.tool.docker && sw.config.uid1000',
+                dockerCredential    : '9f50c848-8764-440d-b95a-1d295c21713e',
                 test                 : 'default',
                 configureArgs       : [
                         "openj9"      : '--enable-jitserver',
@@ -137,6 +138,7 @@ class Config8 {
                         dragonwell: 'pipelines/build/dockerFiles/dragonwell_aarch64.dockerfile'
                 ],
                 dockerNode         : 'sw.tool.docker',
+                dockerCredential    : '9f50c848-8764-440d-b95a-1d295c21713e',
                 additionalNodeLabels: [
                         openj9:  'hw.arch.aarch64 && sw.os.linux'
                 ],

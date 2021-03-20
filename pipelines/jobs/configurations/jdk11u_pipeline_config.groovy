@@ -41,6 +41,7 @@ class Config11 {
                         openj9  : 'pipelines/build/dockerFiles/cuda.dockerfile'
                 ],
                 dockerNode          : 'sw.tool.docker && sw.config.uid1000',
+                dockerCredential    : '9f50c848-8764-440d-b95a-1d295c21713e',
                 test                : false,
                 configureArgs       : [
                         "openj9"      : '--enable-jitserver --enable-dtrace=auto',
@@ -60,6 +61,7 @@ class Config11 {
                         openj9  : 'pipelines/build/dockerFiles/cuda.dockerfile'
                 ],
                 dockerNode          : 'sw.tool.docker && sw.config.uid1000',
+                dockerCredential    : '9f50c848-8764-440d-b95a-1d295c21713e',
                 test                : 'default',
                 configureArgs       : [
                         "openj9"      : '--enable-jitserver --enable-dtrace=auto --without-version-pre --without-version-opt --with-version-build=9 --with-vendor-name="IBM Corporation" --with-vendor-version-string="11.0.10.0-IBM" -with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://www.ibm.com/support/pages/java-sdk-support --with-vendor-vm-bug-url=https://www.ibm.com/support/pages/java-sdk-support --with-jdk-rc-name="IBM Java Platform"'
@@ -214,6 +216,7 @@ class Config11 {
                 arch                : 'aarch64',
                 dockerImage         : 'adoptopenjdk/centos7_build_image',
                 dockerNode         : 'sw.tool.docker',
+                dockerCredential    : '9f50c848-8764-440d-b95a-1d295c21713e',
                 additionalNodeLabels: [
                         openj9:  'hw.arch.aarch64 && sw.os.linux'
                 ],
@@ -267,7 +270,7 @@ class Config11 {
                         "openj9" : 'adoptopenjdk/centos6_build_image',
                 ],
                 dockerNode         : 'sw.tool.docker && sw.config.uid1000',
-
+                dockerCredential    : '9f50c848-8764-440d-b95a-1d295c21713e',
                 crossCompile         : [
                         "openj9"     : 'x64'
                 ],
