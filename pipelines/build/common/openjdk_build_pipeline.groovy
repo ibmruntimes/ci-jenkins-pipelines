@@ -160,9 +160,6 @@ class Build {
                     jobName += "_xl";
                     arch_os += "_xl";
                     break
-                case "IBM":
-                    jobName += "_IBM"
-                    break
             }
         }
         jobParams.put('TEST_JOB_NAME', jobName)
