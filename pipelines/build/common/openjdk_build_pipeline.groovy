@@ -392,7 +392,7 @@ class Build {
     */
     private void buildMacInstaller(VersionInfo versionData) {
         def filter = "**/OpenJDK*_mac_*.tar.gz"
-        def certificate = "Developer ID Installer: London Jamocha Community CIC"
+        def certificate = ""
 
         def nodeFilter = "${buildConfig.TARGET_OS}&&macos10.14&&xcode10"
 
