@@ -34,16 +34,17 @@
     "testDetails"            : {
         "enableTests"        : true,
         "nightlyDefault"     : [
-            "sanity.openjdk",
-            "sanity.system",
             "sanity.functional",
             "extended.functional",
-            "sanity.jck"
+            "sanity.jck",
+            "special.system"
         ],
         "weeklyDefault"     : [
+            "sanity.openjdk",
             "extended.openjdk",
             "sanity.perf",
             "extended.perf",
+            "sanity.system",
             "extended.system",
             "special.functional",
             "extended.jck"
