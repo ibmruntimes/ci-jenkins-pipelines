@@ -34,8 +34,6 @@
     "testDetails"            : {
         "enableTests"        : true,
         "nightlyDefault"     : [
-            "sanity.functional",
-            "extended.functional",
             "sanity.jck",
             "special.system"
         ],
@@ -47,7 +45,9 @@
             "sanity.system",
             "extended.system",
             "special.functional",
-            "extended.jck"
+            "extended.jck",
+            "sanity.functional",
+            "extended.functional"
         ]
     },
     "importLibraryScript"    : "pipelines/build/common/import_lib.groovy",
