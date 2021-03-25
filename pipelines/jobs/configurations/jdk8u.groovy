@@ -26,9 +26,9 @@ targetConfigurations = [
 ]
 
 // Weeknights at H9:00pm
-triggerSchedule_nightly="H 21 * * 1-4"
+triggerSchedule_nightly="0 22 * * 1-4"
 // H9:00am Sat
-triggerSchedule_weekly="H 21 * * 5"
+triggerSchedule_weekly="0 22 * * 5"
 
 // scmReferences to use for weekly release build
 weekly_release_scmReferences=[
