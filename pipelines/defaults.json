@@ -34,6 +34,7 @@
     "testDetails"            : {
         "enableTests"        : true,
         "nightlyDefault"     : [
+            "sanity.functional",
             "sanity.jck",
             "special.system"
         ],
@@ -46,7 +47,6 @@
             "extended.system",
             "special.functional",
             "extended.jck",
-            "sanity.functional",
             "extended.functional"
         ]
     },
