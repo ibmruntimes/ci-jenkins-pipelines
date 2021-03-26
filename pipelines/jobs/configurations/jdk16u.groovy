@@ -23,7 +23,7 @@ targetConfigurations = [
 ]
 
 // Weeknights at H9:00pm
-triggerSchedule_nightly="0 23 * * 1,3"
+triggerSchedule_nightly="59 23 * * 1,3"
 // H9:00am Sat
 triggerSchedule_weekly="0 9 * * 6"
 
