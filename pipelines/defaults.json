@@ -34,22 +34,23 @@
     "testDetails"            : {
         "enableTests"        : true,
         "nightlyDefault"     : [
-            "sanity.jck",
-            "special.system"
-        ],
-        "weeklyDefault"     : [
-            "extended.jck"
-        ],
-        "disabled" : [
             "sanity.functional",
             "extended.functional",
             "sanity.openjdk",
-            "extended.openjdk",
             "sanity.perf",
-            "extended.perf",
+            "sanity.jck",
             "sanity.system",
+            "special.system"
+        ],
+        "weeklyDefault"     : [
+            "extended.openjdk",
+            "extended.perf",
+            "extended.jck",
             "extended.system",
             "special.functional"
+        ],
+        "disabled" : [
+            "sanity.external"
         ]
     },
     "importLibraryScript"    : "pipelines/build/common/import_lib.groovy",
