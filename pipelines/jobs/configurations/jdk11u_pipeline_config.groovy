@@ -29,7 +29,7 @@ class Config11 {
                         "openj9"      : '--enable-dtrace=auto  --with-vendor-name="IBM Corporation" --with-vendor-version-string="11.0.11.0-IBM" --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://www.ibm.com/support/pages/java-sdk-support --with-vendor-vm-bug-url=https://www.ibm.com/support/pages/java-sdk-support --with-jdk-rc-name="IBM Java Platform"'
                 ],
                 additionalFileNameTag: "IBM",
-                buildArgs : "--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk11 -b ibm_sdk"
+                buildArgs : "--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk11 -b ibm-v0.26.0-release"
         ],
 
         x64Linux  : [
@@ -64,10 +64,10 @@ class Config11 {
                 dockerCredential    : '9f50c848-8764-440d-b95a-1d295c21713e',
                 test                : 'default',
                 configureArgs       : [
-                        "openj9"      : '--enable-jitserver --enable-dtrace=auto --with-vendor-name="IBM Corporation" --with-vendor-version-string="11.0.10.0-IBM" --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://www.ibm.com/support/pages/java-sdk-support --with-vendor-vm-bug-url=https://www.ibm.com/support/pages/java-sdk-support --with-jdk-rc-name="IBM Java Platform"'
+                        "openj9"      : '--enable-jitserver --enable-dtrace=auto --with-vendor-name="IBM Corporation" --with-vendor-version-string="11.0.11.0-IBM" --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://www.ibm.com/support/pages/java-sdk-support --with-vendor-vm-bug-url=https://www.ibm.com/support/pages/java-sdk-support --with-jdk-rc-name="IBM Java Platform"'
                 ],
                 additionalFileNameTag: "IBM",
-                buildArgs : "--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk11 -b ibm_sdk"
+                buildArgs : "--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk11 -b ibm-v0.26.0-release"
         ],
 
         x64Windows: [
@@ -91,11 +91,11 @@ class Config11 {
                         openj9:     'ci.project.openj9 && hw.arch.x86 && sw.os.windows'
                 ],
                 buildArgs : [
-                        openj9 : "--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk11 -b ibm_sdk"
+                        openj9 : "--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk11 -b ibm-v0.26.0-release"
                 ],
                 test                : 'default',
                 configureArgs       : [
-                        "openj9"      : '--without-version-pre --without-version-opt --with-version-build=7 --with-vendor-name="IBM Corporation" --with-vendor-version-string="11.0.10.0-IBM" --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://www.ibm.com/support/pages/java-sdk-support --with-vendor-vm-bug-url=https://www.ibm.com/support/pages/java-sdk-support --with-jdk-rc-name="IBM Java Platform"'
+                        "openj9"      : '--without-version-pre --without-version-opt --with-version-build=7 --with-vendor-name="IBM Corporation" --with-vendor-version-string="11.0.11.0-IBM" --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://www.ibm.com/support/pages/java-sdk-support --with-vendor-vm-bug-url=https://www.ibm.com/support/pages/java-sdk-support --with-jdk-rc-name="IBM Java Platform"'
                 ],
                 additionalFileNameTag: "IBM"
         ],
@@ -138,10 +138,10 @@ class Config11 {
                 ],
                 test                : 'default',
                 configureArgs       : [
-                        "openj9"      : '--with-vendor-name="IBM Corporation" --with-vendor-version-string="11.0.10.0-IBM" --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://www.ibm.com/support/pages/java-sdk-support --with-vendor-vm-bug-url=https://www.ibm.com/support/pages/java-sdk-support --with-jdk-rc-name="IBM Java Platform"'
+                        "openj9"      : '--with-vendor-name="IBM Corporation" --with-vendor-version-string="11.0.11.0-IBM" --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://www.ibm.com/support/pages/java-sdk-support --with-vendor-vm-bug-url=https://www.ibm.com/support/pages/java-sdk-support --with-jdk-rc-name="IBM Java Platform"'
                 ],
                 additionalFileNameTag: "IBM",
-                buildArgs : "--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk11 -b ibm_sdk"
+                buildArgs : "--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk11 -b ibm-v0.26.0-release"
         ],
 
         s390xLinux    : [
@@ -161,9 +161,9 @@ class Config11 {
                 additionalNodeLabels: [
                         openj9:  'hw.arch.s390x && (sw.os.cent.7 || sw.os.rhel.7)'
                 ],
-                configureArgs       : '--enable-dtrace=auto --with-vendor-name="IBM Corporation" --with-vendor-version-string="11.0.10.0-IBM" --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://www.ibm.com/support/pages/java-sdk-support --with-vendor-vm-bug-url=https://www.ibm.com/support/pages/java-sdk-support --with-jdk-rc-name="IBM Java Platform"',
+                configureArgs       : '--enable-dtrace=auto --with-vendor-name="IBM Corporation" --with-vendor-version-string="11.0.11.0-IBM" --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://www.ibm.com/support/pages/java-sdk-support --with-vendor-vm-bug-url=https://www.ibm.com/support/pages/java-sdk-support --with-jdk-rc-name="IBM Java Platform"',
                 additionalFileNameTag: "IBM",
-                buildArgs : "--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk11 -b ibm_sdk"
+                buildArgs : "--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk11 -b ibm-v0.26.0-release"
         ],
 
         sparcv9Solaris    : [
@@ -197,10 +197,10 @@ class Config11 {
                         openj9:  'hw.arch.ppc64le && (sw.os.cent.7 || sw.os.rhel.7)'
                 ],
                 configureArgs       : [
-                        "openj9"      : '--enable-dtrace=auto --enable-jitserver --with-vendor-name="IBM Corporation" --with-vendor-version-string="11.0.10.0-IBM" --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://www.ibm.com/support/pages/java-sdk-support --with-vendor-vm-bug-url=https://www.ibm.com/support/pages/java-sdk-support --with-jdk-rc-name="IBM Java Platform"'
+                        "openj9"      : '--enable-dtrace=auto --enable-jitserver --with-vendor-name="IBM Corporation" --with-vendor-version-string="11.0.11.0-IBM" --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://www.ibm.com/support/pages/java-sdk-support --with-vendor-vm-bug-url=https://www.ibm.com/support/pages/java-sdk-support --with-jdk-rc-name="IBM Java Platform"'
                 ],
                 additionalFileNameTag: "IBM",
-                buildArgs : "--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk11 -b ibm_sdk"
+                buildArgs : "--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk11 -b ibm-v0.26.0-release"
 
         ],
 
