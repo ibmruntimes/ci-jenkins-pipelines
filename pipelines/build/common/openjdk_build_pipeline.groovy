@@ -398,7 +398,7 @@ class Build {
     Run the Mac installer downstream job.
     */
     private void buildMacInstaller(VersionInfo versionData) {
-        def filter = "**/OpenJDK*_mac_*.tar.gz"
+        def filter = "**/ibm-java-jdk*_mac_*.tar.gz"
         def certificate = ""
 
         def nodeFilter = "${buildConfig.TARGET_OS}&&macos10.14&&xcode10"
@@ -429,7 +429,7 @@ class Build {
     Run the Linux installer downstream job.
     */
     private void buildLinuxInstaller(VersionInfo versionData) {
-        def filter = "**/OpenJDK*_linux_*.tar.gz"
+        def filter = "**/ibm-java-jdk*_linux_*.tar.gz"
         def nodeFilter = "${buildConfig.TARGET_OS}&&fpm"
 
         String releaseType = "Nightly"
@@ -458,7 +458,7 @@ class Build {
     We run two jobs if we have a JRE (see https://github.com/AdoptOpenJDK/openjdk-build/issues/1751).
     */
     private void buildWindowsInstaller(VersionInfo versionData) {
-        def filter = "**/OpenJDK*jdk_*_windows*.zip"
+        def filter = "**/ibm-java-jdk*_*_windows*.zip"
         def certificate = "C:\\openjdk\\windows.p12"
 
         def buildNumber = versionData.build
