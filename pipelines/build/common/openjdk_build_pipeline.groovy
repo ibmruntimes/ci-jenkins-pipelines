@@ -344,12 +344,12 @@ class Build {
                 def nodeFilter = "${buildConfig.TARGET_OS}"
 
                 if (buildConfig.TARGET_OS == "windows") {
-                    filter = "**/OpenJDK*_windows_*.zip"
+                    filter = "**/ibm-java-jdk*_windows_*.zip"
                     certificate = "C:\\openjdk\\windows.p12"
                     nodeFilter = "${nodeFilter}&&build&&win2012"
 
                 } else if (buildConfig.TARGET_OS == "mac") {
-                    filter = "**/OpenJDK*_mac_*.tar.gz"
+                    filter = "**/ibm-java-jdk*_mac_*.tar.gz"
                     certificate = ""
 
                     nodeFilter = "${nodeFilter}&&macos10.14"
