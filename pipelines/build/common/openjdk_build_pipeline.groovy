@@ -827,12 +827,14 @@ class Build {
 
         javaToBuild = javaToBuild.toUpperCase()
 
-        def fileName = "Open${javaToBuild}-jdk_${architecture}_${os}_${variant}"
+        //def fileName = "Open${javaToBuild}-jdk_${architecture}_${os}_${variant}"
+        def fileName = "ibm-java-jdk_${architecture}_${os}_11.0.11.0"
 
-        if (additionalFileNameTag) {
-            fileName = "${fileName}_${additionalFileNameTag}"
-        }
+        //if (additionalFileNameTag) {
+        //    fileName = "${fileName}_${additionalFileNameTag}"
+        //}
 
+        /*
         if (overrideFileNameVersion) {
             fileName = "${fileName}_${overrideFileNameVersion}"
         } else if (buildConfig.PUBLISH_NAME) {
@@ -853,7 +855,7 @@ class Build {
 
             fileName = "${fileName}_${timestamp}"
         }
-
+        */
 
         fileName = "${fileName}.${extension}"
 
