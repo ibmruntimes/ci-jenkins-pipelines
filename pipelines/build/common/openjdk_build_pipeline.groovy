@@ -490,7 +490,7 @@ class Build {
                         context.string(name: 'PRODUCT_BUILD_NUMBER', value: "${buildNumber}"),
                         context.string(name: 'MSI_PRODUCT_VERSION', value: "${versionData.msi_product_version}"),
                         context.string(name: 'PRODUCT_CATEGORY', value: "jdk"),
-                        context.string(name: 'JVM', value: "${buildConfig.VARIANT}"),
+                        context.string(name: 'JVM', value: "ibm"),
                         context.string(name: 'SIGNING_CERTIFICATE', value: "${certificate}"),
                         context.string(name: 'ARCH', value: "${INSTALLER_ARCH}"),
                         ['$class': 'LabelParameterValue', name: 'NODE_LABEL', label: "${buildConfig.TARGET_OS}&&wix"]
