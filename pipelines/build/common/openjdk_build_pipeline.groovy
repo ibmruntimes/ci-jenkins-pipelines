@@ -415,11 +415,11 @@ class Build {
                 def nodeFilter = "sw.tool.signing"
 
                 if (buildConfig.TARGET_OS == "windows") {
-                    filter = "**/OpenJDK*_windows_*.zip"
+                    filter = "**/Semeru*-jdk*_windows_*.zip"
                     nodeFilter += "&&sw.os.windows"
 
                 } else if (buildConfig.TARGET_OS == "mac") {
-                    filter = "**/OpenJDK*_mac_*.tar.gz"
+                    filter = "**/Semeru*-jdk*_mac_*.tar.gz"
                     nodeFilter += "&&sw.os.osx"
                 }
 
@@ -466,7 +466,7 @@ class Build {
     Run the Mac installer downstream job.
     */
     private void buildMacInstaller(VersionInfo versionData) {
-        def filter = "**/OpenJDK*_mac_*.tar.gz"
+        def filter = "**/Semeru*-jdk*_mac_*.tar.gz"
 
         def nodeFilter = "${buildConfig.TARGET_OS}&&macos10.14&&xcode10"
 
@@ -495,7 +495,7 @@ class Build {
     Run the Linux installer downstream job.
     */
     private void buildLinuxInstaller(VersionInfo versionData) {
-        def filter = "**/OpenJDK*_linux_*.tar.gz"
+        def filter = "**/Semeru*-jdk*_linux_*.tar.gz"
         def nodeFilter = "sw.os.linux&&ci.role.packaging&&sw.tool.signing"
 
         String releaseType = "Nightly"
@@ -524,7 +524,7 @@ class Build {
     We run two jobs if we have a JRE (see https://github.com/AdoptOpenJDK/openjdk-build/issues/1751).
     */
     private void buildWindowsInstaller(VersionInfo versionData) {
-        def filter = "**/OpenJDK*jdk_*_windows*.zip"
+        def filter = "**/Semeru*-jdk_*_windows*.zip"
 
         def buildNumber = versionData.build
 
@@ -1019,7 +1019,7 @@ class Build {
 
         javaToBuild = javaToBuild.toUpperCase()
 
-        def fileName = "Open${javaToBuild}-jdk_${architecture}_${os}_${variant}"
+        def fileName = "Semeru${javaToBuild}-jdk_${architecture}_${os}_${variant}"
 
         if (additionalFileNameTag) {
             fileName = "${fileName}_${additionalFileNameTag}"

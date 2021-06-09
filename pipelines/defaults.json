@@ -2,9 +2,9 @@
     "repository"             : {
         "test_dirs"          : "/test/functional",
         "build_url"          : "https://github.com/AdamBrousseau/openjdk-build.git",
-        "build_branch"       : "ibm_os",
+        "build_branch"       : "semeru_0.27.0_release",
         "pipeline_url"       : "https://github.com/AdamBrousseau/ci-jenkins-pipelines.git",
-        "pipeline_branch"    : "ibm_os"
+        "pipeline_branch"    : "semeru_0.27.0_release"
     },
     "jenkinsDetails"         : {
         "rootUrl"            : "https://hyc-runtimes-jenkins.swg-devops.com/",
@@ -55,5 +55,5 @@
         "enableTests"        : true
     },
     "importLibraryScript"    : "pipelines/build/common/import_lib.groovy",
-    "defaultsUrl"            : "https://raw.githubusercontent.com/AdamBrousseau/ci-jenkins-pipelines/ibm_os/pipelines/defaults.json"
+    "defaultsUrl"            : "https://raw.githubusercontent.com/AdamBrousseau/ci-jenkins-pipelines/semeru_0.27.0_release/pipelines/defaults.json"
 }

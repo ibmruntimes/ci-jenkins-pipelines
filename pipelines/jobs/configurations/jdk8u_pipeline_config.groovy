@@ -9,23 +9,15 @@ class Config8 {
                         openj9  : 'ci.project.openj9 && hw.arch.x86 && sw.os.osx.10_14'
                 ],
                 cleanWorkspaceAfterBuild: true,
+                configureArgs      : '--with-vendor-name="IBM Corporation" --with-vendor-version-string="Semeru-jdk8u302-b05" --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-vendor-vm-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-jdk-rc-name="IBM Semeru Platform"',
                 test                 : 'default'
-        ],
-
-        x64MacXL      : [
-                os                   : 'mac',
-                arch                 : 'x64',
-                additionalNodeLabels : 'macos10.14',
-                test                 : 'default',
-                additionalFileNameTag: "macosXL",
-                configureArgs        : '--with-noncompressedrefs'
         ],
 
         x64Linux      : [
                 os                  : 'linux',
                 arch                : 'x64',
                 additionalNodeLabels : 'ci.project.openj9 && hw.arch.x86 && sw.os.linux',
-                dockerImage         : 'adoptopenjdk/centos6_build_image',
+                dockerImage         : 'adoptopenjdk/centos6_build_image@sha256:643fa990a41dbaf448a24b2e189e69ef9d06ef1cd077ca78208dab35a2d48a19',
                 dockerFile: [
                         openj9  : 'pipelines/build/dockerFiles/cuda.dockerfile',
                         dragonwell: 'pipelines/build/dockerFiles/dragonwell.dockerfile'
@@ -34,7 +26,7 @@ class Config8 {
                 dockerCredential    : '9f50c848-8764-440d-b95a-1d295c21713e',
                 test                 : 'default',
                 configureArgs       : [
-                        "openj9"      : '--enable-jitserver',
+                        "openj9"      : '--enable-jitserver --with-vendor-name="IBM Corporation" --with-vendor-version-string="Semeru-jdk8u302-b05" --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-vendor-vm-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-jdk-rc-name="IBM Semeru Platform"',
                         "dragonwell"  : '--enable-unlimited-crypto --with-jvm-variants=server  --with-zlib=system',
                 ]
         ],
@@ -48,16 +40,8 @@ class Config8 {
                         openj9  : 'ci.project.openj9 && hw.arch.x86 && sw.os.windows',
                         dragonwell: 'win2012'
                 ],
+                configureArgs      : '--with-vendor-name="IBM Corporation" --with-vendor-version-string="Semeru-jdk8u302-b05" --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-vendor-vm-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-jdk-rc-name="IBM Semeru Platform"',
                 test                 : 'default'
-        ],
-
-        x64WindowsXL    : [
-                os                   : 'windows',
-                arch                 : 'x64',
-                additionalNodeLabels : 'win2012',
-                test                 : 'default',
-                additionalFileNameTag: "windowsXL",
-                configureArgs        : '--with-noncompressedrefs'
         ],
 
         x32Windows    : [
@@ -71,6 +55,7 @@ class Config8 {
                 buildArgs : [
                         hotspot : '--jvm-variant client,server'
                 ],
+                configureArgs      : '--with-vendor-name="IBM Corporation" --with-vendor-version-string="Semeru-jdk8u302-b05" --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-vendor-vm-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-jdk-rc-name="IBM Semeru Platform"',
                 test                 : 'default'
         ],
 
@@ -83,7 +68,7 @@ class Config8 {
                 ],
                 test                 : 'default',
                 configureArgs: [
-                    "openj9"        : '--disable-ccache'
+                    "openj9"        : '--disable-ccache --with-vendor-name="IBM Corporation" --with-vendor-version-string="Semeru-jdk8u302-b05" --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-vendor-vm-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-jdk-rc-name="IBM Semeru Platform"'
                 ],
                 cleanWorkspaceAfterBuild: true
         ],
@@ -95,22 +80,11 @@ class Config8 {
                 additionalNodeLabels: [
                         openj9:  'hw.arch.s390x && (sw.os.cent.7 || sw.os.rhel.7)'
                 ],
+                configureArgs      : '--with-vendor-name="IBM Corporation" --with-vendor-version-string="Semeru-jdk8u302-b05" --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-vendor-vm-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-jdk-rc-name="IBM Semeru Platform"',
                 test: [
                         hotspot: ['sanity.openjdk'],
                         openj9: 'default'
                 ]
-        ],
-
-        sparcv9Solaris: [
-                os  : 'solaris',
-                arch: 'sparcv9',
-                test: false
-        ],
-
-        x64Solaris    : [
-                os                  : 'solaris',
-                arch                : 'x64',
-                test                : false
         ],
 
         ppc64leLinux  : [
@@ -123,20 +97,14 @@ class Config8 {
                         openj9:  'hw.arch.ppc64le && (sw.os.cent.7 || sw.os.rhel.7)'
                 ],
                 configureArgs       : [
-                        "openj9"      : '--enable-jitserver'
+                        "openj9"      : '--enable-jitserver --with-vendor-name="IBM Corporation" --with-vendor-version-string="Semeru-jdk8u302-b05" --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-vendor-vm-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-jdk-rc-name="IBM Semeru Platform"'
                 ]
-        ],
-
-        arm32Linux    : [
-                os  : 'linux',
-                arch: 'arm',
-                test: 'default'
         ],
 
         aarch64Linux  : [
                 os                  : 'linux',
                 arch                : 'aarch64',
-                dockerImage         : 'adoptopenjdk/centos7_build_image',
+                dockerImage         : 'adoptopenjdk/centos7_build_image@sha256:e8ab3ee5aab3f78f88a39bacadbd4c9e87c7e2ff8fb7a9f7917427568ccf9ddd',
                 dockerFile: [
                         dragonwell: 'pipelines/build/dockerFiles/dragonwell_aarch64.dockerfile'
                 ],
@@ -145,37 +113,10 @@ class Config8 {
                 additionalNodeLabels: [
                         openj9:  'hw.arch.aarch64 && sw.os.linux'
                 ],
-                test                : 'default',
+                configureArgs      : '--with-vendor-name="IBM Corporation" --with-vendor-version-string="Semeru-jdk8u302-b05" --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-vendor-vm-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-jdk-rc-name="IBM Semeru Platform"',
                 cleanWorkspaceAfterBuild: true,
                 test                 : 'default'
-        ],
-
-        x64LinuxXL       : [
-                os                   : 'linux',
-                dockerImage          : 'adoptopenjdk/centos6_build_image',
-                dockerFile: [
-                        openj9  : 'pipelines/build/dockerFiles/cuda.dockerfile'
-                ],
-                arch                 : 'x64',
-                additionalFileNameTag: "linuxXL",
-                configureArgs        : '--with-noncompressedrefs --enable-jitserver',
-                test                 : 'default'
-        ],
-        s390xLinuxXL       : [
-                os                   : 'linux',
-                arch                 : 's390x',
-                additionalFileNameTag: "linuxXL",
-                test                 : 'default',
-                configureArgs        : '--with-noncompressedrefs'
-        ],
-        ppc64leLinuxXL       : [
-                os                   : 'linux',
-                arch                 : 'ppc64le',
-                additionalNodeLabels : 'centos7',
-                additionalFileNameTag: "linuxXL",
-                test                 : 'default',
-                configureArgs        : '--with-noncompressedrefs --enable-jitserver'
-        ],
+        ]
   ]
 
 }

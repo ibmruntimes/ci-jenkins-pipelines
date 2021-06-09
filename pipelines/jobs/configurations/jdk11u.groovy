@@ -22,7 +22,7 @@ triggerSchedule_weekly="0 21 * * 5"
 
 // scmReferences to use for weekly release build
 weekly_release_scmReferences=[
-        "openj9"         : ""
+        "openj9"         : "semeru_0.27.0_release"
 ]
 
 return this
