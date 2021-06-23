@@ -647,6 +647,64 @@ class Builder implements Serializable {
     }
 
     /*
+    Create SRPM for Linux platforms
+    */
+    def packageSourceBinaries(variant, tag, installerUrl, installerBranch) {
+        context.stage("package") {
+            def downstreamJobName = 'build-scripts/release/package_binaries'
+
+            def downstreamJob = context.build job: downstreamJobName,
+                    parameters: [
+                        context.string(name: 'JDK_VERSION', value: "${getJavaVersionNumber()}"),
+                        context.string(name: 'PRODUCT', value: (tag ?: '')),
+                        context.string(name: 'VARIANT', value: variant),
+                        context.string(name: 'BINARIES_SOURCE', value: 'upstreamJob'),
+                        context.string(name: 'UPSTREAM_JOB_NAME', value: env.JOB_NAME),
+                        context.string(name: 'UPSTREAM_JOB_NUMBER', value: "${currentBuild.getNumber()}"),
+                        context.string(name: 'SCM_REPO', value: installerUrl),
+                        context.string(name: 'SCM_BRANCH', value: installerBranch)
+                    ]
+
+            if (downstreamJob.getResult() == 'SUCCESS') {
+                context.println "[NODE SHIFT] MOVING INTO MASTER NODE..."
+
+                context.node("master") {
+                    context.catchError {
+                        // copy artifacts from downstreamJob
+                        try {
+                            context.timeout(time: pipelineTimeouts.COPY_ARTIFACTS_TIMEOUT, unit: "HOURS") {
+                                context.copyArtifacts(
+                                        projectName: downstreamJobName,
+                                        selector: context.specific("${downstreamJob.getNumber()}"),
+                                        filter: '**/*',
+                                        fingerprintArtifacts: true
+                                )
+                            }
+                        } catch (FlowInterruptedException e) {
+                            throw new Exception("[ERROR] Copy artifact timeout (${pipelineTimeouts.COPY_ARTIFACTS_TIMEOUT} HOURS) for ${downstreamJobName} has been reached. Exiting...")
+                        }
+
+                        // archive artifacts
+                        try {
+                            context.timeout(time: pipelineTimeouts.ARCHIVE_ARTIFACTS_TIMEOUT, unit: "HOURS") {
+                                context.archiveArtifacts artifacts: "target/**/*.rpm"
+                            }
+                        } catch (FlowInterruptedException e) {
+                            throw new Exception("[ERROR] Archive RPM artifact timeout (${pipelineTimeouts.ARCHIVE_ARTIFACTS_TIMEOUT} HOURS) has been reached. Exiting...")
+                        }
+                    }
+                }
+
+                context.println "[NODE SHIFT] OUT OF MASTER NODE!"
+
+            } else if (propagateFailures) {
+                context.error("Build failed due to downstream failure of ${downstreamJobName}")
+                currentBuild.result = "FAILURE"
+            }
+        }
+    }
+
+    /*
     Main function. This is what is executed remotely via the openjdkxx-pipeline and pr tester jobs
     */
     @SuppressWarnings("unused")
@@ -760,6 +818,22 @@ class Builder implements Serializable {
                 }
             }
             context.parallel jobs
+
+            if (enableInstallers) {
+                //build RedHat source RPM package for Linux platforms
+                def variant = jobConfigurations.collect({ it.value.VARIANT }).unique().get(0)
+                def tag = jobConfigurations.collect({ it.value.ADDITIONAL_FILE_NAME_TAG }).unique().get(0)
+                def installerRepo = (DEFAULTS_JSON['repository']['installer_url']) ?: ''
+                def installerBranch = (DEFAULTS_JSON['repository']['installer_branch']) ?: ''
+
+                try {
+                    context.timeout(time: pipelineTimeouts.PUBLISH_ARTIFACTS_TIMEOUT, unit: "HOURS") {
+                        packageSourceBinaries(variant, tag, installerRepo, installerBranch)
+                    }
+                }catch (FlowInterruptedException e) {
+                    throw new Exception("[ERROR] Package source RPM timeout (${pipelineTimeouts.PUBLISH_ARTIFACTS_TIMEOUT} HOURS) has been reached OR the downstream package job failed. Exiting...")
+                }
+            }
 
             // publish to github if needed
             // Dont publish release automatically
