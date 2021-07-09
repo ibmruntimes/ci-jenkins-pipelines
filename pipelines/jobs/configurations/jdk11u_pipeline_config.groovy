@@ -6,7 +6,7 @@ class Config11 {
                 additionalNodeLabels : 'ci.project.openj9 && hw.arch.x86 && sw.os.osx.10_14',
                 test                : 'default',
                 configureArgs       : [
-                        "openj9"      : '--enable-dtrace=auto  --with-vendor-name="IBM Corporation" --with-vendor-version-string="Semeru-11.0.12.0-m1" --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-vendor-vm-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-jdk-rc-name="IBM Semeru Platform"'
+                        "openj9"      : '--enable-dtrace=auto  --with-vendor-name="IBM Corporation" --with-vendor-version-string="Semeru-11.0.12.0-m2" --with-launcher-name=semeru --with-product-name=Semeru --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-vendor-vm-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-jdk-rc-name="IBM Semeru Platform"'
                 ]
         ],
 
@@ -22,7 +22,7 @@ class Config11 {
                 dockerCredential    : '9f50c848-8764-440d-b95a-1d295c21713e',
                 test                : 'default',
                 configureArgs       : [
-                        "openj9"      : '--enable-jitserver --enable-dtrace=auto --with-vendor-name="IBM Corporation" --with-vendor-version-string="Semeru-11.0.12.0-m1" --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-vendor-vm-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-jdk-rc-name="IBM Semeru Platform"'
+                        "openj9"      : '--enable-jitserver --enable-dtrace=auto --with-vendor-name="IBM Corporation" --with-vendor-version-string="Semeru-11.0.12.0-m2" --with-launcher-name=semeru --with-product-name=Semeru --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-vendor-vm-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-jdk-rc-name="IBM Semeru Platform"'
                 ]
         ],
 
@@ -34,7 +34,7 @@ class Config11 {
                 ],
                 test                : 'default',
                 configureArgs       : [
-                        "openj9"      : '--with-vendor-name="IBM Corporation" --with-vendor-version-string="Semeru-11.0.12.0-m1" --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-vendor-vm-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-jdk-rc-name="IBM Semeru Platform"'
+                        "openj9"      : '--with-vendor-name="IBM Corporation" --with-vendor-version-string="Semeru-11.0.12.0-m2" --with-launcher-name=semeru --with-product-name=Semeru --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-vendor-vm-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-jdk-rc-name="IBM Semeru Platform"'
                 ]
         ],
 
@@ -46,7 +46,7 @@ class Config11 {
                 ],
                 test                : 'default',
                 configureArgs       : [
-                        "openj9"      : '--with-vendor-name="IBM Corporation" --with-vendor-version-string="Semeru-11.0.12.0-m1" --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-vendor-vm-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-jdk-rc-name="IBM Semeru Platform"'
+                        "openj9"      : '--with-vendor-name="IBM Corporation" --with-vendor-version-string="Semeru-11.0.12.0-m2" --with-launcher-name=semeru --with-product-name=Semeru --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-vendor-vm-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-jdk-rc-name="IBM Semeru Platform"'
                 ]
         ],
 
@@ -57,7 +57,7 @@ class Config11 {
                 additionalNodeLabels: [
                         openj9:  'hw.arch.s390x && (sw.os.cent.7 || sw.os.rhel.7)'
                 ],
-                configureArgs       : '--enable-dtrace=auto --with-vendor-name="IBM Corporation" --with-vendor-version-string="Semeru-11.0.12.0-m1" --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-vendor-vm-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-jdk-rc-name="IBM Semeru Platform"'
+                configureArgs       : '--enable-dtrace=auto --with-vendor-name="IBM Corporation" --with-vendor-version-string="Semeru-11.0.12.0-m2" --with-launcher-name=semeru --with-product-name=Semeru --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-vendor-vm-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-jdk-rc-name="IBM Semeru Platform"'
         ],
 
         ppc64leLinux    : [
@@ -69,7 +69,7 @@ class Config11 {
                         openj9:  'hw.arch.ppc64le && (sw.os.cent.7 || sw.os.rhel.7)'
                 ],
                 configureArgs       : [
-                        "openj9"      : '--enable-dtrace=auto --enable-jitserver --with-vendor-name="IBM Corporation" --with-vendor-version-string="Semeru-11.0.12.0-m1" --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-vendor-vm-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-jdk-rc-name="IBM Semeru Platform"'
+                        "openj9"      : '--enable-dtrace=auto --enable-jitserver --with-vendor-name="IBM Corporation" --with-vendor-version-string="Semeru-11.0.12.0-m2" --with-launcher-name=semeru --with-product-name=Semeru --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-vendor-vm-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-jdk-rc-name="IBM Semeru Platform"'
                 ]
 
         ],
