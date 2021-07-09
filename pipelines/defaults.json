@@ -1,9 +1,9 @@
 {
     "repository"             : {
         "test_dirs"          : "/test/functional",
-        "build_url"          : "https://github.com/AdamBrousseau/openjdk-build.git",
+        "build_url"          : "https://github.com/ibmruntimes/temurin-build.git",
         "build_branch"       : "semeru_0.27.0_release",
-        "pipeline_url"       : "https://github.com/AdamBrousseau/ci-jenkins-pipelines.git",
+        "pipeline_url"       : "https://github.com/ibmruntimes/ci-jenkins-pipelines.git",
         "pipeline_branch"    : "semeru_0.27.0_release"
     },
     "jenkinsDetails"         : {
@@ -55,5 +55,5 @@
         "enableTests"        : true
     },
     "importLibraryScript"    : "pipelines/build/common/import_lib.groovy",
-    "defaultsUrl"            : "https://raw.githubusercontent.com/AdamBrousseau/ci-jenkins-pipelines/semeru_0.27.0_release/pipelines/defaults.json"
+    "defaultsUrl"            : "https://raw.githubusercontent.com/ibmruntimes/ci-jenkins-pipelines/semeru_0.27.0_release/pipelines/defaults.json"
 }
