@@ -649,15 +649,17 @@ class Builder implements Serializable {
     /*
     Create SRPM for Linux platforms
     */
-    def packageSourceBinaries(variant, tag, installerUrl, installerBranch) {
+    def packageSourceBinaries(variant, tag, linuxTargets, installerUrl, installerBranch) { 
         context.stage("package") {
             def downstreamJobName = 'build-scripts/release/package_binaries'
 
             def downstreamJob = context.build job: downstreamJobName,
                     parameters: [
+                        ['$class': 'BooleanParameterValue', name: 'RELEASE', value: release],
                         context.string(name: 'JDK_VERSION', value: "${getJavaVersionNumber()}"),
                         context.string(name: 'PRODUCT', value: (tag ?: '')),
                         context.string(name: 'VARIANT', value: variant),
+                        context.string(name: 'ARCHITECTURE', value: linuxTargets.join(',')),
                         context.string(name: 'BINARIES_SOURCE', value: 'upstreamJob'),
                         context.string(name: 'UPSTREAM_JOB_NAME', value: env.JOB_NAME),
                         context.string(name: 'UPSTREAM_JOB_NUMBER', value: "${currentBuild.getNumber()}"),
@@ -725,6 +727,7 @@ class Builder implements Serializable {
             }
 
             def jobs = [:]
+            def linuxTargets = []
 
             // Special case for JDK head where the jobs are called jdk-os-arch-variant
             if (javaToBuild == "jdk${getHeadVersionNumber()}") {
@@ -788,6 +791,11 @@ class Builder implements Serializable {
                                                         target: "target/${config.TARGET_OS}/${config.ARCHITECTURE}/${config.VARIANT}/",
                                                         flatten: true
                                                 )
+
+                                                // cache Linux platform
+                                                if (configuration.key.toLowerCase().contains('linux')) {
+                                                    linuxTargets.add(config.ARCHITECTURE)
+                                                }
                                             }
                                         } catch (FlowInterruptedException e) {
                                             throw new Exception("[ERROR] Copy artifact timeout (${pipelineTimeouts.COPY_ARTIFACTS_TIMEOUT} HOURS) for ${downstreamJobName} has been reached. Exiting...")
@@ -819,7 +827,7 @@ class Builder implements Serializable {
             }
             context.parallel jobs
 
-            if (enableInstallers) {
+            if (enableInstallers && !linuxTargets.isEmpty()) {
                 //build RedHat source RPM package for Linux platforms
                 def variant = jobConfigurations.collect({ it.value.VARIANT }).unique().get(0)
                 def tag = jobConfigurations.collect({ it.value.ADDITIONAL_FILE_NAME_TAG }).unique().get(0)
@@ -828,7 +836,7 @@ class Builder implements Serializable {
 
                 try {
                     context.timeout(time: pipelineTimeouts.PUBLISH_ARTIFACTS_TIMEOUT, unit: "HOURS") {
-                        packageSourceBinaries(variant, tag, installerRepo, installerBranch)
+                        packageSourceBinaries(variant, tag, linuxTargets, installerRepo, installerBranch)
                     }
                 }catch (FlowInterruptedException e) {
                     throw new Exception("[ERROR] Package source RPM timeout (${pipelineTimeouts.PUBLISH_ARTIFACTS_TIMEOUT} HOURS) has been reached OR the downstream package job failed. Exiting...")
