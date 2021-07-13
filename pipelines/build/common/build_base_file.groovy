@@ -689,7 +689,7 @@ class Builder implements Serializable {
                         // archive artifacts
                         try {
                             context.timeout(time: pipelineTimeouts.ARCHIVE_ARTIFACTS_TIMEOUT, unit: "HOURS") {
-                                context.archiveArtifacts artifacts: "target/**/*.rpm"
+                                context.archiveArtifacts artifacts: "target/**"
                             }
                         } catch (FlowInterruptedException e) {
                             throw new Exception("[ERROR] Archive RPM artifact timeout (${pipelineTimeouts.ARCHIVE_ARTIFACTS_TIMEOUT} HOURS) has been reached. Exiting...")
@@ -836,7 +836,7 @@ class Builder implements Serializable {
 
                 try {
                     context.timeout(time: pipelineTimeouts.PUBLISH_ARTIFACTS_TIMEOUT, unit: "HOURS") {
-                        packageSourceBinaries(variant, tag, linuxTargets, installerRepo, installerBranch)
+                        packageSourceBinaries(variant, tag, linuxTargets.unique(), installerRepo, installerBranch)
                     }
                 }catch (FlowInterruptedException e) {
                     throw new Exception("[ERROR] Package source RPM timeout (${pipelineTimeouts.PUBLISH_ARTIFACTS_TIMEOUT} HOURS) has been reached OR the downstream package job failed. Exiting...")
