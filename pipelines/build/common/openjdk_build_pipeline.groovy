@@ -1616,7 +1616,7 @@ class Build {
                     try {
                         // Installer job timeout managed by Jenkins job config
                         buildInstaller(versionInfo)
-                        signInstaller(versionInfo)
+                        //signInstaller(versionInfo) We already sign our msi during the creation. And pkg is 3rd party signed atm.
                     } catch (FlowInterruptedException e) {
                         throw new Exception("[ERROR] Installer job timeout (${buildTimeouts.INSTALLER_JOBS_TIMEOUT} HOURS) has been reached OR the downstream installer job failed. Exiting...")
                     }
