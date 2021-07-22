@@ -792,7 +792,7 @@ class Build {
                 context.println "INFO: Attempting to read workspace/target/metadata/variant_version/major.txt..."
                 try {
                     j9Major = context.readFile(j9MajorPath)
-                    context.println "SUCCESS: major.txt found"
+                    context.println "SUCCESS: major.txt found with value '${j9Major}'"
                 } catch (NoSuchFileException e) {
                     throw new Exception("ERROR: ${j9MajorPath} was not found. Exiting...")
                 }
@@ -800,7 +800,7 @@ class Build {
                 context.println "INFO: Attempting to read workspace/target/metadata/variant_version/minor.txt..."
                 try {
                     j9Minor = context.readFile(j9MinorPath)
-                    context.println "SUCCESS: minor.txt found"
+                    context.println "SUCCESS: minor.txt found  with value '${j9Minor}'"
                 } catch (NoSuchFileException e) {
                     throw new Exception("ERROR: ${j9MinorPath} was not found. Exiting...")
                 }
@@ -808,7 +808,7 @@ class Build {
                 context.println "INFO: Attempting to read workspace/target/metadata/variant_version/security.txt..."
                 try {
                     j9Security = context.readFile(j9SecurityPath)
-                    context.println "SUCCESS: security.txt found"
+                    context.println "SUCCESS: security.txt found with value '${j9Security}'"
                 } catch (NoSuchFileException e) {
                     throw new Exception("ERROR: ${j9SecurityPath} was not found. Exiting...")
                 }
@@ -816,7 +816,7 @@ class Build {
                 context.println "INFO: Attempting to read workspace/target/metadata/variant_version/tags.txt..."
                 try {
                     j9Tags = context.readFile(j9TagsPath)
-                    context.println "SUCCESS: tags.txt found"
+                    context.println "SUCCESS: tags.txt found with value '${j9Tags}'"
                 } catch (NoSuchFileException e) {
                     throw new Exception("ERROR: ${j9TagsPath} was not found. Exiting...")
                 }
