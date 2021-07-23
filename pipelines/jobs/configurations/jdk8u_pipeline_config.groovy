@@ -113,7 +113,7 @@ class Config8 {
                 additionalNodeLabels: [
                         openj9:  'hw.arch.aarch64 && sw.os.linux'
                 ],
-                configureArgs      : '--with-vendor-name="IBM Corp." --with-launcher-name=semeru --with-product-name=Semeru --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-vendor-vm-bug-url=https://github.com/eclipse-openj9/openj9/issues',
+                configureArgs      : '--with-milestone=ea --with-vendor-name="IBM Corp." --with-launcher-name=semeru --with-product-name=Semeru --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-vendor-vm-bug-url=https://github.com/eclipse-openj9/openj9/issues',
                 cleanWorkspaceAfterBuild: true,
                 test                 : 'default'
         ]

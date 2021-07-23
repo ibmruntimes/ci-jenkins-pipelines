@@ -95,7 +95,7 @@ class Config16 {
                         openj9:  'hw.arch.aarch64 && sw.os.linux'
                 ],
                 test                : 'default',
-                configureArgs       : '--enable-dtrace --with-vendor-name="IBM Corp." --with-vendor-version-string="16.0.1.0-m2" --with-launcher-name=semeru --with-product-name=Semeru --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-vendor-vm-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-jdk-rc-name="IBM Semeru Platform"'
+                configureArgs       : '--enable-dtrace --with-version-pre=ea --without-version-opt --with-vendor-name="IBM Corp." --with-vendor-version-string="16.0.1.0-m2" --with-launcher-name=semeru --with-product-name=Semeru --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-vendor-vm-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-jdk-rc-name="IBM Semeru Platform"'
         ]
   ]
 

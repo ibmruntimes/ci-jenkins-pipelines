@@ -86,7 +86,7 @@ class Config11 {
                 test                : 'default',
                 configureArgs       : [
                         "hotspot" : '--enable-dtrace=auto',
-                        "openj9" : '--enable-dtrace=auto',
+                        "openj9" : '--enable-dtrace=auto --with-version-pre=ea --without-version-opt  --with-vendor-name="IBM Corp." --with-vendor-version-string="11.0.12.0" --with-launcher-name=semeru --with-product-name=Semeru --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-vendor-vm-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-jdk-rc-name="IBM Semeru Platform"',
                         "corretto" : '--enable-dtrace=auto',
                         "dragonwell" : "--enable-dtrace=auto --with-extra-cflags=\"-march=armv8.2-a+crypto\" --with-extra-cxxflags=\"-march=armv8.2-a+crypto\"",
                         "bisheng" : '--enable-dtrace=auto --with-extra-cflags=-fstack-protector-strong --with-extra-cxxflags=-fstack-protector-strong --with-jvm-variants=server'
