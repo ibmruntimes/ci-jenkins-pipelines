@@ -47,7 +47,8 @@
             "extended.perf",
             "extended.jck",
             "extended.system",
-            "special.functional"
+            "special.functional",
+            "special.jck"
         ],
         "disabled" : [
             "sanity.external"
