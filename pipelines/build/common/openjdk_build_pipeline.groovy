@@ -1019,7 +1019,7 @@ class Build {
 
         javaToBuild = javaToBuild.toUpperCase()
 
-        def fileName = "Semeru-jdk_${architecture}_${os}"
+        def fileName = "ibm-semeru-open-jdk_${architecture}_${os}"
 
         if (additionalFileNameTag) {
             fileName = "${fileName}_${additionalFileNameTag}"
