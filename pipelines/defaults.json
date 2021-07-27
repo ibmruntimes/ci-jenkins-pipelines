@@ -34,21 +34,9 @@
     },
     "testDetails"            : {
         "nightlyDefault"     : [
-            "sanity.functional",
-            "extended.functional",
-            "sanity.openjdk",
-            "sanity.perf",
-            "sanity.jck",
-            "sanity.system",
-            "special.system"
+            "sanity.openjdk"
         ],
         "weeklyDefault"     : [
-            "extended.openjdk",
-            "extended.perf",
-            "extended.jck",
-            "extended.system",
-            "special.functional",
-            "special.jck"
         ],
         "disabled" : [
             "sanity.external"
