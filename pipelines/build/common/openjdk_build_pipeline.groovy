@@ -622,7 +622,7 @@ class Build {
             context.stage("installer") {
                 switch (buildConfig.TARGET_OS) {
                     case "mac": context.sh 'rm -f workspace/target/*.pkg workspace/target/*.pkg.json workspace/target/*.pkg.sha256.txt'; buildMacInstaller(versionData); break
-                    case "linux": buildLinuxInstaller(versionData); break
+                    //case "linux": buildLinuxInstaller(versionData); break  // Use the new rpm method
                     case "windows": buildWindowsInstaller(versionData); break
                     default: break
                 }
