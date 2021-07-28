@@ -388,7 +388,7 @@ class Build {
     */
     VersionInfo parseVersionOutput(String consoleOut) {
         context.println(consoleOut)
-        Matcher matcher = (consoleOut =~ /(?ms)^.*Runtime Environment[^\n]*\(build (?<version>[^)]*)\).*$/)
+        Matcher matcher = (consoleOut =~ /(?ms)^.*IBM Semeru Runtime Open Edition[^\n]*\(build (?<version>[^)]*)\).*$/)
         if (matcher.matches()) {
             context.println("matched")
             String versionOutput = matcher.group('version')
