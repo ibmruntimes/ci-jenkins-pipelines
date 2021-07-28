@@ -387,6 +387,7 @@ class Build {
     The regex would match both OpenJDK Runtime Environment and Java(TM) SE Runtime Environment.
     */
     VersionInfo parseVersionOutput(String consoleOut) {
+        context.println("Attempt to parse version output...")
         context.println(consoleOut)
         Matcher matcher = (consoleOut =~ /(?ms)^.*IBM Semeru Runtime Open Edition[^\n]*\(build (?<version>[^)]*)\).*$/)
         if (matcher.matches()) {
@@ -396,6 +397,8 @@ class Build {
             context.println(versionOutput)
 
             return new VersionInfo(context).parse(versionOutput, buildConfig.ADOPT_BUILD_NUMBER)
+        } else {
+            context.println("Failed to parse version output")
         }
         return null
     }
