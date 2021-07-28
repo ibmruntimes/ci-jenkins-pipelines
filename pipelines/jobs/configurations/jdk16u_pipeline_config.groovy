@@ -6,7 +6,7 @@ class Config16 {
                 additionalNodeLabels: 'ci.project.openj9 && hw.arch.x86 && sw.os.osx.10_14',
                 test                : 'default',
                 cleanWorkspaceAfterBuild: true,
-                configureArgs       : '--enable-dtrace --with-vendor-name="IBM Corp." --with-vendor-version-string="16.0.2.0" --with-launcher-name=semeru --with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition" --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-vendor-vm-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-jdk-rc-name="IBM Semeru Platform"'
+                configureArgs       : '--enable-dtrace --with-vendor-name="International Business Machines Corporation" --with-vendor-version-string="16.0.2.0" --with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition" --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-vendor-vm-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-jdk-rc-name="IBM Semeru Platform"'
         ],
 
         x64Linux  : [
@@ -28,7 +28,7 @@ class Config16 {
                         openj9      : '!(sw.os.cent.6||sw.os.rhel.6)'
                 ],
                 configureArgs       : [
-                        "openj9"      : '--enable-dtrace --enable-jitserver --with-vendor-name="IBM Corp." --with-vendor-version-string="16.0.2.0" --with-launcher-name=semeru --with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition" --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-vendor-vm-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-jdk-rc-name="IBM Semeru Platform"',
+                        "openj9"      : '--enable-dtrace --enable-jitserver --with-vendor-name="International Business Machines Corporation" --with-vendor-version-string="16.0.2.0" --with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition" --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-vendor-vm-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-jdk-rc-name="IBM Semeru Platform"',
                         "hotspot"     : '--enable-dtrace'
                 ]
         ],
@@ -38,7 +38,7 @@ class Config16 {
                 arch                : 'x64',
                 additionalNodeLabels: 'ci.project.openj9 && hw.arch.x86 && sw.os.windows',
                 cleanWorkspaceAfterBuild: true,
-                configureArgs: '--with-vendor-name="IBM Corp." --with-vendor-version-string="16.0.2.0" --with-launcher-name=semeru --with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition" --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-vendor-vm-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-jdk-rc-name="IBM Semeru Platform"',
+                configureArgs: '--with-vendor-name="International Business Machines Corporation" --with-vendor-version-string="16.0.2.0" --with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition" --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-vendor-vm-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-jdk-rc-name="IBM Semeru Platform"',
                 test                : 'default'
         ],
 
@@ -51,7 +51,7 @@ class Config16 {
                 ],
                 test                : 'default',
                 configureArgs: [
-                        openj9: '--disable-ccache --with-vendor-name="IBM Corp." --with-vendor-version-string="16.0.2.0" --with-launcher-name=semeru --with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition" --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-vendor-vm-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-jdk-rc-name="IBM Semeru Platform"'
+                        openj9: '--disable-ccache --with-vendor-name="International Business Machines Corporation" --with-vendor-version-string="16.0.2.0" --with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition" --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-vendor-vm-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-jdk-rc-name="IBM Semeru Platform"'
                 ],
                 cleanWorkspaceAfterBuild: true
         ],
@@ -65,7 +65,7 @@ class Config16 {
                 additionalNodeLabels: [
                         openj9:  'hw.arch.s390x && (sw.os.cent.7 || sw.os.rhel.7)'
                 ],
-                configureArgs       : '--enable-dtrace --with-vendor-name="IBM Corp." --with-vendor-version-string="16.0.2.0" --with-launcher-name=semeru --with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition" --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-vendor-vm-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-jdk-rc-name="IBM Semeru Platform"'
+                configureArgs       : '--enable-dtrace --with-vendor-name="International Business Machines Corporation" --with-vendor-version-string="16.0.2.0" --with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition" --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-vendor-vm-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-jdk-rc-name="IBM Semeru Platform"'
         ],
 
         ppc64leLinux    : [
@@ -79,7 +79,7 @@ class Config16 {
                 ],
                 configureArgs       : [
                         "hotspot"     : '--enable-dtrace',
-                        "openj9"      : '--enable-dtrace --enable-jitserver --with-vendor-name="IBM Corp." --with-vendor-version-string="16.0.2.0" --with-launcher-name=semeru --with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition" --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-vendor-vm-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-jdk-rc-name="IBM Semeru Platform"'
+                        "openj9"      : '--enable-dtrace --enable-jitserver --with-vendor-name="International Business Machines Corporation" --with-vendor-version-string="16.0.2.0" --with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition" --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-vendor-vm-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-jdk-rc-name="IBM Semeru Platform"'
                 ]
 
         ],
@@ -95,7 +95,7 @@ class Config16 {
                         openj9:  'hw.arch.aarch64 && sw.os.linux'
                 ],
                 test                : 'default',
-                configureArgs       : '--enable-dtrace --with-version-pre=ea --without-version-opt --with-vendor-name="IBM Corp." --with-vendor-version-string="16.0.2.0" --with-launcher-name=semeru --with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition" --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-vendor-vm-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-jdk-rc-name="IBM Semeru Platform"'
+                configureArgs       : '--enable-dtrace --with-version-pre=ea --without-version-opt --with-vendor-name="International Business Machines Corporation" --with-vendor-version-string="16.0.2.0" --with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition" --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-vendor-vm-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-jdk-rc-name="IBM Semeru Platform"'
         ]
   ]
 
