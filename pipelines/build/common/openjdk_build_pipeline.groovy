@@ -431,7 +431,7 @@ class Build {
                         context.string(name: 'UPSTREAM_JOB_NAME', value: "${env.JOB_NAME}"),
                         context.string(name: 'OPERATING_SYSTEM', value: "${buildConfig.TARGET_OS}"),
                         context.string(name: 'VERSION', value: "${versionInfo.major}"),
-                        context.string(name: 'SIGN_TOOL', value: "eclipse"),
+                        context.string(name: 'SIGN_TOOL', value: "ucl"),
                         context.string(name: 'FILTER', value: "${filter}"),
                         ['$class': 'LabelParameterValue', name: 'NODE_LABEL', label: "${nodeFilter}"],
                 ]
