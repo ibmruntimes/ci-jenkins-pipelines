@@ -2,9 +2,9 @@
     "repository"             : {
         "test_dirs"          : "/test/functional",
         "build_url"          : "https://github.com/ibmruntimes/temurin-build.git",
-        "build_branch"       : "semeru_0.27.0_release",
+        "build_branch"       : "ibm_11.0.12.0_release",
         "pipeline_url"       : "https://github.com/ibmruntimes/ci-jenkins-pipelines.git",
-        "pipeline_branch"    : "semeru_0.27.0_release"
+        "pipeline_branch"    : "ibm_11.0.12.0_release"
     },
     "jenkinsDetails"         : {
         "rootUrl"            : "https://hyc-runtimes-jenkins.swg-devops.com/",
@@ -56,5 +56,5 @@
         "enableTests"        : true
     },
     "importLibraryScript"    : "pipelines/build/common/import_lib.groovy",
-    "defaultsUrl"            : "https://raw.githubusercontent.com/ibmruntimes/ci-jenkins-pipelines/semeru_0.27.0_release/pipelines/defaults.json"
+    "defaultsUrl"            : "https://raw.githubusercontent.com/ibmruntimes/ci-jenkins-pipelines/ibm_11.0.12.0_release/pipelines/defaults.json"
 }

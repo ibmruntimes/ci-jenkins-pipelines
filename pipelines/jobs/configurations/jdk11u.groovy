@@ -1,12 +1,4 @@
 targetConfigurations = [
-        "x64Mac"        : [ "openj9" ],
-        "x64Linux"      : [ "openj9" ],
-        "x64Windows"    : [ "openj9" ],
-        "ppc64Aix"      : [ "openj9" ],
-        "ppc64leLinux"  : [ "openj9" ],
-        "s390xLinux"    : [ "openj9" ],
-        "aarch64Linux"  : [ "openj9" ],
-        "riscv64Linux"  : [ "openj9" ],
         "x64MacIBM"        : [ "openj9" ],
         "x64LinuxIBM"      : [ "openj9" ],
         "x64WindowsIBM"    : [ "openj9" ],
@@ -22,7 +14,7 @@ triggerSchedule_weekly="0 21 * * 5"
 
 // scmReferences to use for weekly release build
 weekly_release_scmReferences=[
-        "openj9"         : "semeru_0.27.0_release"
+        "openj9"         : "ibm_11.0.12.0_release"
 ]
 
 return this

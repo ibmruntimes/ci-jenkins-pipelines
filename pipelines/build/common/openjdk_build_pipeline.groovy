@@ -389,7 +389,7 @@ class Build {
     VersionInfo parseVersionOutput(String consoleOut) {
         context.println("Attempt to parse version output...")
         context.println(consoleOut)
-        Matcher matcher = (consoleOut =~ /(?ms)^.*IBM Semeru Runtime Open Edition[^\n]*\(build (?<version>[^)]*)\).*$/)
+        Matcher matcher = (consoleOut =~ /(?ms)^.*IBM Semeru Runtime Certified Edition[^\n]*\(build (?<version>[^)]*)\).*$/)
         if (matcher.matches()) {
             context.println("matched")
             String versionOutput = matcher.group('version')
@@ -1022,7 +1022,7 @@ class Build {
 
         javaToBuild = javaToBuild.toUpperCase()
 
-        def fileName = "ibm-semeru-open-jdk_${architecture}_${os}"
+        def fileName = "ibm-semeru-certified-jdk_${architecture}_${os}"
 
         if (additionalFileNameTag) {
             fileName = "${fileName}_${additionalFileNameTag}"
