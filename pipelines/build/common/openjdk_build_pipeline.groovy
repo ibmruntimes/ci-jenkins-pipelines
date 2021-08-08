@@ -469,7 +469,7 @@ class Build {
     Run the Mac installer downstream job.
     */
     private void buildMacInstaller(VersionInfo versionData) {
-        def filter = "**/ibm-semeru*-jdk*_mac_*.tar.gz"
+        def filter = "**/ibm-semeru*-j*_mac_*.tar.gz"
 
         def nodeFilter = "${buildConfig.TARGET_OS}&&macos10.14&&xcode10"
 
@@ -527,7 +527,7 @@ class Build {
     We run two jobs if we have a JRE (see https://github.com/AdoptOpenJDK/openjdk-build/issues/1751).
     */
     private void buildWindowsInstaller(VersionInfo versionData) {
-        def filter = "**/ibm-semeru*-jdk_*_windows*.zip"
+        def filter = "**/ibm-semeru*-j*_*_windows*.zip"
 
         def buildNumber = versionData.build
 
