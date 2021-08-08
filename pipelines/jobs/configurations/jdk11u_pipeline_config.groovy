@@ -8,6 +8,7 @@ class Config11 {
                 configureArgs       : [
                         "openj9"      : '--enable-dtrace=auto  --with-vendor-name="International Business Machines Corporation" --with-vendor-version-string="11.0.12.0" --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-vendor-vm-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-jdk-rc-name="IBM Semeru Platform"'
                 ],
+                additionalFileNameTag: "IBM",
                 buildArgs : "--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk11 -b ibm-v0.27.0-release"
         ],
 
@@ -25,6 +26,7 @@ class Config11 {
                 configureArgs       : [
                         "openj9"      : '--enable-jitserver --enable-dtrace=auto --with-vendor-name="International Business Machines Corporation" --with-vendor-version-string="11.0.12.0" --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-vendor-vm-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-jdk-rc-name="IBM Semeru Platform"'
                 ],
+                additionalFileNameTag: "IBM",
                 buildArgs : "--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk11 -b ibm-v0.27.0-release"
         ],
 
@@ -38,6 +40,7 @@ class Config11 {
                 configureArgs       : [
                         "openj9"      : '--with-vendor-name="International Business Machines Corporation" --with-vendor-version-string="11.0.12.0" --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-vendor-vm-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-jdk-rc-name="IBM Semeru Platform"'
                 ],
+                additionalFileNameTag: "IBM",
                 buildArgs : "--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk11 -b ibm-v0.27.0-release"
         ],
 
@@ -51,6 +54,7 @@ class Config11 {
                 configureArgs       : [
                         "openj9"      : '--with-vendor-name="International Business Machines Corporation" --with-vendor-version-string="11.0.12.0" --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-vendor-vm-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-jdk-rc-name="IBM Semeru Platform"'
                 ],
+                additionalFileNameTag: "IBM",
                 buildArgs : "--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk11 -b ibm-v0.27.0-release"
         ],
 
@@ -62,6 +66,7 @@ class Config11 {
                         openj9:  'hw.arch.s390x && (sw.os.cent.7 || sw.os.rhel.7)'
                 ],
                 configureArgs       : '--enable-dtrace=auto --with-vendor-name="International Business Machines Corporation" --with-vendor-version-string="11.0.12.0" --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-vendor-vm-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-jdk-rc-name="IBM Semeru Platform"',
+                additionalFileNameTag: "IBM",
                 buildArgs : "--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk11 -b ibm-v0.27.0-release"
         ],
 
@@ -76,6 +81,7 @@ class Config11 {
                 configureArgs       : [
                         "openj9"      : '--enable-dtrace=auto --enable-jitserver --with-vendor-name="International Business Machines Corporation" --with-vendor-version-string="11.0.12.0" --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-vendor-vm-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-jdk-rc-name="IBM Semeru Platform"'
                 ],
+                additionalFileNameTag: "IBM",
                 buildArgs : "--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk11 -b ibm-v0.27.0-release"
 
         ]
