@@ -1024,9 +1024,11 @@ class Build {
 
         def fileName = "ibm-semeru-certified-jdk_${architecture}_${os}"
 
+        /*
         if (additionalFileNameTag) {
             fileName = "${fileName}_${additionalFileNameTag}"
         }
+        */
 
         if (overrideFileNameVersion) {
             fileName = "${fileName}_${overrideFileNameVersion}"
