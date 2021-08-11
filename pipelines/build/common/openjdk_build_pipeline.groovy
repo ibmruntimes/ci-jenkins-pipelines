@@ -1023,13 +1023,19 @@ class Build {
         javaToBuild = javaToBuild.toUpperCase()
 
         def fileName = "ibm-semeru-certified-jdk_${architecture}_${os}"
-
+        //CONFIGURE_ARGS": "--with-vendor-version-string=\"11.0.12.0\""
+        def configureArgs = buildConfig.CONFIGURE_ARGS
+        def startIndex = configureArgs.indexOf('--with-vendor-version-string=\"') + 30
+        def vendorVersion = configureArgs.substring(startIndex, configureArgs.indexOf('\"', startIndex))
+        context.println "vendorVersion:$vendorVersion"
+        fileName += "_${vendorVersion}"
         /*
         if (additionalFileNameTag) {
             fileName = "${fileName}_${additionalFileNameTag}"
         }
         */
 
+        /*
         if (overrideFileNameVersion) {
             fileName = "${fileName}_${overrideFileNameVersion}"
         } else if (buildConfig.PUBLISH_NAME) {
@@ -1051,7 +1057,7 @@ class Build {
             fileName = "${fileName}_${timestamp}"
         }
 
-
+        */
         fileName = "${fileName}.${extension}"
 
         context.println "Filename will be: $fileName"
