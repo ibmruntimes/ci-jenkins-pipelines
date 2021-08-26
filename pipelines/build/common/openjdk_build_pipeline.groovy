@@ -454,7 +454,7 @@ class Build {
                             flatten: true)
 
 
-                    context.sh 'for file in $(ls workspace/target/*.tar.gz workspace/target/*.zip); do sha256sum "$file" > $file.sha256.txt ; done'
+                    context.sh 'cd workspace/target/ && for file in $(ls *.tar.gz *.zip); sha256sum "$file" > $fname.sha256.txt ; done'
 
                     writeMetadata(versionInfo, false)
                     context.archiveArtifacts artifacts: "workspace/target/*"
@@ -631,7 +631,7 @@ class Build {
                 // (Linux installer job produces no artifacts, it just uploads rpm/deb to the repositories)
                 if (buildConfig.TARGET_OS == "mac" || buildConfig.TARGET_OS == "windows") {
                     try {
-                        context.sh 'for file in $(ls workspace/target/*.tar.gz workspace/target/*.pkg workspace/target/*.msi); do sha256sum "$file" > $file.sha256.txt ; done'
+                        context.sh 'cd workspace/target/ && for file in $(ls *.tar.gz *.pkg *.msi); sha256sum "$file" > $file.sha256.txt ; done'
                         writeMetadata(versionData, false)
                         context.archiveArtifacts artifacts: "workspace/target/*"
                     } catch (e) {
@@ -656,7 +656,7 @@ class Build {
                 if (buildConfig.TARGET_OS == "windows") {
                     try {
                         signInstallerJob(versionData);
-                        context.sh 'for file in $(ls workspace/target/*.tar.gz workspace/target/*.pkg workspace/target/*.msi); do sha256sum "$file" > $file.sha256.txt ; done'
+                        context.sh 'cd workspace/target/ && for file in $(ls *.tar.gz *.pkg *.msi); sha256sum "$file" > $file.sha256.txt ; done'
                         writeMetadata(versionData, false)
                         context.archiveArtifacts artifacts: "workspace/target/*"
                     } catch (e) {
