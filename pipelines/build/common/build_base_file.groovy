@@ -802,7 +802,8 @@ class Builder implements Serializable {
                                         }
 
                                         // Checksum
-                                        context.sh 'for file in $(ls target/*/*/*/*.tar.gz target/*/*/*/*.zip); do sha256sum "$file" > $file.sha256.txt ; done'
+                                        def extension = (config.TARGET_OS == "windows") ? "zip" : "tar.gz"
+                                        context.sh "cd target/${config.TARGET_OS}/${config.ARCHITECTURE}/${config.VARIANT}/ && for file in \$(ls *.${extension}); do sha256sum \"\$file\" > \$file.sha256.txt ; done"
 
                                         // Archive in Jenkins
                                         try {
