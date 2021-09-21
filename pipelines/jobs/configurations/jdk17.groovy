@@ -38,6 +38,9 @@ targetConfigurations = [
         "s390xLinuxIBM": [
                 "openj9"
         ]
+        "aarch64LinuxIBM": [
+                "openj9"
+        ]
 
 ]
 
