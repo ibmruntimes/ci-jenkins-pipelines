@@ -88,6 +88,9 @@ class Config17 {
                 dockerNode          : 'sw.tool.docker && sw.config.uid1000',
                 dockerCredential    : '9f50c848-8764-440d-b95a-1d295c21713e',
                 test                : false,
+                additionalTestLabels: [
+                        openj9      : '!(centos6||rhel6)'
+                ],
                 configureArgs       : [
                         "openj9"      : '--enable-jitserver --enable-dtrace=auto --with-vendor-name="IBM Corporation" --with-vendor-version-string="17.0.0.0-m1" --with-product-name="IBM Semeru Runtime" --with-product-suffix="Certified Edition" --with-vendor-url=https://www.ibm.com/ --with-vendor-bug-url=https://github.com/eclipse-openj9/openj9/issues --with-vendor-vm-bug-url=https://github.com/eclipse-openj9/openj9/issues'
                 ],
