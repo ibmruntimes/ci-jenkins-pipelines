@@ -212,6 +212,9 @@ node('master') {
         config.put("defaultsJson", DEFAULTS_JSON)
         config.put("adoptDefaultsJson", ADOPT_DEFAULTS_JSON)
 
+        config.put("enableInstallers", DEFAULTS_JSON['enableInstallers'] as Boolean)
+        config.put("enableSigner", DEFAULTS_JSON['enableSigner'] as Boolean)
+
         println "[INFO] FINAL CONFIG FOR NIGHTLY $javaVersion"
         println JsonOutput.prettyPrint(JsonOutput.toJson(config))
 

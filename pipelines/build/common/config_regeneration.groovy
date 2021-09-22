@@ -444,8 +444,8 @@ class Regeneration implements Serializable {
                 ADOPT_BUILD_NUMBER: "",
                 ENABLE_TESTS: DEFAULTS_JSON['testDetails']['enableTests'] as Boolean,
                 ENABLE_TESTDYNAMICPARALLEL: DEFAULTS_JSON['testDetails']['enableTestDynamicParallel'] as Boolean,
-                ENABLE_INSTALLERS: true,
-                ENABLE_SIGNER: true,
+                ENABLE_INSTALLERS: DEFAULTS_JSON['enableInstallers'] as Boolean,
+                ENABLE_SIGNER: DEFAULTS_JSON['enableSigner'] as Boolean,
                 CLEAN_WORKSPACE: true,
                 CLEAN_WORKSPACE_AFTER: true,
                 CLEAN_WORKSPACE_BUILD_OUTPUT_ONLY_AFTER: false

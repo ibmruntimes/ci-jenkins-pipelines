@@ -12,7 +12,7 @@
         "rootUrl"            : "https://hyc-runtimes-jenkins.swg-devops.com/",
         "rootDirectory"      : "build-scripts"
     },
-    "templateDirectories" : {
+    "templateDirectories"    : {
         "downstream"         : "pipelines/build/common/create_job_from_template.groovy",
         "upstream"           : "pipelines/jobs/pipeline_job_template.groovy",
         "weekly"             : "pipelines/jobs/weekly_release_pipeline_job_template.groovy"
@@ -30,7 +30,7 @@
         "tester"             : "pipelines/build/prTester/pr_test_pipeline.groovy",
         "buildfarm"          : "build-farm/make-adopt-build-farm.sh"
     },
-    "baseFileDirectories": {
+    "baseFileDirectories"    : {
         "upstream"           : "pipelines/build/common/build_base_file.groovy",
         "downstream"         : "pipelines/build/common/openjdk_build_pipeline.groovy"
     },
@@ -45,7 +45,7 @@
             "sanity.system",
             "special.system"
         ],
-        "weeklyDefault"     : [
+        "weeklyDefault"      : [
             "extended.openjdk",
             "extended.perf",
             "extended.jck",
@@ -53,7 +53,7 @@
             "special.functional",
             "special.jck"
         ],
-        "disabled" : [
+        "disabled"           : [
             "sanity.external"
         ],
         "enableTestDynamicParallel" : false,
@@ -62,6 +62,8 @@
             "numMachines"    : "3"
          }
     },
+    "enableInstallers"       : false,
+    "enableSigner"           : true,
     "importLibraryScript"    : "pipelines/build/common/import_lib.groovy",
     "defaultsUrl"            : "https://raw.githubusercontent.com/ibmruntimes/ci-jenkins-pipelines/ibm/pipelines/defaults.json"
 }
