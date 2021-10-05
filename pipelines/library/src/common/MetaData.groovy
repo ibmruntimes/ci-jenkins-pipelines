@@ -20,7 +20,6 @@ class MetaData {
     final String build_env_docker_image_digest
     final String dependency_version_alsa
     final String dependency_version_freetype
-    final String dependency_version_freemarker
     String binary_type
     String sha256
 
@@ -43,8 +42,7 @@ class MetaData {
         String openjdk_source,
         String build_env_docker_image_digest,
         String dependency_version_alsa,
-        String dependency_version_freetype,
-        String dependency_version_freemarker
+        String dependency_version_freetype
     ) {
         this.vendor = vendor
         this.os = os
@@ -65,7 +63,6 @@ class MetaData {
         this.build_env_docker_image_digest = build_env_docker_image_digest
         this.dependency_version_alsa = dependency_version_alsa
         this.dependency_version_freetype = dependency_version_freetype
-        this.dependency_version_freemarker = dependency_version_freemarker
     }
 
     Map asMap() {
@@ -89,8 +86,7 @@ class MetaData {
                 openjdk_source : openjdk_source,
                 build_env_docker_image_digest : build_env_docker_image_digest,
                 dependency_version_alsa : dependency_version_alsa,
-                dependency_version_freetype : dependency_version_freetype,
-                dependency_version_freemarker : dependency_version_freemarker
+                dependency_version_freetype : dependency_version_freetype
             ]
 
         if (variant_version) {
