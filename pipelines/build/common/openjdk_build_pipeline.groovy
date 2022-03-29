@@ -155,7 +155,7 @@ class Build {
             vendorTestRepos = ((String)DEFAULTS_JSON['repository']['build_url']).minus(".git")
             vendorTestBranches = DEFAULTS_JSON['repository']['build_branch']
             vendorTestDirs = DEFAULTS_JSON['repository']['test_dirs']
-        }                     
+        }
         jobParams.put("VENDOR_TEST_REPOS", vendorTestRepos)
         jobParams.put("VENDOR_TEST_BRANCHES", vendorTestBranches)
         jobParams.put("VENDOR_TEST_DIRS", vendorTestDirs)
@@ -187,7 +187,7 @@ class Build {
         jobParams.put('JDK_VERSIONS', jdk_Version)
         if (buildConfig.VARIANT == "temurin") {
             jobParams.put('JDK_IMPL', 'hotspot')
-        } else { 
+        } else {
             jobParams.put('JDK_IMPL', buildConfig.VARIANT)
         }
 
@@ -1252,7 +1252,7 @@ class Build {
         }
 
         if (variant == "openj9") {
-             fileName = "ibm-semeru-" + ((additionalFileNameTag == "IBM") ? "certified" : "open") + "-jdk_${architecture}_${os}"
+             fileName = "ibm-semeru-" + ((additionalFileNameTag == "IBM") ? "certified" : "open") + ((additionalFileNameTag == "criu") ? "-ea" : "") + "-jdk_${architecture}_${os}"
         }
 
         if (overrideFileNameVersion) {
@@ -1545,7 +1545,7 @@ class Build {
 
                                 repoHandler.setUserDefaultsJson(context, DEFAULTS_JSON)
                                 repoHandler.checkoutUserBuild(context)
-                                if (env.JOB_NAME.contains("IBM")) {
+                                if (env.JOB_NAME.contains("IBM") || env.JOB_NAME.contains("criu")) {
                                     context.sshagent(['83181e25-eea4-4f55-8b3e-e79615733226']) {
                                         context.sh(script: "./${DEFAULTS_JSON['scriptDirectories']['buildfarm']}")
                                     }
