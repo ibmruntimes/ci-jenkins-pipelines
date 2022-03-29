@@ -3,8 +3,8 @@
         "test_dirs"          : "/test/functional",
         "build_url"          : "https://github.com/ibmruntimes/temurin-build.git",
         "build_branch"       : "ibm",
-        "pipeline_url"       : "https://github.com/ibmruntimes/ci-jenkins-pipelines.git",
-        "pipeline_branch"    : "ibm",
+        "pipeline_url"       : "https://github.com/adambrousseau/ci-jenkins-pipelines.git",
+        "pipeline_branch"    : "criu_xlinux_11",
         "installer_url"      : "git@github.ibm.com:runtimes/adoptium-installer.git",
         "installer_branch"   : "ibm"
     },
@@ -67,5 +67,5 @@
     "enableSigner"           : true,
     "verifySigner"           : true,
     "importLibraryScript"    : "pipelines/build/common/import_lib.groovy",
-    "defaultsUrl"            : "https://raw.githubusercontent.com/ibmruntimes/ci-jenkins-pipelines/ibm/pipelines/defaults.json"
+    "defaultsUrl"            : "https://raw.githubusercontent.com/adambrousseau/ci-jenkins-pipelines/criu_xlinux_11/pipelines/defaults.json"
 }
