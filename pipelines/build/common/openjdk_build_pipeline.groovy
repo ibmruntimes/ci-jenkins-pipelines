@@ -1115,7 +1115,7 @@ class Build {
             }
 
             // Get dependency_versions
-            def deps = ["alsa", "freetype", "freemarker"]
+            def deps = ["alsa", "freetype"]
             for (dep in deps) {
                 String depVerPath = "workspace/target/metadata/dependency_version_${dep}.txt"
                 context.println "INFO: Attempting to read ${depVerPath}..."
@@ -1149,8 +1149,7 @@ class Build {
             openjdkSource,
             dockerImageDigest,
             dependency_version["alsa"],
-            dependency_version["freetype"],
-            dependency_version["freemarker"]
+            dependency_version["freetype"]
         )
 
     }
