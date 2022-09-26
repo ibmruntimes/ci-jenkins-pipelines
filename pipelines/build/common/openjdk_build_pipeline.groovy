@@ -377,9 +377,11 @@ class Build {
 
                         def DOCKER_REGISTRY_URL = ""
                         def DOCKER_REGISTRY_URL_CREDENTIAL_ID = ""
+                        def curAdditionalTestLabel = additionalTestLabel
                         if ("${testType}".contains("external")) {
                             DOCKER_REGISTRY_URL = "sys-rt-docker-local.artifactory.swg-devops.com"
                             DOCKER_REGISTRY_URL_CREDENTIAL_ID = artifactoryCredential
+                            curAdditionalTestLabel += "&&!sw.os.ubuntu.22"
                         }
 
                         def jobParams = getAQATestJobParams(testType)
@@ -456,7 +458,7 @@ class Build {
                                             context.string(name: 'JDK_REPO', value: jdkRepo),
                                             context.string(name: 'JDK_BRANCH', value: jdkBranch),
                                             context.string(name: 'OPENJ9_BRANCH', value: openj9Branch),
-                                            context.string(name: 'LABEL_ADDITION', value: additionalTestLabel),
+                                            context.string(name: 'LABEL_ADDITION', value: curAdditionalTestLabel),
                                             context.booleanParam(name: 'KEEP_REPORTDIR', value: keep_test_reportdir),
                                             context.string(name: 'PARALLEL', value: parallel),
                                             context.string(name: 'NUM_MACHINES', value: "${numMachinesPerTest}"),
