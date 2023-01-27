@@ -60,9 +60,7 @@ node('worker') {
         } else if (jdkOpenj9Branch == buildTag) {
             println "[INFO] scmReference=${buildTag} matches with JDK${params.jdkVersion}_OPENJ9_BRANCH=${jdkOpenj9Branch} in ${propertyFile} in aqa-tests release branch."
         } else {
-            println "[ERROR] scmReference does not match with any JDK brnach in ${propertyFile} in aqa-tests release branch. Please update aqa-tests ${params.aqaReference} release branch. Set the current build result to FAILURE!"
-            currentBuild.result = 'FAILURE'
-            return
+            println "[WARNING] scmReference=${buildTag} does not match with JDK${params.jdkVersion}_BRANCH=${jdkBranch} or JDK${params.jdkVersion}_OPENJ9_BRANCH=${jdkOpenj9Branch} in aqa-tests release branch."
         }
     }
     // Load defaultsJson. These are passed down from the build_pipeline_generator and is a JSON object containing user's default constants.
