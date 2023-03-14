@@ -282,7 +282,8 @@ class Config11 {
                         'extended.openjdk.fips',
                         'sanity.system.fips',
                         'extended.system.fips',
-                        'special.system.fips'
+                        'special.system.fips',
+                        'dev.openjdk'
                     ]
             ],
             configureArgs       : [
@@ -361,7 +362,8 @@ class Config11 {
                         'extended.system',
                         'special.functional',
                         'special.jck',
-                        'sanity.external'
+                        'sanity.external',
+                        'dev.openjdk'
                     ]
             ],
             additionalNodeLabels: [
@@ -392,7 +394,8 @@ class Config11 {
                         'extended.system',
                         'special.functional',
                         'special.jck',
-                        'sanity.external'
+                        'sanity.external',
+                        'dev.openjdk'
                     ]
             ],
             additionalNodeLabels: [
@@ -431,7 +434,8 @@ class Config11 {
                         'extended.system',
                         'special.functional',
                         'special.jck',
-                        'sanity.external'
+                        'sanity.external',
+                        'dev.openjdk'
                     ]
             ],
             configureArgs       : [

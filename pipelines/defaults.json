@@ -56,7 +56,6 @@
             "extended.system",
             "special.functional",
             "special.jck",
-            "dev.openjdk",
             "dev.system"
         ],
         "disabled" : [

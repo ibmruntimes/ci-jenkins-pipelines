@@ -64,7 +64,8 @@ class Config19 {
                                 'extended.openjdk.fips',
                                 'sanity.system.fips',
                                 'extended.system.fips',
-                                'special.system.fips'
+                                'special.system.fips',
+                                'dev.openjdk'
                         ]
                 ],
                 cleanWorkspaceAfterBuild: true,
@@ -172,7 +173,27 @@ class Config19 {
         s390xLinux    : [
                 os                  : 'linux',
                 arch                : 's390x',
-                test                : 'default',
+                test                : [
+                        nightly: [
+                                'sanity.functional',
+                                'extended.functional',
+                                'sanity.openjdk',
+                                'sanity.perf',
+                                'sanity.jck',
+                                'sanity.system',
+                                'special.system'
+                        ],
+                        weekly : [
+                                'extended.openjdk',
+                                'extended.perf',
+                                'extended.jck',
+                                'extended.system',
+                                'special.functional',
+                                'special.jck',
+                                'dev.system',
+                                'dev.openjdk'
+                        ]
+                ],
                 cleanWorkspaceAfterBuild: true,
                 additionalNodeLabels: 'hw.arch.s390x && (sw.os.cent.7 || sw.os.rhel.7)',
                 bootJDK             : '18',
@@ -189,7 +210,27 @@ class Config19 {
         ppc64leLinux    : [
                 os                  : 'linux',
                 arch                : 'ppc64le',
-                test                : 'default',
+                test                : [
+                        nightly: [
+                                'sanity.functional',
+                                'extended.functional',
+                                'sanity.openjdk',
+                                'sanity.perf',
+                                'sanity.jck',
+                                'sanity.system',
+                                'special.system'
+                        ],
+                        weekly : [
+                                'extended.openjdk',
+                                'extended.perf',
+                                'extended.jck',
+                                'extended.system',
+                                'special.functional',
+                                'special.jck',
+                                'dev.system',
+                                'dev.openjdk'
+                        ]
+                ],
                 cleanWorkspaceAfterBuild: true,
                 additionalNodeLabels: 'hw.arch.ppc64le && (sw.os.cent.7 || sw.os.rhel.7)',
                 bootJDK             : '18',
@@ -212,7 +253,27 @@ class Config19 {
                 dockerImage         : 'adoptopenjdk/centos7_build_image@sha256:8947557de41e8b5fb0b0e067144b30f7771b182f0f571c12afad846aed6bc6be',
                 dockerNode          : 'sw.tool.docker',
                 dockerCredential    : '9f50c848-8764-440d-b95a-1d295c21713e',
-                test                : 'default',
+                test                : [
+                        nightly: [
+                                'sanity.functional',
+                                'extended.functional',
+                                'sanity.openjdk',
+                                'sanity.perf',
+                                'sanity.jck',
+                                'sanity.system',
+                                'special.system'
+                        ],
+                        weekly : [
+                                'extended.openjdk',
+                                'extended.perf',
+                                'extended.jck',
+                                'extended.system',
+                                'special.functional',
+                                'special.jck',
+                                'dev.system',
+                                'dev.openjdk'
+                        ]
+                ],
                 bootJDK             : '18',
                 configureArgs       : [
                         temurin     : '--enable-dtrace',
