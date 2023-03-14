@@ -50,7 +50,8 @@ class Config20 {
                                 "extended.openjdk.fips",
                                 "sanity.system.fips",
                                 "extended.system.fips",
-                                "special.system.fips"
+                                "special.system.fips",
+                                'dev.openjdk'
                         ]
                 ],
                 additionalTestLabels: [
@@ -117,7 +118,27 @@ class Config20 {
         s390xLinux    : [
                 os                  : 'linux',
                 arch                : 's390x',
-                test                : 'default',
+                test                : [
+                        nightly: [
+                                'sanity.functional',
+                                'extended.functional',
+                                'sanity.openjdk',
+                                'sanity.perf',
+                                'sanity.jck',
+                                'sanity.system',
+                                'special.system'
+                        ],
+                        weekly : [
+                                'extended.openjdk',
+                                'extended.perf',
+                                'extended.jck',
+                                'extended.system',
+                                'special.functional',
+                                'special.jck',
+                                'dev.system',
+                                'dev.openjdk'
+                        ]
+                ],
                 configureArgs       : '--enable-dtrace',
                 buildArgs           : [
                         'temurin'   : '--create-jre-image --create-sbom'
@@ -127,7 +148,27 @@ class Config20 {
         ppc64leLinux    : [
                 os                  : 'linux',
                 arch                : 'ppc64le',
-                test                : 'default',
+                test                : [
+                        nightly: [
+                                'sanity.functional',
+                                'extended.functional',
+                                'sanity.openjdk',
+                                'sanity.perf',
+                                'sanity.jck',
+                                'sanity.system',
+                                'special.system'
+                        ],
+                        weekly : [
+                                'extended.openjdk',
+                                'extended.perf',
+                                'extended.jck',
+                                'extended.system',
+                                'special.functional',
+                                'special.jck',
+                                'dev.system',
+                                'dev.openjdk'
+                        ]
+                ],
                 configureArgs       : [
                         'temurin'     : '--enable-dtrace',
                         'openj9'      : '--enable-dtrace'
@@ -141,7 +182,27 @@ class Config20 {
                 os                  : 'linux',
                 arch                : 'aarch64',
                 dockerImage         : 'adoptopenjdk/centos7_build_image',
-                test                : 'default',
+                test                : [
+                        nightly: [
+                                'sanity.functional',
+                                'extended.functional',
+                                'sanity.openjdk',
+                                'sanity.perf',
+                                'sanity.jck',
+                                'sanity.system',
+                                'special.system'
+                        ],
+                        weekly : [
+                                'extended.openjdk',
+                                'extended.perf',
+                                'extended.jck',
+                                'extended.system',
+                                'special.functional',
+                                'special.jck',
+                                'dev.system',
+                                'dev.openjdk'
+                        ]
+                ],
                 configureArgs : '--enable-dtrace',
                 testDynamic          : false,
                 buildArgs           : [

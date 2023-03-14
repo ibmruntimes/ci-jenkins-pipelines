@@ -56,7 +56,8 @@ class Config8 {
                                 'extended.openjdk.fips',
                                 'sanity.system.fips',
                                 'extended.system.fips',
-                                'special.system.fips'
+                                'special.system.fips',
+                                'dev.openjdk'
                         ]
                 ],
                 configureArgs       : [
@@ -163,7 +164,8 @@ class Config8 {
                                 'extended.system',
                                 'special.functional',
                                 'special.jck',
-                                'sanity.external'
+                                'sanity.external',
+                                'dev.openjdk'
                         ]
                 ],
                 buildArgs           : [
@@ -209,7 +211,8 @@ class Config8 {
                                 'extended.system',
                                 'special.functional',
                                 'special.jck',
-                                'sanity.external'
+                                'sanity.external',
+                                'dev.openjdk'
                         ]
                 ],
                 cleanWorkspaceAfterBuild: true,
@@ -250,7 +253,27 @@ class Config8 {
                 ],
                 configureArgs      : '--with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition"',
                 cleanWorkspaceAfterBuild: true,
-                test                 : 'default',
+                test                : [
+                        nightly: [
+                                'sanity.functional',
+                                'extended.functional',
+                                'sanity.openjdk',
+                                'sanity.perf',
+                                'sanity.jck',
+                                'sanity.system',
+                                'special.system'
+                        ],
+                        weekly : [
+                                'extended.openjdk',
+                                'extended.perf',
+                                'extended.jck',
+                                'extended.system',
+                                'special.functional',
+                                'special.jck',
+                                'dev.system',
+                                'dev.openjdk'
+                        ]
+                ],
                 buildArgs           : [
                         'temurin'   : '--create-sbom'
                 ]
