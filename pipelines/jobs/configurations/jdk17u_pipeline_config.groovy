@@ -174,7 +174,7 @@ class Config17 {
                         'openj9'    : '--create-jre-image',
                         'temurin'   : '--create-jre-image --create-sbom'
                 ],
-                configureArgs       : '--enable-dtrace  --enable-criu-support --with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition"'
+                configureArgs       : '--enable-dtrace --with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition"'
         ],
 
         aarch64Mac: [
@@ -423,7 +423,7 @@ class Config17 {
                         openj9:  'hw.arch.aarch64 && sw.os.linux'
                 ],
                 configureArgs       : [
-                        openj9      : '--enable-dtrace  --enable-criu-support'
+                        openj9      : '--enable-dtrace'
                 ],
                 additionalFileNameTag: 'IBM',
                 buildArgs : [
@@ -449,78 +449,6 @@ class Config17 {
                 buildArgs : [
                         'openj9'    : '--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk17 -b ibm_sdk --create-jre-image'
                 ]
-        ],
-
-        x64LinuxCRIU  : [
-            os                  : 'linux',
-            arch                : 'x64',
-            additionalNodeLabels : 'hw.arch.x86 && sw.os.linux && (sw.os.cent.7||sw.os.rhel.7) && ci.role.build.criu',
-            test                : [
-                    nightly: [
-                        'sanity.functional',
-                        'extended.functional',
-                        'special.functional',
-                        'sanity.external'
-                    ],
-                    weekly : []
-            ],
-            additionalTestLabels: [
-                        openj9  : 'ci.project.openj9 && hw.arch.x86 && sw.os.linux && ci.role.test.criu'
-            ],
-            configureArgs       : [
-                    'openj9'    : '--disable-ccache --enable-criu-support --enable-dtrace --with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition" --with-version-pre=ea'
-            ],
-            additionalFileNameTag: 'criu',
-            buildArgs           : [
-                'openj9'    : '--create-jre-image'
-            ]
-        ],
-
-        ppc64leLinuxCRIU    : [
-                os                  : 'linux',
-                arch                : 'ppc64le',
-                test                : [
-                    nightly: [
-                        'sanity.functional',
-                        'extended.functional',
-                        'special.functional'
-                    ],
-                    weekly : []
-                ],
-                cleanWorkspaceAfterBuild: true,
-                additionalNodeLabels: [
-                        openj9:  'hw.arch.ppc64le && (sw.os.cent.7 || sw.os.rhel.7)'
-                ],
-                additionalFileNameTag: 'criu',
-                buildArgs           : [
-                        'openj9'    : '--create-jre-image'
-                ],
-                configureArgs       : [
-                        'openj9'      : '--enable-dtrace --enable-criu-support --with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition"'
-                ]
-        ],
-
-        s390xLinuxCRIU    : [
-                os                  : 'linux',
-                arch                : 's390x',
-                test                : 'default',
-                cleanWorkspaceAfterBuild: true,
-                additionalNodeLabels: [
-                        openj9:  'hw.arch.s390x && (sw.os.cent.7 || sw.os.rhel.7)'
-                ],
-                test                : [
-                    nightly: [
-                        'sanity.functional',
-                        'extended.functional',
-                        'special.functional'
-                    ],
-                    weekly : []
-                ],
-                additionalFileNameTag: 'criu',
-                buildArgs           : [
-                        'openj9'      : '--create-jre-image'
-                ],
-                configureArgs       : '--enable-dtrace --enable-criu-support --with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition"'
         ]
   ]
 
