@@ -451,16 +451,23 @@ class Build {
                         }
                         def parallel = 'None'
                         def numMachinesPerTest = ''
+                        def testTime = ''
 
                         if (enableTestDynamicParallel && dynamicList.contains(testType)) {
-                            numMachinesPerTest = numMachines[(dynamicList.indexOf(testType))]
-                            if (!numMachinesPerTest) {
-                                // see build configuration in jdk*_pipeline_config.groovy
-                                // when numMachines is an array, its size should match the testLists size
-                                throw new Exception("No number of machines provided for running ${testType} tests in parallel, numMachines: ${numMachines}!")
+                            if (testType == 'sanity.functional'
+                                && buildConfig.TARGET_OS == "linux"
+                                && buildConfig.ARCHITECTURE.contains('x64')
+                                && buildConfig.JAVA_TO_BUILD == 'jdk11u') {
+                                    testTime = '30'
+                            } else {
+                                numMachinesPerTest = numMachines[(dynamicList.indexOf(testType))]
+                                if (!numMachinesPerTest) {
+                                    // see build configuration in jdk*_pipeline_config.groovy
+                                    // when numMachines is an array, its size should match the testLists size
+                                    throw new Exception("No number of machines provided for running ${testType} tests in parallel, numMachines: ${numMachines}!")
+                                }
+                                context.println "Number of machines for running parallel tests: ${numMachinesPerTest}"
                             }
-                            context.println "Number of machines for running parallel tests: ${numMachinesPerTest}"
-
                             parallel = 'Dynamic'
                         }
 
@@ -516,6 +523,7 @@ class Build {
                                             context.booleanParam(name: 'KEEP_REPORTDIR', value: keep_test_reportdir),
                                             context.string(name: 'PARALLEL', value: parallel),
                                             context.string(name: 'NUM_MACHINES', value: "${numMachinesPerTest}"),
+                                            context.string(name: 'TEST_TIME', value: testTime),
                                             context.booleanParam(name: 'USE_TESTENV_PROPERTIES', value: useTestEnvProperties),
                                             context.booleanParam(name: 'GENERATE_JOBS', value: aqaAutoGen),
                                             context.string(name: 'ADOPTOPENJDK_BRANCH', value: aqaBranch),
