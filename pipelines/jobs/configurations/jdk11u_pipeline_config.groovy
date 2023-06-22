@@ -171,7 +171,7 @@ class Config11 {
             test                : 'default',
             configureArgs       : [
                     'temurin' : '--enable-dtrace=auto',
-                    'openj9' : '--enable-dtrace=auto  --enable-criu-support --without-version-opt  --with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition"',
+                    'openj9' : '--enable-dtrace=auto --without-version-opt  --with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition"',
                     'corretto' : '--enable-dtrace=auto',
                     'dragonwell' : '--enable-dtrace=auto --with-extra-cflags=\"-march=armv8.2-a+crypto\" --with-extra-cxxflags=\"-march=armv8.2-a+crypto\"',
                     'bisheng' : '--enable-dtrace=auto --with-extra-cflags=-fstack-protector-strong --with-extra-cxxflags=-fstack-protector-strong --with-jvm-variants=server'
@@ -479,7 +479,7 @@ class Config11 {
             ],
             configureArgs       : [
                     'temurin' : '--enable-dtrace=auto',
-                    'openj9' : '--enable-dtrace=auto  --enable-criu-support --without-version-opt',
+                    'openj9' : '--enable-dtrace=auto --without-version-opt',
                     'corretto' : '--enable-dtrace=auto',
                     'dragonwell' : '--enable-dtrace=auto --with-extra-cflags=\"-march=armv8.2-a+crypto\" --with-extra-cxxflags=\"-march=armv8.2-a+crypto\"',
                     'bisheng' : '--enable-dtrace=auto --with-extra-cflags=-fstack-protector-strong --with-extra-cxxflags=-fstack-protector-strong --with-jvm-variants=server'
@@ -520,67 +520,6 @@ class Config11 {
                 ],
                 additionalFileNameTag: 'IBM',
                 buildArgs : '--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk11 -b ibm_sdk'
-        ],
-
-        x64LinuxCRIU  : [
-            os                  : 'linux',
-            arch                : 'x64',
-            additionalNodeLabels : 'hw.arch.x86 && sw.os.linux && (sw.os.cent.7||sw.os.rhel.7) && ci.role.build.criu',
-            test                : [
-                    nightly: [
-                        'sanity.functional',
-                        'extended.functional',
-                        'special.functional',
-                        'sanity.external'
-                    ],
-                    weekly : []
-            ],
-            additionalTestLabels: [
-                        openj9      : 'ci.project.openj9 && hw.arch.x86 && sw.os.linux && ci.role.test.criu'
-            ],
-            configureArgs       : [
-                    'openj9'      : '--disable-ccache --enable-dtrace=auto --with-version-pre=ea --enable-criu-support --with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition"'
-            ],
-            additionalFileNameTag: 'criu'
-        ],
-
-        ppc64leLinuxCRIU    : [
-            os                  : 'linux',
-            arch                : 'ppc64le',
-            test                : [
-                    nightly: [
-                        'sanity.functional',
-                        'extended.functional',
-                        'special.functional'
-                    ],
-                    weekly : []
-            ],
-            additionalNodeLabels: [
-                    openj9:  'hw.arch.ppc64le && (sw.os.cent.7 || sw.os.rhel.7)'
-            ],
-            configureArgs       : [
-                    'temurin'     : '--enable-dtrace=auto',
-                    'openj9'      : '--enable-dtrace=auto --with-version-pre=ea --enable-criu-support --with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition"'
-            ],
-            additionalFileNameTag: 'criu'
-        ],
-
-        s390xLinuxCRIU    : [
-            os                  : 'linux',
-            arch                : 's390x',
-            test                : [
-                    nightly: [
-                        'sanity.functional',
-                        'extended.functional',
-                        'special.functional'
-                    ],
-                    weekly : []
-            ],
-            additionalNodeLabels: [
-                    openj9:  'hw.arch.s390x && (sw.os.cent.7 || sw.os.rhel.7)'
-            ],
-            configureArgs       : '--enable-dtrace=auto  --with-version-pre=ea --enable-criu-support --with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition"',
-            additionalFileNameTag: 'criu'
         ]
   ]
 

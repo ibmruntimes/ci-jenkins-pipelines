@@ -174,9 +174,6 @@ class Build {
             default: variant = 'hs'
         }
         def jobName = "Test_openjdk${jobParams['JDK_VERSIONS']}_${variant}_${testType}_${jobParams['ARCH_OS_LIST']}"
-        if (buildConfig.ADDITIONAL_FILE_NAME_TAG == 'criu') {
-            jobName += "_criu"
-        }
 
         jobParams.put('TEST_JOB_NAME', jobName)
         return jobParams
@@ -1517,7 +1514,7 @@ class Build {
         }
 
         if (variant == "openj9") {
-             fileName = "ibm-semeru-" + ((additionalFileNameTag == "IBM") ? "certified" : "open") + ((additionalFileNameTag == "criu") ? "-ea" : "") + "-jdk_${architecture}_${os}"
+             fileName = "ibm-semeru-" + ((additionalFileNameTag == "IBM") ? "certified" : "open") + "-jdk_${architecture}_${os}"
         }
 
         if (overrideFileNameVersion) {
