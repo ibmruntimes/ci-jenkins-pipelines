@@ -497,7 +497,8 @@ class Config17 {
                     nightly: [
                         'sanity.functional',
                         'extended.functional',
-                        'special.functional'
+                        'special.functional',
+                        'dev.external'
                     ],
                     weekly : []
                 ],

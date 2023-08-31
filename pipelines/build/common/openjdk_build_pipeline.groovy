@@ -444,6 +444,16 @@ class Build {
 	                        additionalArtifactsRequired = 'RI_JDK'
                         }
 
+                        String additionalFileNameTag = buildConfig.ADDITIONAL_FILE_NAME_TAG
+                        if (additionalFileNameTag == "criu" && buildConfig.ARCHITECTURE == 'ppc64le') {
+                            if (testType  == 'dev.external' || testType  == 'sanity.functional') {
+                                if (additionalTestLabel != '') {
+	                                additionalTestLabel += '&&'
+	                            }
+                                additionalTestLabel += 'ci.role.test.criu318'
+                            }
+                        }
+
                         def jobParams = getAQATestJobParams(testType)
 
                         def testFlag = ''
