@@ -2638,50 +2638,8 @@ class Build {
                     }
                 }
 
-                //buildInstaller if needed
-                if (enableInstallers) {
-                    try {
-                        // Installer job timeout managed by Jenkins job config
-                        buildInstaller(versionInfo)
-                        // sign installers for all variants except openj9
-                        // openj9 variant:
-                        // - Win msi & linux rpm are signed during the creation
-                        // - Mac pkg is 3rd party signed atm.
-                        // - Only sign AIX
-                        if ((buildConfig.VARIANT != "openj9") || ((buildConfig.VARIANT == "openj9") && (buildConfig.TARGET_OS == "aix"))){
-                            signInstaller(versionInfo)
-                        }
-                    } catch (FlowInterruptedException e) {
-                        currentBuild.result = 'FAILURE'
-                        throw new Exception("[ERROR] Installer job timeout (${buildTimeouts.INSTALLER_JOBS_TIMEOUT} HOURS) has been reached OR the downstream installer job failed. Exiting...")
-                    }
-                }
-                if (!env.JOB_NAME.contains('pr-tester') && context.JENKINS_URL.contains('adopt')) {
-                    try {
-                        gpgSign()
-                    } catch (Exception e) {
-                        context.println(e.message)
-                        currentBuild.result = 'FAILURE'
-                    }
-                }
-
-                if (!env.JOB_NAME.contains('pr-tester')) { // pr-tester does not sign the binaries
-                    // Verify Windows and Mac Signing for Temurin
-                    if (buildConfig.VARIANT == 'temurin') {
-                        try {
-                            verifySigning()
-                        } catch (Exception e) {
-                            context.println(e.message)
-                            currentBuild.result = 'FAILURE'
-                        }
-                    }
-                }
-
                 // Run Smoke Tests and AQA Tests
                 if (enableTests) {
-                  if (currentBuild.currentResult != "SUCCESS") {
-                    context.println('[ERROR] Build stages were not successful, not running AQA tests')
-                  } else {
                     try {
                         //Set smoke tests blocking in release testing only
                         def smokeTestsResult = runSmokeTests()
@@ -2712,7 +2670,37 @@ class Build {
                         context.println(e.message)
                         currentBuild.result = 'FAILURE'
                     }
-                  }
+                }
+
+                //buildInstaller if needed
+                if (enableInstallers) {
+                    try {
+                        // Installer job timeout managed by Jenkins job config
+                        buildInstaller(versionInfo)
+                        signInstaller(versionInfo)
+                    } catch (FlowInterruptedException e) {
+                        throw new Exception("[ERROR] Installer job timeout (${buildTimeouts.INSTALLER_JOBS_TIMEOUT} HOURS) has been reached OR the downstream installer job failed. Exiting...")
+                    }
+                }
+                if (!env.JOB_NAME.contains('pr-tester') && context.JENKINS_URL.contains('adopt')) {
+                    try {
+                        gpgSign()
+                    } catch (Exception e) {
+                        context.println(e.message)
+                        currentBuild.result = 'FAILURE'
+                    }
+                }
+
+                if (!env.JOB_NAME.contains('pr-tester')) { // pr-tester does not sign the binaries
+                    // Verify Windows and Mac Signing for Temurin
+                    if (buildConfig.VARIANT == 'temurin') {
+                        try {
+                            verifySigning()
+                        } catch (Exception e) {
+                            context.println(e.message)
+                            currentBuild.result = 'FAILURE'
+                        }
+                    }
                 }
 
                 // Compare reproducible build if needed
