@@ -463,6 +463,8 @@ class Build {
                 testStages["${testType}"] = {
                     context.println "Running test: ${testType}"
                     context.stage("${testType}") {
+                        def jobParams = getAQATestJobParams(testType)
+                        def jobName = jobParams.TEST_JOB_NAME
                         def rerunIterations = '3'
                         def fipsTestBuildSuffix = "";
                         def buildList = ""
@@ -486,10 +488,6 @@ class Build {
                         } else if ("${testType}".contains('jck')) {
                             // Keep test reportdir always for JUnit targets
                             keep_test_reportdir = true
-                        }
-
-                        if ("${testType}".contains('dev')) {
-                            rerunIterations = '0'
                         }
 
                         def DYNAMIC_COMPILE = false
@@ -543,7 +541,8 @@ class Build {
                         def additionalTestLabel = buildConfig.ADDITIONAL_TEST_LABEL
                         def relatedNodeLabel = ''
                         def additionalArtifactsRequired = ''
-                        if (testType  == 'dev.openjdk') {
+                        // Eclipse Adoptium Temurin label speciall requirements for special.system on linux
+                        if (testType  == 'dev.openjdk' || (testType  == 'special.system' && jobName.contains('linux') && buildConfig.VARIANT == 'temurin')) {
                             context.println "${testType} need extra label sw.tool.docker"
                             if (additionalTestLabel == '') {
                                 additionalTestLabel = 'sw.tool.docker'
@@ -571,7 +570,6 @@ class Build {
                             vendorTestBranches = buildConfig.BUILD_REF ?: vendorTestBranches
                         }
 
-                        def jobParams = getAQATestJobParams(testType)
 
                         def testFlag = ''
                         if (fipsTestBuildSuffix.trim()) {
@@ -580,7 +578,6 @@ class Build {
                             jobParams.put('TEST_JOB_NAME', "${jobParams.TEST_JOB_NAME}_${fipsTestBuildSuffix}")
                         }
 
-                        def jobName = jobParams.TEST_JOB_NAME
                         String helperRef = buildConfig.HELPER_REF ?: DEFAULTS_JSON['repository']['helper_ref']
                         def JobHelper = context.library(identifier: "openjdk-jenkins-helper@${helperRef}").JobHelper
 
