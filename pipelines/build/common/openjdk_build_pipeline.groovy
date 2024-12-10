@@ -1874,6 +1874,7 @@ class Build {
         def base_path
         base_path = build_path
         def repoHandler = new RepoHandler(USER_REMOTE_CONFIGS, ADOPT_DEFAULTS_JSON, buildConfig.CI_REF, buildConfig.BUILD_REF)
+
         context.stage('internal sign') {
             context.node('eclipse-codesign') {
                 // Safety first!
@@ -2015,6 +2016,7 @@ def buildScriptsAssemble(
     def base_path
     base_path = build_path
     def assembleBuildArgs
+
     // Remove jmod directories to be replaced with the stash saved above
     batOrSh "rm -rf ${base_path}/hotspot/variant-server ${base_path}/support/modules_cmds ${base_path}/support/modules_libs"
     // JDK 16 + jpackage executables need to be signed as well
@@ -2236,9 +2238,9 @@ def buildScriptsAssemble(
                                     def base_path = build_path
                                     if (openjdk_build_dir_arg == "") {
                                         // If not using a custom openjdk build dir, then query what autoconf created as the build sub-folder
-                                        base_path = context.sh(script: "ls -d ${build_path}/* | tr -d '\\n'", returnStdout:true)
+                                        base_path = context.sh(script: "ls -d ${build_path}/*", returnStdout:true).trim()
                                     }
-                                    context.println "base build path for jmod signing = ${base_path}"
+                                    context.println "base_path for jmod signing = ${base_path}."
                                     context.stash name: 'jmods',
                                         includes: "${base_path}/hotspot/variant-server/**/*," +
                                             "${base_path}/support/modules_cmds/**/*," +
@@ -2337,7 +2339,7 @@ def buildScriptsAssemble(
                     if ((buildConfig.TARGET_OS == 'mac' || buildConfig.TARGET_OS == 'windows') && buildConfig.JAVA_TO_BUILD != 'jdk8u' && enableSigner) {
                         context.println "openjdk_build_pipeline: Internal signing phase required - skipping metadata reading"
                     } else {
-                    // Run a downstream job on riscv machine that returns the java version. Otherwise, just read the version.txt
+                        // Run a downstream job on riscv machine that returns the java version. Otherwise, just read the version.txt
                         String versionOut
                             if (buildConfig.BUILD_ARGS.contains('--cross-compile')) {
                             context.println "[WARNING] Don't read faked version.txt on cross compiled build! Archiving early and running downstream job to retrieve java version..."
@@ -2556,6 +2558,7 @@ def buildScriptsAssemble(
                 String userOrgRepo = "${splitAdoptUrl[splitAdoptUrl.size() - 2]}/${splitAdoptUrl[splitAdoptUrl.size() - 1]}"
                 // e.g. adoptium/temurin-build/master/build-farm/platform-specific-configurations
                 envVars.add("ADOPT_PLATFORM_CONFIG_LOCATION=${userOrgRepo}/${adoptBranch}/${ADOPT_DEFAULTS_JSON['configDirectories']['platform']}" as String)
+                def internalSigningRequired = (buildConfig.TARGET_OS == 'windows' || buildConfig.TARGET_OS == 'mac')
 
                 context.stage('queue') {
                     /* This loads the library containing two Helper classes, and causes them to be
@@ -2717,7 +2720,7 @@ def buildScriptsAssemble(
                                     }
                                 }
                                 // Is thre potential for not enabling the signer on jdk8u instead of having this clause?
-                                if ( enableSigner && buildConfig.JAVA_TO_BUILD != 'jdk8u' ) {
+                                if ( enableSigner && internalSigningRequired && buildConfig.JAVA_TO_BUILD != 'jdk8u' ) {
                                     context.println "openjdk_build_pipeline: running eclipse signing phase"
                                     buildScriptsEclipseSigner()
                                     context.ws(workspace) {
@@ -2763,7 +2766,7 @@ def buildScriptsAssemble(
                                         enableSigner,
                                         envVars
                                     )
-                                    if ( enableSigner ) {
+                                    if ( enableSigner && internalSigningRequired ) {
                                         buildScriptsEclipseSigner()
                                         context.println "openjdk_build_pipeline: running assemble phase (invocation 2)"
                                         buildScriptsAssemble(
@@ -2783,7 +2786,7 @@ def buildScriptsAssemble(
                                     enableSigner,
                                     envVars
                                 )
-                                if ( enableSigner ) {
+                                if ( enableSigner && internalSigningRequired ) {
                                     buildScriptsEclipseSigner()
                                     context.println "openjdk_build_pipeline: running assemble phase (invocation 3)"
                                     buildScriptsAssemble(
