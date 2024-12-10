@@ -131,7 +131,7 @@ class Config8 {
                 os                  : 'windows',
                 arch                : 'x64',
                 additionalNodeLabels: [
-                        temurin : 'win2022&&vs2017',
+                        temurin : 'win2022&&vs2022',
                         corretto: 'win2012',
                         openj9  : 'ci.project.openj9 && hw.arch.x86 && sw.os.windows',
                         dragonwell: 'win2012'
