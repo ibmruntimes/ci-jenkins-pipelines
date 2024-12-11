@@ -23,8 +23,61 @@ class Config24 {
                 dockerFile: [
                         openj9      : 'pipelines/build/dockerFiles/cuda.dockerfile'
                 ],
-                test: [
-                        weekly : ['sanity.openjdk', 'sanity.system', 'extended.system', 'sanity.perf', 'sanity.functional', 'extended.functional', 'extended.openjdk', 'extended.perf', 'special.functional', 'dev.openjdk', 'dev.functional', 'dev.system', 'special.system']
+                test                : [
+                        nightly: [
+                                'sanity.functional',
+                                'sanity.openjdk',
+                                'sanity.perf',
+                                'sanity.jck',
+                                'sanity.system',
+                                'extended.functional',
+                                'extended.openjdk',
+                                'special.system'
+                        ],
+                        weekly : [
+                                'sanity.functional',
+                                'sanity.openjdk',
+                                'sanity.perf',
+                                'sanity.jck',
+                                'sanity.system',
+                                'extended.functional',
+                                'extended.openjdk',
+                                'extended.perf',
+                                'extended.jck',
+                                'extended.system',
+                                'special.functional',
+                                'special.jck',
+                                'special.openjdk',
+                                'special.system',
+                                'dev.functional',
+                                'sanity.jck.fips140_2',
+                                'extended.jck.fips140_2',
+                                'special.jck.fips140_2',
+                                'sanity.openjdk.fips140_2',
+                                'extended.openjdk.fips140_2',
+                                'extended.functional.fips140_3_OpenJCEPlusFIPS',
+                                'sanity.jck.fips140_3_OpenJCEPlusFIPS',
+                                'extended.jck.fips140_3_OpenJCEPlusFIPS',
+                                'special.jck.fips140_3_OpenJCEPlusFIPS',
+                                'sanity.openjdk.fips140_3_OpenJCEPlusFIPS',
+                                'extended.openjdk.fips140_3_OpenJCEPlusFIPS'
+                        ],
+                        release : [
+                                'sanity.functional',
+                                'sanity.openjdk',
+                                'sanity.perf',
+                                'sanity.jck',
+                                'sanity.system',
+                                'extended.functional',
+                                'extended.openjdk',
+                                'extended.perf',
+                                'extended.jck',
+                                'extended.system',
+                                'special.functional',
+                                'special.jck',
+                                'special.openjdk',
+                                'special.system'
+                        ]
                 ],
                 additionalTestLabels: [
                         openj9      : '!(centos6||rhel6)',
@@ -68,9 +121,57 @@ class Config24 {
                 os                  : 'windows',
                 arch                : 'x64',
                 additionalNodeLabels: 'win2022&&vs2022',
-                test: [
-                        weekly : ['sanity.openjdk', 'sanity.system', 'extended.system', 'sanity.perf', 'sanity.functional', 'extended.functional', 'extended.openjdk', 'extended.perf', 'special.functional', 'special.openjdk', 'dev.functional', 'dev.system']
-                ],
+                test                : [
+                        nightly: [
+                                'sanity.functional',
+                                'sanity.openjdk',
+                                'sanity.perf',
+                                'sanity.jck',
+                                'sanity.system',
+                                'extended.functional',
+                                'extended.openjdk',
+                                'special.system'
+                        ],
+                        weekly : [     
+                                'sanity.functional',
+                                'sanity.openjdk',
+                                'sanity.perf',
+                                'sanity.jck',
+                                'sanity.system',
+                                'extended.functional',
+                                'extended.openjdk',
+                                'extended.perf',
+                                'extended.jck',
+                                'extended.system',
+                                'special.functional',
+                                'special.jck',
+                                'special.openjdk',
+                                'special.system',
+                                'dev.functional',
+                                'extended.functional.fips140_3_OpenJCEPlusFIPS',
+                                'sanity.jck.fips140_3_OpenJCEPlusFIPS',
+                                'extended.jck.fips140_3_OpenJCEPlusFIPS',
+                                'special.jck.fips140_3_OpenJCEPlusFIPS',
+                                'sanity.openjdk.fips140_3_OpenJCEPlusFIPS',
+                                'extended.openjdk.fips140_3_OpenJCEPlusFIPS'
+                        ],
+                        release : [
+                                'sanity.functional',
+                                'sanity.openjdk',
+                                'sanity.perf',
+                                'sanity.jck',
+                                'sanity.system',
+                                'extended.functional',
+                                'extended.openjdk',
+                                'extended.perf',
+                                'extended.jck',
+                                'extended.system',
+                                'special.functional',
+                                'special.jck',
+                                'special.openjdk',
+                                'special.system'
+                        ]
+            ],
                 buildArgs           : [
                         'temurin'   : '--create-jre-image --create-sbom --use-adoptium-devkit vs2022_redist_14.40.33807_10.0.26100.0'
                 ]
@@ -83,7 +184,57 @@ class Config24 {
                         temurin: 'openxl17&&aix720',
                         openj9:  'xlc16&&aix715'
                 ],
-                test                : 'default',
+                test                : [
+                        nightly: [
+                                'sanity.functional',
+                                'sanity.openjdk',
+                                'sanity.perf',
+                                'sanity.jck',
+                                'sanity.system',
+                                'extended.functional',
+                                'extended.openjdk',
+                                'special.system'
+                        ],
+                        weekly : [
+                                'sanity.functional',
+                                'sanity.openjdk',
+                                'sanity.perf',
+                                'sanity.jck',
+                                'sanity.system',
+                                'extended.functional',
+                                'extended.openjdk',
+                                'extended.perf',
+                                'extended.jck',
+                                'extended.system',
+                                'special.functional',
+                                'special.jck',
+                                'special.openjdk',
+                                'special.system',
+                                'dev.functional',
+                                'extended.functional.fips140_3_OpenJCEPlusFIPS',
+                                'sanity.jck.fips140_3_OpenJCEPlusFIPS',
+                                'extended.jck.fips140_3_OpenJCEPlusFIPS',
+                                'special.jck.fips140_3_OpenJCEPlusFIPS',
+                                'sanity.openjdk.fips140_3_OpenJCEPlusFIPS',
+                                'extended.openjdk.fips140_3_OpenJCEPlusFIPS'
+                        ],
+                        release : [
+                                'sanity.functional',
+                                'sanity.openjdk',
+                                'sanity.perf',
+                                'sanity.jck',
+                                'sanity.system',
+                                'extended.functional',
+                                'extended.openjdk',
+                                'extended.perf',
+                                'extended.jck',
+                                'extended.system',
+                                'special.functional',
+                                'special.jck',
+                                'special.openjdk',
+                                'special.system'
+                        ]
+                ],
                 additionalTestLabels: [
                         temurin      : 'sw.os.aix.7_2TL5'
                 ],
@@ -97,7 +248,62 @@ class Config24 {
                 os                  : 'linux',
                 arch                : 's390x',
                 dockerImage         : 'rhel7_build_image',
-                test                : 'default',
+                test                : [
+                        nightly: [
+                                'sanity.functional',
+                                'sanity.openjdk',
+                                'sanity.perf',
+                                'sanity.jck',
+                                'sanity.system',
+                                'extended.functional',
+                                'extended.openjdk',
+                                'special.system'
+                        ],
+                        weekly : [
+                                'sanity.functional',
+                                'sanity.openjdk',
+                                'sanity.perf',
+                                'sanity.jck',
+                                'sanity.system',
+                                'extended.functional',
+                                'extended.openjdk',
+                                'extended.perf',
+                                'extended.jck',
+                                'extended.system',
+                                'special.functional',
+                                'special.jck',
+                                'special.openjdk',
+                                'special.system',
+                                'dev.functional',
+                                'sanity.jck.fips140_2',
+                                'extended.jck.fips140_2',
+                                'special.jck.fips140_2',
+                                'sanity.openjdk.fips140_2',
+                                'extended.openjdk.fips140_2',
+                                'extended.functional.fips140_3_OpenJCEPlusFIPS',
+                                'sanity.jck.fips140_3_OpenJCEPlusFIPS',
+                                'extended.jck.fips140_3_OpenJCEPlusFIPS',
+                                'special.jck.fips140_3_OpenJCEPlusFIPS',
+                                'sanity.openjdk.fips140_3_OpenJCEPlusFIPS',
+                                'extended.openjdk.fips140_3_OpenJCEPlusFIPS'
+                        ],
+                        release : [
+                                'sanity.functional',
+                                'sanity.openjdk',
+                                'sanity.perf',
+                                'sanity.jck',
+                                'sanity.system',
+                                'extended.functional',
+                                'extended.openjdk',
+                                'extended.perf',
+                                'extended.jck',
+                                'extended.system',
+                                'special.functional',
+                                'special.jck',
+                                'special.openjdk',
+                                'special.system'
+                        ]
+                ],
                 buildArgs           : [
                         'temurin'   : '--create-jre-image --create-sbom --enable-sbom-strace --use-adoptium-devkit gcc-11.3.0-Centos7.9.2009-b03'
                 ]
@@ -107,8 +313,61 @@ class Config24 {
                 os                  : 'linux',
                 arch                : 'ppc64le',
                 dockerImage         : 'adoptopenjdk/centos7_build_image',
-                test: [
-                        weekly : ['sanity.openjdk', 'sanity.system', 'extended.system', 'sanity.perf', 'sanity.functional', 'extended.functional', 'extended.openjdk', 'extended.perf', 'special.functional', 'special.openjdk', 'dev.functional', 'special.system']
+                test                : [
+                        nightly: [
+                                'sanity.functional',
+                                'sanity.openjdk',
+                                'sanity.perf',
+                                'sanity.jck',
+                                'sanity.system',
+                                'extended.functional',
+                                'extended.openjdk',
+                                'special.system'
+                        ],
+                        weekly : [
+                                'sanity.functional',
+                                'sanity.openjdk',
+                                'sanity.perf',
+                                'sanity.jck',
+                                'sanity.system',
+                                'extended.functional',
+                                'extended.openjdk',
+                                'extended.perf',
+                                'extended.jck',
+                                'extended.system',
+                                'special.functional',
+                                'special.jck',
+                                'special.openjdk',
+                                'special.system',
+                                'dev.functional',
+                                'sanity.jck.fips140_2',
+                                'extended.jck.fips140_2',
+                                'special.jck.fips140_2',
+                                'sanity.openjdk.fips140_2',
+                                'extended.openjdk.fips140_2',
+                                'extended.functional.fips140_3_OpenJCEPlusFIPS',
+                                'sanity.jck.fips140_3_OpenJCEPlusFIPS',
+                                'extended.jck.fips140_3_OpenJCEPlusFIPS',
+                                'special.jck.fips140_3_OpenJCEPlusFIPS',
+                                'sanity.openjdk.fips140_3_OpenJCEPlusFIPS',
+                                'extended.openjdk.fips140_3_OpenJCEPlusFIPS'
+                        ],
+                        release : [
+                                'sanity.functional',
+                                'sanity.openjdk',
+                                'sanity.perf',
+                                'sanity.jck',
+                                'sanity.system',
+                                'extended.functional',
+                                'extended.openjdk',
+                                'extended.perf',
+                                'extended.jck',
+                                'extended.system',
+                                'special.functional',
+                                'special.jck',
+                                'special.openjdk',
+                                'special.system'
+                        ]
                 ],
                 configureArgs       : [
                         'openj9'      : '--enable-dtrace'
