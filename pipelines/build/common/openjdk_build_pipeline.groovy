@@ -2633,6 +2633,8 @@ class Build {
                     }
                 }
 
+                def smokeTestsResult = runSmokeTests()
+
                 // Sign and archive jobs if needed
                 if (enableSigner) {
                     try {
@@ -2685,8 +2687,6 @@ class Build {
                         }
                     }
                 }
-
-                def smokeTestsResult = runSmokeTests()
 
                 // Run Smoke Tests and AQA Tests
                 if (enableTests) {
