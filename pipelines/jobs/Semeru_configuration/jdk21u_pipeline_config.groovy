@@ -4,21 +4,10 @@ class Config21 {
         x64Mac    : [
                 os                  : 'mac',
                 arch                : 'x64',
-                additionalNodeLabels: [
-                        openj9      : 'ci.project.openj9 && hw.arch.x86 && sw.os.mac && sw.tool.xcode.15_2',
-                        temurin     : 'xcode15.0.1'
-                ],
-                additionalTestLabels: [
-                        openj9      : ''
-                ],
+                additionalNodeLabels: 'ci.project.openj9 && hw.arch.x86 && sw.os.mac && sw.tool.xcode.15_2',
                 test                : 'default',
-                configureArgs       : [
-                        openj9      : '--enable-dtrace --with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition"',
-                        temurin     : '--enable-dtrace'
-                ],
-                buildArgs           : [
-                        'openj9'    : '--create-jre-image --ssh'
-                        ]
+                configureArgs       : '--enable-dtrace --with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition"',
+                buildArgs           : '--create-jre-image --ssh'
         ],
 
         x64Linux  : [
@@ -27,62 +16,33 @@ class Config21 {
                 dockerImage         : 'ghcr.io/adoptium/adoptium_build_image:centos7',
                 dockerRegistry      : 'https://ghcr.io/',
                 dockerCredential    : 'f5a0bd2f-093e-41ea-bd6f-875936334a63',
-                dockerFile: [
-                        openj9      : 'pipelines/build/dockerFiles/cuda.dockerfile'
-                ],
+                dockerFile          : 'pipelines/build/dockerFiles/cuda.dockerfile',
                 dockerNode          : 'sw.tool.docker',
                 test                : 'default',
                 cleanWorkspaceAfterBuild: true,
-                additionalNodeLabels: [
-                        openj9      : 'hw.arch.x86 && sw.os.linux'
-                ],
-                additionalTestLabels: [
-                        openj9      : '!(sw.os.cent.6||sw.os.rhel.6)',
-                        temurin     : '!(centos6||rhel6)'
-                ],
-                configureArgs       : [
-                        'openj9'    : '--enable-dtrace --with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition"'
-                        ],
-                buildArgs           : [
-                        'openj9'    : '--create-jre-image --ssh'
-                        ]
+                additionalNodeLabels: 'hw.arch.x86 && sw.os.linux'
+                configureArgs       : '--enable-dtrace --with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition"',
+                buildArgs           : '--create-jre-image --ssh'
         ],
 
         x64Windows: [
                 os                  : 'windows',
                 arch                : 'x64',
-                additionalNodeLabels: [
-                        openj9      : 'hw.arch.x86 && sw.os.windows',
-                        temurin     : 'win2022&&vs2022'
-                ],
+                additionalNodeLabels: 'hw.arch.x86 && sw.os.windows',
                 cleanWorkspaceAfterBuild: true,
                 test                : 'default',
-                configureArgs       : [
-                        openj9      : '--with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition" --with-jdk-rc-name="IBM Semeru Runtime"'
-                ],
-                buildArgs           : [
-                        'openj9'    : '--create-jre-image --ssh'
-                        ]
+                configureArgs       : '--with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition" --with-jdk-rc-name="IBM Semeru Runtime"',
+                buildArgs           : '--create-jre-image --ssh'
         ],
 
         ppc64Aix    : [
                 os                  : 'aix',
                 arch                : 'ppc64',
-                additionalNodeLabels: [
-                        temurin: 'xlc16&&aix720',
-                        openj9:  'hw.arch.ppc64 && sw.os.aix.7_2 && sw.tool.c++runtime.16_1'
-                ],
+                additionalNodeLabels: 'hw.arch.ppc64 && sw.os.aix.7_2 && sw.tool.c++runtime.16_1',
                 test                : 'default',
-                additionalTestLabels: [
-                        temurin      : 'sw.os.aix.7_2'
-                ],
                 cleanWorkspaceAfterBuild: true,
-                configureArgs       : [
-                        openj9      : '--disable-ccache --with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition"'
-                ],
-                buildArgs           : [
-                        'openj9'    : '--create-jre-image --ssh'
-                        ]
+                configureArgs       : '--disable-ccache --with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition"',
+                buildArgs           : '--create-jre-image --ssh'
         ],
 
         s390xLinux    : [
@@ -90,19 +50,13 @@ class Config21 {
                 arch                : 's390x',
                 test                : 'default',
                 cleanWorkspaceAfterBuild: true,
-                additionalNodeLabels: [
-                        openj9:  'ci.project.openj9 && hw.arch.s390x'
-                ],
+                additionalNodeLabels: 'ci.project.openj9 && hw.arch.s390x',
                 dockerImage: 'sys-rt-docker-local/semeru/s390_rhel7_build_image',
                 dockerRegistry: 'https://docker-na.artifactory.swg-devops.com/',
                 dockerCredential : '7c1c2c28-650f-49e0-afd1-ca6b60479546',
                 dockerNode : 'sw.tool.docker',
-                configureArgs       : [
-                        openj9      : '--with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition"'
-                ],
-                buildArgs           : [
-                        'openj9'    : '--create-jre-image --ssh'
-                        ]
+                configureArgs       : '--with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition"',
+                buildArgs           : '--create-jre-image --ssh'
         ],
 
         ppc64leLinux    : [
@@ -113,19 +67,11 @@ class Config21 {
                 dockerCredential    : 'f5a0bd2f-093e-41ea-bd6f-875936334a63',
                 test                : 'default',
                 cleanWorkspaceAfterBuild: true,
-                additionalNodeLabels: [
-                    openj9:  'ci.project.openj9 && hw.arch.ppc64le && sw.os.linux'
-                ],
-                dockerFile: [
-                    openj9  : 'pipelines/build/dockerFiles/cuda.dockerfile'
-                ],
-                dockerNode         : 'sw.tool.docker',
-                configureArgs       : [
-                        'openj9'    : '--with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition"'
-                ],
-                buildArgs           : [
-                        'openj9'    : '--create-jre-image --ssh'
-                        ]
+                additionalNodeLabels: 'ci.project.openj9 && hw.arch.ppc64le && sw.os.linux',
+                dockerFile          : 'pipelines/build/dockerFiles/cuda.dockerfile'
+                dockerNode          : 'sw.tool.docker',
+                configureArgs       : '--with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition"',
+                buildArgs           : '--create-jre-image --ssh'
         ],
 
         aarch64Linux    : [
@@ -135,53 +81,27 @@ class Config21 {
                 dockerRegistry      : 'https://ghcr.io/',
                 dockerCredential    : 'f5a0bd2f-093e-41ea-bd6f-875936334a63',
                 dockerNode          : 'sw.tool.docker',
-                additionalNodeLabels: [
-                        openj9      : 'hw.arch.aarch64 && sw.os.linux'
-                ],
+                additionalNodeLabels: 'hw.arch.aarch64 && sw.os.linux',
                 test                : 'default',
-                configureArgs : [
-                        'openj9'    : '--enable-dtrace --with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition"'
-                        ],
+                configureArgs       : '--enable-dtrace --with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition"',
                 cleanWorkspaceAfterBuild: true,
-                buildArgs           : [
-                        'openj9'    : '--create-jre-image --ssh'
-                        ]
+                buildArgs           : '--create-jre-image --ssh'
         ],
 
         aarch64Mac: [
                 os                  : 'mac',
                 arch                : 'aarch64',
-                additionalNodeLabels: [
-                        openj9      : 'ci.project.openj9 && hw.arch.aarch64 && sw.os.mac && sw.tool.xcode.15_2',
-                        temurin     : 'xcode15.0.1'
-                ],
+                additionalNodeLabels: 'ci.project.openj9 && hw.arch.aarch64 && sw.os.mac && sw.tool.xcode.15_2',
                 cleanWorkspaceAfterBuild: true,
                 test                : 'default',
-                configureArgs       : [
-                        openj9      : '--enable-dtrace --disable-warnings-as-errors --with-noncompressedrefs --with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition"'
-                ],
-                buildArgs           : [
-                        'openj9'    : '--create-jre-image --ssh'
-                        ]
-        ],
-
-        riscv64Linux      :  [
-                os                  : 'linux',
-                arch                : 'riscv64',
-                crossCompile        : 'qemustatic',
-                dockerImage         : 'ghcr.io/adoptium/adoptium_build_image:ubuntu2004_linux-riscv64',
-                dockerArgs          : '--platform linux/riscv64',
-                test                : 'default',
-                configureArgs       : '--enable-headless-only=yes --enable-dtrace',
-                buildArgs           : [
-                        ]
+                configureArgs       : '--enable-dtrace --disable-warnings-as-errors --with-noncompressedrefs --with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition"',
+                buildArgs           : '--create-jre-image --ssh'
         ],
 
         x64MacIBM    : [
                 os                  : 'mac',
                 arch                : 'x64',
                 additionalNodeLabels: 'ci.project.openj9 && hw.arch.x86 && sw.os.mac && sw.tool.xcode.15_2',
-                additionalTestLabels: '',
                 test                : 'default',
                 configureArgs       : '--enable-dtrace',
                 additionalFileNameTag: 'IBM',
@@ -265,11 +185,10 @@ class Config21 {
                         ]
                 ],
                 cleanWorkspaceAfterBuild: true,
-                additionalNodeLabels: 'hw.arch.x86 && sw.os.linux',
-                additionalTestLabels: '!(sw.os.cent.6||sw.os.rhel.6)',
-                configureArgs       : '--enable-dtrace',
+                additionalNodeLabels : 'hw.arch.x86 && sw.os.linux',
+                configureArgs        : '--enable-dtrace',
                 additionalFileNameTag: 'IBM',
-                buildArgs           : '--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk21 -b ibm_sdk --create-jre-image'
+                buildArgs            : '--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk21 -b ibm_sdk --create-jre-image'
         ],
 
         x64WindowsIBM: [
@@ -465,16 +384,14 @@ class Config21 {
                                 'extended.openjdk.fips140_3_OpenJCEPlusFIPS'
                         ]
                 ],
-                cleanWorkspaceAfterBuild: true,
-                additionalNodeLabels: [
-                        openj9:  'ci.project.openj9 && hw.arch.s390x'
-                ],
-                dockerImage: 'sys-rt-docker-local/semeru/s390_rhel7_build_image',
-                dockerRegistry: 'https://docker-na.artifactory.swg-devops.com/',
-                dockerCredential : '7c1c2c28-650f-49e0-afd1-ca6b60479546',
-                dockerNode : 'sw.tool.docker',
-                additionalFileNameTag: 'IBM',
-                buildArgs           : '--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk21 -b ibm_sdk --create-jre-image'
+                cleanWorkspaceAfterBuild : true,
+                additionalNodeLabels     : 'ci.project.openj9 && hw.arch.s390x',
+                dockerImage              : 'sys-rt-docker-local/semeru/s390_rhel7_build_image',
+                dockerRegistry           : 'https://docker-na.artifactory.swg-devops.com/',
+                dockerCredential         : '7c1c2c28-650f-49e0-afd1-ca6b60479546',
+                dockerNode               : 'sw.tool.docker',
+                additionalFileNameTag    : 'IBM',
+                buildArgs                : '--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk21 -b ibm_sdk --create-jre-image'
         ],
 
         ppc64leLinuxIBM    : [
@@ -483,10 +400,8 @@ class Config21 {
                 dockerImage         : 'ghcr.io/adoptium/adoptium_build_image:centos7',
                 dockerRegistry      : 'https://ghcr.io/',
                 dockerCredential    : 'f5a0bd2f-093e-41ea-bd6f-875936334a63',
-                dockerFile: [
-                    openj9  : 'pipelines/build/dockerFiles/cuda.dockerfile'
-                ],
-                dockerNode         : 'sw.tool.docker',
+                dockerFile          : 'pipelines/build/dockerFiles/cuda.dockerfile',
+                dockerNode          : 'sw.tool.docker',
                 test                : [
                         nightly: [
                                 'sanity.functional',
@@ -554,12 +469,10 @@ class Config21 {
                                 'extended.openjdk.fips140_3_OpenJCEPlusFIPS'
                         ]
                 ],
-                cleanWorkspaceAfterBuild: true,
-                additionalNodeLabels: [
-                    openj9:  'ci.project.openj9 && hw.arch.ppc64le && sw.os.linux'
-                ],
-                additionalFileNameTag: 'IBM',
-                buildArgs           : '--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk21 -b ibm_sdk --create-jre-image'
+                cleanWorkspaceAfterBuild : true,
+                additionalNodeLabels     : 'ci.project.openj9 && hw.arch.ppc64le && sw.os.linux',
+                additionalFileNameTag    : 'IBM',
+                buildArgs                : '--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk21 -b ibm_sdk --create-jre-image'
         ],
 
         aarch64LinuxIBM    : [
