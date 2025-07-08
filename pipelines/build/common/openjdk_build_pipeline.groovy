@@ -491,18 +491,15 @@ class Build {
                         if ("${testType}".contains('dev') || "${testType}".contains('external')) {
                             rerunIterations = '0'
                         }
-                        if (("${testType}".contains('openjdk')) || ("${testType}".contains('jck')) || (testType  == 'dev.functional') || (testType  == 'extended.functional')) {
-                            // Keep test reportdir always for JUnit targets
-                            keep_test_reportdir = true
-                            if (("${testType}".contains('special'))) {
-                                customizedSdkUrl += " " + jreUrl
-                            }
-                            customizedSdkUrl += " " + testimageUrl
-                        } else if ("${testType}".contains('jck')) {
-                            // Keep test reportdir always for JUnit targets
+                        if (("${testType}".contains('openjdk')) || ("${testType}".contains('jck')) || (testType == 'functional')) {
                             keep_test_reportdir = true
                         }
-
+                        if (("${testType}".contains('openjdk')) || "${testType}".contains('functional') || ("${testType}".contains('extended.system'))) {
+                            customizedSdkUrl += " " + testimageUrl
+                        }
+                        if ("${testType}".contains('special.openjdk')) {
+                            customizedSdkUrl += " " + jreUrl
+                        }
                         if ("${testType}".contains('dev')) {
                             rerunIterations = '0'
                         }
@@ -526,7 +523,6 @@ class Build {
                                 VENDOR_TEST_DIRS = ''
                                 buildList = "functional/OpenJcePlusTests,functional/security"
                             }
-                            customizedSdkUrl += " " + testimageUrl
                         } else if ("${testType}".contains('jck')) {
                             VENDOR_TEST_REPOS = 'git@github.ibm.com:runtimes/jck.git'
                             VENDOR_TEST_BRANCHES = "main"
