@@ -2515,7 +2515,7 @@ class Build {
                                                 if (buildConfig.DOCKER_ARGS) {
                                                     context.sh(script: "docker pull ${buildConfig.DOCKER_IMAGE} ${buildConfig.DOCKER_ARGS}")
                                                 } else {
-                                                    context.docker.image(buildConfig.DOCKER_IMAGE).pull()
+                                                    context.sh(script: "docker pull ${buildConfig.DOCKER_IMAGE}")
                                                 }
                                             }
                                             // When we use non-default registry, we need to add a tag that includes the registry name in order to be able to access the image and fetch `dockerImageDigest`
