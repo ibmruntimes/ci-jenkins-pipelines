@@ -18,8 +18,8 @@ class Config11 {
             os                  : 'linux',
             arch                : 'x64',
             dockerImage         : 'ghcr.io/adoptium/adoptium_build_image:centos6_linux-amd64',
-            dockerRegistry      : 'https://ghcr.io/',
-            dockerCredential    : 'f5a0bd2f-093e-41ea-bd6f-875936334a63',
+            dockerRegistry      : 'https://nvcr.io',
+            dockerCredential    : '190cfe9d-f1e6-4757-83ea-11ca21498c84',
             dockerFile: [
                     openj9  : 'pipelines/build/dockerFiles/cuda.dockerfile'
             ],
@@ -98,8 +98,8 @@ class Config11 {
             arch                : 'ppc64le',
             test                : 'default',
             dockerImage         : 'ghcr.io/adoptium/adoptium_build_image:centos7',
-            dockerRegistry      : 'https://ghcr.io/',
-            dockerCredential    : 'f5a0bd2f-093e-41ea-bd6f-875936334a63',
+            dockerRegistry      : 'https://nvcr.io',
+            dockerCredential    : '190cfe9d-f1e6-4757-83ea-11ca21498c84',
             additionalNodeLabels: [
                     openj9:  'ci.project.openj9 && hw.arch.ppc64le && sw.os.linux'
             ],
@@ -214,8 +214,8 @@ class Config11 {
             os                  : 'linux',
             arch                : 'x64',
             dockerImage         : 'ghcr.io/adoptium/adoptium_build_image:centos6_linux-amd64',
-            dockerRegistry      : 'https://ghcr.io/',
-            dockerCredential    : 'f5a0bd2f-093e-41ea-bd6f-875936334a63',
+            dockerRegistry      : 'https://nvcr.io',
+            dockerCredential    : '190cfe9d-f1e6-4757-83ea-11ca21498c84',
             dockerFile: [
                     'openj9'  : 'pipelines/build/dockerFiles/cuda.dockerfile'
             ],
@@ -353,8 +353,8 @@ class Config11 {
             os                  : 'linux',
             arch                : 'ppc64le',
             dockerImage         : 'ghcr.io/adoptium/adoptium_build_image:centos7',
-            dockerRegistry      : 'https://ghcr.io/',
-            dockerCredential    : 'f5a0bd2f-093e-41ea-bd6f-875936334a63',
+            dockerRegistry      : 'https://nvcr.io',
+            dockerCredential    : '190cfe9d-f1e6-4757-83ea-11ca21498c84',
             dockerFile: [
                     openj9  : 'pipelines/build/dockerFiles/cuda.dockerfile'
             ],

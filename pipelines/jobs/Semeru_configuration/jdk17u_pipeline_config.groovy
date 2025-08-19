@@ -23,8 +23,8 @@ class Config17 {
                         temurin     : 'adoptopenjdk/centos6_build_image',
                         openj9      : 'ghcr.io/adoptium/adoptium_build_image:centos7'
                 ],
-                dockerRegistry: 'https://ghcr.io/',
-                dockerCredential    : 'f5a0bd2f-093e-41ea-bd6f-875936334a63',
+                dockerRegistry: 'https://nvcr.io',
+                dockerCredential    : '190cfe9d-f1e6-4757-83ea-11ca21498c84',
                 additionalNodeLabels : 'ci.project.openj9 && hw.arch.x86 && sw.os.linux',
                 dockerFile: [
                         openj9  : 'pipelines/build/dockerFiles/cuda.dockerfile'
@@ -102,8 +102,8 @@ class Config17 {
                 os                  : 'linux',
                 arch                : 'ppc64le',
                 dockerImage         : 'ghcr.io/adoptium/adoptium_build_image:centos7',
-                dockerRegistry      : 'https://ghcr.io/',
-                dockerCredential    : 'f5a0bd2f-093e-41ea-bd6f-875936334a63',
+                dockerRegistry      : 'https://nvcr.io',
+                dockerCredential    : '190cfe9d-f1e6-4757-83ea-11ca21498c84',
                 test                : 'default',
                 cleanWorkspaceAfterBuild: true,
                 additionalNodeLabels: [
@@ -189,8 +189,8 @@ class Config17 {
                 os                  : 'linux',
                 arch                : 'x64',
                 dockerImage         : 'ghcr.io/adoptium/adoptium_build_image:centos7',
-                dockerRegistry      : 'https://ghcr.io/',
-                dockerCredential    : 'f5a0bd2f-093e-41ea-bd6f-875936334a63',
+                dockerRegistry      : 'https://nvcr.io',
+                dockerCredential    : '190cfe9d-f1e6-4757-83ea-11ca21498c84',
                 additionalNodeLabels : 'ci.project.openj9 && hw.arch.x86 && sw.os.linux',
                 dockerFile: [
                         'openj9'  : 'pipelines/build/dockerFiles/cuda.dockerfile'
@@ -490,8 +490,8 @@ class Config17 {
                 os                  : 'linux',
                 arch                : 'ppc64le',
                 dockerImage         : 'ghcr.io/adoptium/adoptium_build_image:centos7',
-                dockerRegistry      : 'https://ghcr.io/',
-                dockerCredential    : 'f5a0bd2f-093e-41ea-bd6f-875936334a63',
+                dockerRegistry      : 'https://nvcr.io',
+                dockerCredential    : '190cfe9d-f1e6-4757-83ea-11ca21498c84',
                 test                : [
                         nightly: [
                                 'sanity.functional',

@@ -2518,7 +2518,7 @@ class Build {
                                                     context.docker.image(buildConfig.DOCKER_IMAGE).pull()
                                                 }
                                             }
-                                            // When we use non-default registery, we need to add a tag includes that inorder to let in later lines be able to access image and fetch `dockerImageDigest` 
+                                            // When we use non-default registry, we need to add a tag that includes the registry name in order to be able to access the image and fetch `dockerImageDigest`
                                             def imageWithoutTag = buildConfig.DOCKER_IMAGE.contains(':') ? buildConfig.DOCKER_IMAGE.substring(0, buildConfig.DOCKER_IMAGE.lastIndexOf(':')) : buildConfig.DOCKER_IMAGE
                                             def imageTag = buildConfig.DOCKER_IMAGE.contains(':') ? buildConfig.DOCKER_IMAGE.substring(buildConfig.DOCKER_IMAGE.lastIndexOf(':') + 1) : 'latest'
                                             def long_docker_image_name = context.sh(script: "docker image ls | grep ${imageWithoutTag} | head -n1 | awk '{print \$1}'", returnStdout:true).trim()
