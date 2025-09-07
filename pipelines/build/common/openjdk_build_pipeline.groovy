@@ -344,6 +344,45 @@ class Build {
     }
 
     /*
+    This is a placeholder for running security scans.
+    */
+    def runSecurityScan() {
+        if (env.JOB_NAME ==~ /.*jdk\d{1,2}u?-mac-x64-openj9-IBM.*/) {
+            def openj9JavaToBuild = buildConfig.JAVA_TO_BUILD
+            if (openj9JavaToBuild.endsWith('u')) {
+                openj9JavaToBuild = openj9JavaToBuild[0..-2]
+            }
+            def suffix = "runtimes/openj9-openjdk-${openj9JavaToBuild}"
+            def jdkRepo = "git@github.ibm.com:${suffix}"
+            def jobName = "SonarQube/SonarQube_Scan"
+            def branch = 'ibm_sdk'
+            // Extract branch from BUILD_ARGS if present and safe to do so
+            def buildArgs = buildConfig.BUILD_ARGS ?: ''
+            if (buildArgs.contains(' -b ')) {
+                def parts = buildArgs.split(' -b ')
+                if (parts.size() > 1) {
+                    def afterB = parts[-1]
+                    def branchCandidate = afterB.split(' ')[0]
+                    if (branchCandidate?.trim()) {
+                        branch = branchCandidate
+                    }
+                }
+            }
+
+            context.build job: jobName,
+                propagate: false,
+                waitForStart: true,
+                parameters: [
+                    context.string(name: 'GIT_REPO', value: jdkRepo),
+                    context.string(name: 'BRANCH', value: branch),
+                    context.string(name: 'JOB_NAME', value: env.JOB_NAME),
+                    context.booleanParam(name: 'SCAN_JAVA', value: true),
+                    context.string(name: 'JOB_NUMBER', value: env.BUILD_NUMBER)
+                ]
+            }
+    }
+
+    /*
     Run smoke tests, which should block the running of downstream test jobs if there are failures.
     If a test job that doesn't exist, it will be created dynamically.
     */
@@ -2443,7 +2482,6 @@ class Build {
                 // Get branch/tag of temurin-build, ci-jenkins-pipeline and jenkins-helper repo from BUILD_CONFIGURATION or defaultsJson
                 def helperRef = buildConfig.HELPER_REF ?: DEFAULTS_JSON['repository']['helper_ref']
                 def nonDockerNodeName = ''
-
                 context.stage('queue') {
                     /* This loads the library containing two Helper classes, and causes them to be
                     imported/updated from their repo. Without the library being imported here, runTests method will fail to execute the post-build test jobs for reasons unknown.*/
@@ -2695,6 +2733,8 @@ class Build {
                 }
 
                 def smokeTestsResult = runSmokeTests()
+
+                runSecurityScan()
 
                 // Run Smoke Tests and AQA Tests
                 if (enableTests) {
