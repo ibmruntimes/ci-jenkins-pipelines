@@ -463,7 +463,8 @@ class Build {
                         // testType value examples: 
                         // extended.functional.fips140_3_OpenJCEPlusFIPS.FIPS140-3
                         // sanity.jck.fips140_3_OpenJCEPlusFIPS
-                        if ("${testType}".contains(".fips")) {
+                        // special.jck.OpenJCEPlus
+                        if ("${testType}".contains(".fips") || "${testType}".contains(".OpenJCEPlus")) {
                             String[] tokens = testType.split('\\.')
                             def levelGroup = tokens[0] + "." + tokens[1]
                             fipsTestBuildSuffix = testType.replace(levelGroup + ".", "")
@@ -506,7 +507,7 @@ class Build {
                             VENDOR_TEST_BRANCHES = aqaBranch
                             VENDOR_TEST_DIRS = 'functional'
                             // do not set functional vendor repo for FIPS
-                            if (fipsTestBuildSuffix && "${fipsTestBuildSuffix}".contains("fips")) {
+                            if (fipsTestBuildSuffix) {
                                 VENDOR_TEST_REPOS = ''
                                 VENDOR_TEST_BRANCHES = ''
                                 VENDOR_TEST_DIRS = ''
@@ -522,7 +523,7 @@ class Build {
                             VENDOR_TEST_BRANCHES = "ibm_tlda"
                             VENDOR_TEST_DIRS = 'openjdk'
                             // do not set openjdk vendor repo for FIPS
-                            if (fipsTestBuildSuffix && "${fipsTestBuildSuffix}".contains("fips")) {
+                            if (fipsTestBuildSuffix) {
                                 VENDOR_TEST_REPOS = ''
                                 VENDOR_TEST_BRANCHES = ''
                                 VENDOR_TEST_DIRS = ''
