@@ -117,11 +117,11 @@
         },
         "ebcEnabledTargets":{
             "linux_x64" : {
-                "8" :  ["extended.functional","extended.openjdk","sanity.functional","sanity.jck","sanity.openjdk","sanity.perf","sanity.system","special.system"],
-                "11" : ["extended.functional","extended.openjdk","sanity.functional","sanity.jck","sanity.openjdk","sanity.perf","sanity.system","special.system"],
-                "17" : ["extended.functional","extended.openjdk","sanity.functional","sanity.jck","sanity.openjdk","sanity.perf","sanity.system","special.system"],
-                "21" : ["extended.functional","extended.openjdk","sanity.functional","sanity.jck","sanity.openjdk","sanity.perf","sanity.system","special.system"],
-                "25" : ["extended.functional","extended.openjdk","sanity.functional","sanity.jck","sanity.openjdk","sanity.perf","sanity.system","special.system"]
+                "8" :  ["extended.functional","extended.openjdk","sanity.functional","sanity.jck","sanity.openjdk","sanity.perf","sanity.system","special.system","extended.jck","extended.perf","extended.system","special.functional","special.jck","special.openjdk"],
+                "11" : ["extended.functional","extended.openjdk","sanity.functional","sanity.jck","sanity.openjdk","sanity.perf","sanity.system","special.system","extended.jck","extended.perf","extended.system","special.functional","special.jck","special.openjdk"],
+                "17" : ["extended.functional","extended.openjdk","sanity.functional","sanity.jck","sanity.openjdk","sanity.perf","sanity.system","special.system","extended.jck","extended.perf","extended.system","special.functional","special.jck","special.openjdk"],
+                "21" : ["extended.functional","extended.openjdk","sanity.functional","sanity.jck","sanity.openjdk","sanity.perf","sanity.system","special.system","extended.jck","extended.perf","extended.system","special.functional","special.jck","special.openjdk"],
+                "25" : ["extended.functional","extended.openjdk","sanity.functional","sanity.jck","sanity.openjdk","sanity.perf","sanity.system","special.system","extended.jck","extended.perf","extended.system","special.functional","special.jck","special.openjdk"]
             },
             "aix_ppc64" : {
                 "8" :  [],
