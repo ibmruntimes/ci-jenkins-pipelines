@@ -83,7 +83,7 @@ class Config11 {
             additionalNodeLabels: [
                     openj9:  'ci.project.openj9 && hw.arch.s390x'
             ],
-            dockerImage: 'runtimes/runtimes/semeru/s390_rhel7_build_image',
+            dockerImage: 'runtimes/semeru/s390_rhel7_build_image',
             dockerRegistry: 'https://icr.io/',
             dockerCredential : 'ea4b3e98-4334-48d4-8211-98deb8767b55',
             dockerNode : 'sw.tool.docker',
@@ -364,7 +364,7 @@ class Config11 {
             additionalNodeLabels: [
                     openj9:  'ci.project.openj9 && hw.arch.s390x'
             ],
-            dockerImage: 'runtimes/runtimes/semeru/s390_rhel7_build_image',
+            dockerImage: 'runtimes/semeru/s390_rhel7_build_image',
             dockerRegistry: 'https://icr.io/',
             dockerCredential : 'ea4b3e98-4334-48d4-8211-98deb8767b55',
             dockerNode : 'sw.tool.docker',
