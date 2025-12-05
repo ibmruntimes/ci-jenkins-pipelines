@@ -22,13 +22,37 @@ targetConfigurations = [
         ],
         'aarch64Mac': [
                 'openj9'
+        ],
+        'x64MacIBM'      : [
+                'openj9'
+        ],
+        'x64LinuxIBM'    : [
+                'openj9'
+        ],
+        'x64WindowsIBM'  : [
+                'openj9'
+        ],
+        'ppc64AixIBM'    : [
+                'openj9'
+        ],
+        'ppc64leLinuxIBM': [
+                'openj9'
+        ],
+        's390xLinuxIBM'  : [
+                'openj9'
+        ],
+        'aarch64LinuxIBM': [
+                'openj9'
+        ],
+        'aarch64MacIBM': [
+                'openj9'
         ]
 ]
 
 // Weekly 8:00 pm Mon~Thur
-triggerSchedule_nightly = '0 20 * * 1-4'
+triggerSchedule_nightly = 'H 21 * * 1-4'
 // 12:00 pm Sat
-triggerSchedule_weekly = '0 12 * * 6'
+triggerSchedule_weekly = 'H 13 * * 6'
 
 // scmReferences to use for weekly release build
 weekly_release_scmReferences = [
