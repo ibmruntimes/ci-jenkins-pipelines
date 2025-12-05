@@ -121,63 +121,72 @@
                 "11" : ["extended.functional","extended.openjdk","sanity.functional","sanity.jck","sanity.openjdk","sanity.perf","sanity.system","special.system","extended.jck","extended.perf","extended.system","special.functional","special.jck","special.openjdk"],
                 "17" : ["extended.functional","extended.openjdk","sanity.functional","sanity.jck","sanity.openjdk","sanity.perf","sanity.system","special.system","extended.jck","extended.perf","extended.system","special.functional","special.jck","special.openjdk"],
                 "21" : ["extended.functional","extended.openjdk","sanity.functional","sanity.jck","sanity.openjdk","sanity.perf","sanity.system","special.system","extended.jck","extended.perf","extended.system","special.functional","special.jck","special.openjdk"],
-                "25" : ["extended.functional","extended.openjdk","sanity.functional","sanity.jck","sanity.openjdk","sanity.perf","sanity.system","special.system","extended.jck","extended.perf","extended.system","special.functional","special.jck","special.openjdk"]
+                "25" : ["extended.functional","extended.openjdk","sanity.functional","sanity.jck","sanity.openjdk","sanity.perf","sanity.system","special.system","extended.jck","extended.perf","extended.system","special.functional","special.jck","special.openjdk"],
+                "26" : ["extended.functional","extended.openjdk","sanity.functional","sanity.jck","sanity.openjdk","sanity.perf","sanity.system","special.system","extended.jck","extended.perf","extended.system","special.functional","special.jck","special.openjdk"]
             },
             "aix_ppc64" : {
                 "8" :  [],
                 "11" : [],
                 "17" : [],
                 "21" : [],
-                "25" : []
+                "25" : [],
+                "26" : []
             },
             "linux_aarch64" : {
                 "8" :  [],
                 "11" : [],
                 "17" : [],
                 "21" : [],
-                "25" : []
+                "25" : [],
+                "26" : []
             },
             "linux_ppc64le" : {
                 "8" :  [],
                 "11" : [],
                 "17" : [],
                 "21" : [],
-                "25" : []
+                "25" : [],
+                "26" : []
             },
             "linux_s390x" : {
                 "8" :  [],
                 "11" : [],
                 "17" : [],
                 "21" : [],
-                "25" : []
+                "25" : [],
+                "26" : []
             },
             "mac_aarch64" : {
                 "8" :  [],
                 "11" : [],
                 "17" : [],
                 "21" : [],
-                "25" : []
+                "25" : [],
+                "26" : []
             },
             "mac_x64" : {
                 "8" :  [],
                 "11" : [],
                 "17" : [],
                 "21" : [],
-                "25" : []
+                "25" : [],
+                "26" : []
             },
             "windows-x64" : {
                 "8" :  [],
                 "11" : [],
                 "17" : [],
                 "21" : [],
-                "25" : []
+                "25" : [],
+                "26" : []
             },
             "windows-x32" : {
                 "8" :  [],
                 "11" : [],
                 "17" : [],
                 "21" : [],
-                "25" : []
+                "25" : [],
+                "26" : []
             }
         }
     },
