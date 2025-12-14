@@ -948,14 +948,11 @@ class Build {
 
                 if (buildConfig.VARIANT == 'openj9') {
                     filter = "**/ibm-semeru*-j*_${buildConfig.TARGET_OS}_*.tar.gz"
-                    nodeFilter = 'sw.tool.signing'
+                    nodeFilter = 'sw.tool.signing&&sw.os.linux'
                     signTool = 'garasign'
 
                     if (buildConfig.TARGET_OS == 'windows') {
-                        nodeFilter += '&&sw.os.windows'
                         filter = "**/ibm-semeru*-j*_${buildConfig.TARGET_OS}_*.zip"
-                    } else if (['aix', 'linux', 'mac'].contains(buildConfig.TARGET_OS)) {
-                        nodeFilter += '&&sw.os.linux'
                     }
                 } else {
                     if (buildConfig.TARGET_OS == 'windows') {
