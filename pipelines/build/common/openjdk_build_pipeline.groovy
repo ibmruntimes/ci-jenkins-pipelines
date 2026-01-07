@@ -947,15 +947,13 @@ class Build {
                 def signTool = 'eclipse'
 
                 if (buildConfig.VARIANT == 'openj9') {
-                    filter = "**/ibm-semeru*-j*_${buildConfig.TARGET_OS}_*.tar.gz"
-                    nodeFilter = 'sw.tool.signing'
-                    signTool = 'garasign'
-
+                    nodeFilter = 'sw.tool.signing&&sw.os.linux'
                     if (buildConfig.TARGET_OS == 'windows') {
-                        nodeFilter += '&&sw.os.windows'
                         filter = "**/ibm-semeru*-j*_${buildConfig.TARGET_OS}_*.zip"
-                    } else if (['aix', 'linux', 'mac'].contains(buildConfig.TARGET_OS)) {
-                        nodeFilter += '&&sw.os.linux'
+                        signTool = 'cosign'
+                    } else {
+                        filter = "**/ibm-semeru*-j*_${buildConfig.TARGET_OS}_*.tar.gz"
+                        signTool = 'garasign'
                     }
                 } else {
                     if (buildConfig.TARGET_OS == 'windows') {
