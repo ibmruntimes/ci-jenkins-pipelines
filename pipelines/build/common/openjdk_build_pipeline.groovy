@@ -347,7 +347,7 @@ class Build {
     This is a placeholder for running security scans.
     */
     def runSecurityScan() {
-        if (env.JOB_NAME ==~ /.*jdk\d{1,2}u?-mac-x64-openj9.*/) {
+        if (env.JOB_NAME ==~ /.*jdk\d{1,2}u?-(mac|linux)-x64-openj9.*/) {
             def openj9JavaToBuild = buildConfig.JAVA_TO_BUILD
             if (openj9JavaToBuild.endsWith('u')) {
                 openj9JavaToBuild = openj9JavaToBuild[0..-2]
