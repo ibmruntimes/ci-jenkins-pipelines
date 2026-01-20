@@ -1,4 +1,4 @@
-class Config24 {
+class Config26 {
 
     final Map<String, Map<String, ?>> buildConfigurations = [
         x64Mac    : [
