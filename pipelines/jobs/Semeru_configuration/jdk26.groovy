@@ -22,30 +22,6 @@ targetConfigurations = [
         ],
         'aarch64Mac': [
                 'openj9'
-        ],
-        'x64MacIBM'      : [
-                'openj9'
-        ],
-        'x64LinuxIBM'    : [
-                'openj9'
-        ],
-        'x64WindowsIBM'  : [
-                'openj9'
-        ],
-        'ppc64AixIBM'    : [
-                'openj9'
-        ],
-        'ppc64leLinuxIBM': [
-                'openj9'
-        ],
-        's390xLinuxIBM'  : [
-                'openj9'
-        ],
-        'aarch64LinuxIBM': [
-                'openj9'
-        ],
-        'aarch64MacIBM': [
-                'openj9'
         ]
 ]
 
