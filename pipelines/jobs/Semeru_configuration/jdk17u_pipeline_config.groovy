@@ -4,7 +4,7 @@ class Config17 {
         x64Mac    : [
                 os                  : 'mac',
                 arch                : 'x64',
-                additionalNodeLabels: 'ci.project.openj9 && hw.arch.x86 && sw.os.mac && sw.tool.xcode.15_2',
+                additionalNodeLabels: 'ci.project.openj9 && hw.arch.x86 && sw.os.mac',
                 additionalTestLabels: [
                         openj9      : ''
                 ],
@@ -145,7 +145,7 @@ class Config17 {
                 arch                : 'aarch64',
                 additionalNodeLabels: [
                         temurin : 'xcode15.0.1',
-                        openj9 : 'ci.project.openj9 && hw.arch.aarch64 && sw.os.mac && sw.tool.xcode.15_2'
+                        openj9 : 'ci.project.openj9 && hw.arch.aarch64 && sw.os.mac'
                 ],
                 cleanWorkspaceAfterBuild: true,
                 configureArgs       : [
@@ -175,7 +175,7 @@ class Config17 {
         x64MacIBM    : [
                 os                  : 'mac',
                 arch                : 'x64',
-                additionalNodeLabels : 'ci.project.openj9 && hw.arch.x86 && sw.os.mac && sw.tool.xcode.15_2',
+                additionalNodeLabels : 'ci.project.openj9 && hw.arch.x86 && sw.os.mac',
                 test                : 'default',
                 cleanWorkspaceAfterBuild: true,
                 configureArgs       : [
@@ -494,7 +494,7 @@ class Config17 {
                 arch                : 'aarch64',
                 additionalNodeLabels: [
                         temurin : 'macos11',
-                        openj9 : 'ci.project.openj9 && hw.arch.aarch64 && sw.os.mac && sw.tool.xcode.15_2'
+                        openj9 : 'ci.project.openj9 && hw.arch.aarch64 && sw.os.mac'
                 ],
                 cleanWorkspaceAfterBuild: true,
                 configureArgs       : [

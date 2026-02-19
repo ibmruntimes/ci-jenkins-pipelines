@@ -5,7 +5,7 @@ class Config21 {
                 os                  : 'mac',
                 arch                : 'x64',
                 additionalNodeLabels: [
-                        openj9      : 'ci.project.openj9 && hw.arch.x86 && sw.os.mac && sw.tool.xcode.15_2',
+                        openj9      : 'ci.project.openj9 && hw.arch.x86 && sw.os.mac',
                         temurin     : 'xcode15.0.1'
                 ],
                 additionalTestLabels: [
@@ -152,7 +152,7 @@ class Config21 {
                 os                  : 'mac',
                 arch                : 'aarch64',
                 additionalNodeLabels: [
-                        openj9      : 'ci.project.openj9 && hw.arch.aarch64 && sw.os.mac && sw.tool.xcode.15_2',
+                        openj9      : 'ci.project.openj9 && hw.arch.aarch64 && sw.os.mac',
                         temurin     : 'xcode15.0.1'
                 ],
                 cleanWorkspaceAfterBuild: true,
@@ -180,7 +180,7 @@ class Config21 {
         x64MacIBM    : [
                 os                  : 'mac',
                 arch                : 'x64',
-                additionalNodeLabels: 'ci.project.openj9 && hw.arch.x86 && sw.os.mac && sw.tool.xcode.15_2',
+                additionalNodeLabels: 'ci.project.openj9 && hw.arch.x86 && sw.os.mac',
                 additionalTestLabels: '',
                 test                : 'default',
                 configureArgs       : '--enable-dtrace',
@@ -475,7 +475,7 @@ class Config21 {
         aarch64MacIBM: [
                 os                  : 'mac',
                 arch                : 'aarch64',
-                additionalNodeLabels: 'ci.project.openj9 && hw.arch.aarch64 && sw.os.mac && sw.tool.xcode.15_2',
+                additionalNodeLabels: 'ci.project.openj9 && hw.arch.aarch64 && sw.os.mac',
                 cleanWorkspaceAfterBuild: true,
                 test                : 'default',
                 configureArgs       : '--enable-dtrace --disable-warnings-as-errors --with-noncompressedrefs',

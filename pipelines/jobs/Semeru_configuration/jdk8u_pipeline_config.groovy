@@ -6,7 +6,7 @@ class Config8 {
                 arch                : 'x64',
                 additionalNodeLabels: [
                         temurin : 'xcode11.7',
-                        openj9  : 'ci.project.openj9 && hw.arch.x86 && sw.os.mac && sw.tool.xcode.15_2'
+                        openj9  : 'ci.project.openj9 && hw.arch.x86 && sw.os.mac'
                 ],
                 cleanWorkspaceAfterBuild: true,
                 test                : [
