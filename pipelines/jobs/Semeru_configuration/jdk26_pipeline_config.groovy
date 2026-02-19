@@ -4,7 +4,7 @@ class Config26 {
         x64Mac    : [
                 os                  : 'mac',
                 arch                : 'x64',
-                additionalNodeLabels: 'ci.project.openj9 && hw.arch.x86 && sw.os.mac && sw.tool.xcode.15_2',
+                additionalNodeLabels: 'ci.project.openj9 && hw.arch.x86 && sw.os.mac',
                 additionalTestLabels: '!sw.os.osx.10_15',
                 test                : 'default',
                 configureArgs       : '--enable-dtrace --with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition"',
@@ -500,7 +500,7 @@ class Config26 {
                 os                  : 'mac',
                 arch                : 'aarch64',
                 additionalNodeLabels: [
-                        openj9      : 'ci.project.openj9 && hw.arch.aarch64 && sw.os.mac && sw.tool.xcode.15_2',
+                        openj9      : 'ci.project.openj9 && hw.arch.aarch64 && sw.os.mac',
                 ],
                 cleanWorkspaceAfterBuild: true,
                 test                : 'default',

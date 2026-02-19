@@ -4,7 +4,7 @@ class Config25 {
         x64Mac    : [
                 os                  : 'mac',
                 arch                : 'x64',
-                additionalNodeLabels: 'ci.project.openj9 && hw.arch.x86 && sw.os.mac && sw.tool.xcode.15_2',
+                additionalNodeLabels: 'ci.project.openj9 && hw.arch.x86 && sw.os.mac',
                 additionalTestLabels: '!sw.os.osx.10_15',
                 test                : 'default',
                 configureArgs       : '--enable-dtrace --with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition"',
@@ -92,7 +92,7 @@ class Config25 {
         aarch64Mac: [
                 os                  : 'mac',
                 arch                : 'aarch64',
-                additionalNodeLabels: 'ci.project.openj9 && hw.arch.aarch64 && sw.os.mac && sw.tool.xcode.15_2',
+                additionalNodeLabels: 'ci.project.openj9 && hw.arch.aarch64 && sw.os.mac',
                 cleanWorkspaceAfterBuild: true,
                 test                : 'default',
                 configureArgs       : '--enable-dtrace --disable-warnings-as-errors --with-noncompressedrefs --with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition"',
@@ -102,7 +102,7 @@ class Config25 {
         x64MacIBM    : [
                 os                  : 'mac',
                 arch                : 'x64',
-                additionalNodeLabels: 'ci.project.openj9 && hw.arch.x86 && sw.os.mac && sw.tool.xcode.15_2',
+                additionalNodeLabels: 'ci.project.openj9 && hw.arch.x86 && sw.os.mac',
                 additionalTestLabels: '!sw.os.osx.10_15',
                 test                : 'default',
                 configureArgs       : '--enable-dtrace',
@@ -390,7 +390,7 @@ class Config25 {
         aarch64MacIBM: [
                 os                  : 'mac',
                 arch                : 'aarch64',
-                additionalNodeLabels: 'ci.project.openj9 && hw.arch.aarch64 && sw.os.mac && sw.tool.xcode.15_2',
+                additionalNodeLabels: 'ci.project.openj9 && hw.arch.aarch64 && sw.os.mac',
                 cleanWorkspaceAfterBuild: true,
                 test                : 'default',
                 configureArgs       : '--enable-dtrace --disable-warnings-as-errors --with-noncompressedrefs',

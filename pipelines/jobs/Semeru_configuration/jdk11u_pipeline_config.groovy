@@ -4,7 +4,7 @@ class Config11 {
         x64Mac    : [
             os                  : 'mac',
             arch                : 'x64',
-            additionalNodeLabels : 'ci.project.openj9 && hw.arch.x86 && sw.os.mac && sw.tool.xcode.15_2',
+            additionalNodeLabels : 'ci.project.openj9 && hw.arch.x86 && sw.os.mac',
             test                : 'default',
             configureArgs       : [
                     'openj9'      : '--enable-dtrace=auto  --with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition"'
@@ -180,7 +180,7 @@ class Config11 {
                 os                  : 'mac',
                 arch                : 'aarch64',
                 additionalNodeLabels: [
-                        openj9 : 'ci.project.openj9 && hw.arch.aarch64 && sw.os.mac && sw.tool.xcode.15_2',
+                        openj9 : 'ci.project.openj9 && hw.arch.aarch64 && sw.os.mac',
                         temurin: 'macos11'
                 ],
                 cleanWorkspaceAfterBuild: true,
@@ -201,7 +201,7 @@ class Config11 {
         x64MacIBM    : [
             os                  : 'mac',
             arch                : 'x64',
-            additionalNodeLabels : 'ci.project.openj9 && hw.arch.x86 && sw.os.mac && sw.tool.xcode.15_2',
+            additionalNodeLabels : 'ci.project.openj9 && hw.arch.x86 && sw.os.mac',
             test                : 'default',
             configureArgs       : [
                     'openj9'      : '--enable-dtrace=auto '
@@ -514,7 +514,7 @@ class Config11 {
                 os                  : 'mac',
                 arch                : 'aarch64',
                 additionalNodeLabels: [
-                        openj9 : 'ci.project.openj9 && hw.arch.aarch64 && sw.os.mac && sw.tool.xcode.15_2'
+                        openj9 : 'ci.project.openj9 && hw.arch.aarch64 && sw.os.mac'
                 ],
                 cleanWorkspaceAfterBuild: true,
                 configureArgs       : [
