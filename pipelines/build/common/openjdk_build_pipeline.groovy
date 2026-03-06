@@ -1337,14 +1337,14 @@ class Build {
             )
 
         } else {
-            def installerJob = context.build job: 'build-scripts/release/sign_mis',
+            def installerJob = context.build job: 'build-scripts/release/sign_msi',
                     propagate: true,
                     parameters: [
                             context.string(name: 'UPSTREAM_JOB_NUMBER', value: "${env.BUILD_NUMBER}"),
                             context.string(name: 'UPSTREAM_JOB_NAME', value: "${env.JOB_NAME}")
                     ]
             context.copyArtifacts(
-                    projectName: 'build-scripts/release/sign_mis',
+                    projectName: 'build-scripts/release/sign_msi',
                     selector: context.specific("${installerJob.getNumber()}"),
                     filter: 'workspace/target/*',
                     fingerprintArtifacts: true,
