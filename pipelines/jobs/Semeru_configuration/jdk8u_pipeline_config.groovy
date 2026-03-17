@@ -41,7 +41,7 @@ class Config8 {
         x64Linux      : [
                 os                  : 'linux',
                 arch                : 'x64',
-                dockerImage         : 'ghcr.io/adoptium/adoptium_build_image:centos6',
+                dockerImage         : 'ghcr.io/adoptium/adoptium_build_image:centos7',
                 dockerRegistry      : 'https://ghcr.io/',
                 dockerCredential    : 'f5a0bd2f-093e-41ea-bd6f-875936334a63',
                 dockerFile: [
@@ -209,7 +209,7 @@ class Config8 {
                 additionalNodeLabels: [
                         openj9:  'ci.project.openj9 && hw.arch.s390x'
                 ],
-                dockerImage: 'runtimes/semeru/s390_rhel7_build_image',
+                dockerImage: 'runtimes/ibm-java-8/s390x-redhat7:gcc14_semeru',
                 dockerRegistry: 'https://icr.io/',
                 dockerCredential : 'ea4b3e98-4334-48d4-8211-98deb8767b55',
                 dockerNode : 'sw.tool.docker',
