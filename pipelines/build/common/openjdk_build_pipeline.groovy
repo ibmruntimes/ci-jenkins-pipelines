@@ -2539,8 +2539,8 @@ class Build {
                                             // When we use non-default registery, we need to add a tag includes that inorder to let in later lines be able to access image and fetch `dockerImageDigest` 
                                             def imageWithoutTag = buildConfig.DOCKER_IMAGE.contains(':') ? buildConfig.DOCKER_IMAGE.substring(0, buildConfig.DOCKER_IMAGE.lastIndexOf(':')) : buildConfig.DOCKER_IMAGE
                                             def imageTag = buildConfig.DOCKER_IMAGE.contains(':') ? buildConfig.DOCKER_IMAGE.substring(buildConfig.DOCKER_IMAGE.lastIndexOf(':') + 1) : 'latest'
-                                            def long_docker_image_name = context.sh(script: "docker image ls --format '{{.Repository}}' | grep ${imageWithoutTag} | head -n1 | awk '{print \$1}'", returnStdout:true).trim()
-                                            context.sh(script: "docker tag '${long_docker_image_name}:${imageTag}' '${buildConfig.DOCKER_IMAGE}'", returnStdout:false)
+                                            def fullImageName = context.sh(script: "docker image ls --format '/{{.Repository}}:{{.Tag}}' | grep '/${imageWithoutTag}:${imageTag}\$' | head -n1 | sed -e 's|^/||'", returnStdout:true).trim()
+                                            context.sh(script: "docker tag '${fullImageName}' '${buildConfig.DOCKER_IMAGE}'", returnStdout:false)
                                         } else {
                                             if (buildConfig.DOCKER_ARGS) {
                                                 context.sh(script: "docker pull ${buildConfig.DOCKER_IMAGE} ${buildConfig.DOCKER_ARGS}")
