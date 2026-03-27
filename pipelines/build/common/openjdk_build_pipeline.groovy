@@ -2203,7 +2203,7 @@ class Build {
                                         } else if (buildConfig.RELEASE) {
                                             try {
                                                 def branchSuffix = (buildConfig.PUBLISH_NAME =~ /jdk-([0-9]+(\.[0-9]+){0,3})\+.*/)[ 0 ][ 1 ]
-                                                openjceplusBranch = "semeru-java-" + branchSuffix
+                                                openjceplusBranch = ((buildConfig.ADDITIONAL_FILE_NAME_TAG == "IBM") ? "ibm-" : "") + "semeru-java-" + branchSuffix
                                             } catch (IndexOutOfBoundsException e) {
                                                 context.println "WARNING: OpenJCEPlus Branch cannot be determined based on PUBLISH_NAME. Using default branch: ${openjceplusBranch}"
                                             }
