@@ -1059,9 +1059,8 @@ class Build {
             def variantTags = ''
             String additionalFileNameTag = buildConfig.ADDITIONAL_FILE_NAME_TAG
 
-            if (buildConfig.RELEASE && ((additionalFileNameTag == 'IBM') && buildConfig.CONFIGURE_ARGS.contains('--with-vendor-version-string'))) {
+            if ((buildConfig.RELEASE) && (buildConfig.CONFIGURE_ARGS.contains('--with-vendor-version-string') || buildConfig.BUILD_ARGS?.contains('--vendor-version'))) {
                 specVersion = getVendorVersion()
-
             } else if (buildConfig.PUBLISH_NAME && buildConfig.PUBLISH_NAME.contains(buildConfig.VARIANT)) {
                 // expected publishName:  jdk[-]<version>_<variant>-<variant_version>[-<variant_tag>]
                 //e.g.
@@ -1776,19 +1775,7 @@ class Build {
 
         if (overrideFileNameVersion) {
             fileName = "${fileName}_${overrideFileNameVersion}"
-        } else if ((buildConfig.PUBLISH_NAME) && (additionalFileNameTag != 'IBM')) {
-            // for java 11 remove jdk- and +. i.e jdk-11.0.3+7 -> 11.0.3_7_openj9-0.14.0
-            def nameTag = buildConfig.PUBLISH_NAME
-                    .replace('jdk-', '')
-                    .replaceAll("\\+", '_')
-
-            // for java 8 remove jdk and - before the build. i.e jdk8u212-b03_openj9-0.14.0 -> 8u212b03_openj9-0.14.0
-            nameTag = nameTag
-                    .replace('jdk', '')
-                    .replace('-b', 'b')
-
-            fileName = "${fileName}_${nameTag}"
-        } else if ((buildConfig.RELEASE) && ((additionalFileNameTag == "IBM") && buildConfig.CONFIGURE_ARGS.contains('--with-vendor-version-string'))) {
+        } else if ((buildConfig.RELEASE) && (buildConfig.CONFIGURE_ARGS.contains('--with-vendor-version-string') || buildConfig.BUILD_ARGS?.contains('--vendor-version'))) {
             fileName = "${fileName}_${getVendorVersion()}"
         } else {
             def timestamp = new Date().format('yyyy-MM-dd-HH-mm', TimeZone.getTimeZone('UTC'))
@@ -1809,21 +1796,21 @@ class Build {
     /*
     Return the vendor version from the configure arguments when the
     --with-vendor-version-string option is set, otherwise return an empty string.
+    e.g: "CONFIGURE_ARGS": "--with-jdk-rc-name=\"IBM Semeru Runtime\" --with-vendor-version-string=\"25.0.3.0-m1b\"",
+    e.g: "BUILD_ARGS": "--ssh --vendor-version \"8.0.492.0-m1a\"",
      */
     def getVendorVersion() {
-        def vendorVersion = ''
-        def configureArgs = buildConfig.CONFIGURE_ARGS
-        def startIndex = configureArgs.indexOf('--with-vendor-version-string=\"')
-
-        if (startIndex != 1) {
-            // extract vendor version string from buildConfig.CONFIGURE_ARGS
-            //  e.g. "CONFIGURE_ARGS": "--with-vendor-version-string=\"11.0.12.0\""
-
-            startIndex += 30
-            vendorVersion = configureArgs.substring(startIndex, configureArgs.indexOf('\"', startIndex))
+        def vendorArgs = buildConfig.CONFIGURE_ARGS ?: ''
+        if (buildConfig.JAVA_TO_BUILD == 'jdk8u') {
+            vendorArgs = buildConfig.BUILD_ARGS
         }
+        def pattern = /--(?:with-vendor-version-string|vendor-version)[= ]"?(.*?)"?(?:\s|$)/
+        def matcher = (vendorArgs =~ pattern)
 
-        return vendorVersion
+        if (matcher.find()) {
+            return matcher[0][1]
+        }
+        return ''
     }
 
     /*
@@ -2697,7 +2684,7 @@ class Build {
                         // - Win msi & linux rpm are signed during the creation
                         // - Mac pkg is 3rd party signed atm.
                         // - Only sign AIX
-                        if ((buildConfig.VARIANT != "openj9") || ((buildConfig.VARIANT == "openj9") && (buildConfig.TARGET_OS in ["aix","windows"]))){
+                        if ((buildConfig.VARIANT != "openj9") || ((buildConfig.VARIANT == "openj9") && (buildConfig.TARGET_OS == "aix"))){
                             signInstaller(versionInfo)
                         }
                     } catch (FlowInterruptedException e) {
