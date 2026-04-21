@@ -465,7 +465,7 @@ class Regeneration implements Serializable {
                 CI_REF: '',
                 HELPER_REF: '',
                 AQA_REF: '',
-                AQA_AUTO_GEN: false,
+                AQA_AUTO_GEN: true,
                 BUILD_ARGS: buildArgs,
                 NODE_LABEL: "${additionalNodeLabels}",
                 ADDITIONAL_TEST_LABEL: "${additionalTestLabels}",
