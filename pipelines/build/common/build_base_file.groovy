@@ -35,6 +35,25 @@ import org.jenkinsci.plugins.workflow.steps.FlowInterruptedException
 //@CompileStatic(extensions = "JenkinsTypeCheckHelperExtension")
 class Builder implements Serializable {
 
+    /**
+     * Helper function to create badge summary with initial text
+     */
+    def createBadgeSummary(String icon, String initialText = '') {
+        def summary = context.manager.createSummary(icon)
+        if (initialText) {
+            summary.setText(initialText)
+        }
+        return summary
+    }
+
+    /**
+     * Helper function to append text to summary by getting current text and setting new text
+     */
+    def appendSummaryText(summary, String summaryText) {
+        def currentText = summary.getText() ?: ''
+        summary.setText(currentText + summaryText)
+    }
+
     String javaToBuild
     Map<String, Map<String, ?>> buildConfigurations
     Map<String, List<String>> targetConfigurations
@@ -979,16 +998,16 @@ class Builder implements Serializable {
 
             def releaseSummary
             if ( publish || release ) {
-                releaseSummary = context.manager.createSummary('next.svg')
+                releaseSummary = createBadgeSummary('next.svg')
                 if (release) {
                     if (publishName) {
                         // Keep Jenkins release logs for real releases
                         currentBuild.setKeepLog(keepReleaseLogs)
                         currentBuild.setDisplayName(publishName)
                     }
-                    releaseSummary.appendText('<b>RELEASE PUBLISH BINARIES:</b><ul>', false)
+                    appendSummaryText(releaseSummary, '<b>RELEASE PUBLISH BINARIES:</b><ul>')
                 } else {
-                    releaseSummary.appendText('<b>NIGHTLY PUBLISH BINARIES:</b><ul>', false)
+                    appendSummaryText(releaseSummary, '<b>NIGHTLY PUBLISH BINARIES:</b><ul>')
                 }
             }
 
@@ -1267,13 +1286,13 @@ class Builder implements Serializable {
                     try {
                         context.timeout(time: pipelineTimeouts.PUBLISH_ARTIFACTS_TIMEOUT, unit: 'HOURS') {
                             def (String releaseToolUrl, String releaseComment) = publishBinary()
-                            releaseSummary.appendText("<li><a href=${releaseToolUrl}> ${releaseComment} Rerun Link</a></li>")
+                            appendSummaryText(releaseSummary, "<li><a href=${releaseToolUrl}> ${releaseComment} Rerun Link</a></li>")
                         }
                     } catch (FlowInterruptedException e) {
                         throw new Exception("[ERROR] Publish binary timeout (${pipelineTimeouts.PUBLISH_ARTIFACTS_TIMEOUT} HOURS) has been reached OR the downstream publish job failed. Exiting...")
                     }
                 }
-                releaseSummary.appendText('</ul>', false)
+                appendSummaryText(releaseSummary, '</ul>')
             }
         }
     }
