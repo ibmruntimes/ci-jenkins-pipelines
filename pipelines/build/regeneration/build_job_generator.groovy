@@ -30,7 +30,7 @@ String ADOPT_DEFAULTS_FILE_URL = 'https://raw.githubusercontent.com/adoptium/ci-
 
 String DEFAULTS_FILE_URL = (params.DEFAULTS_URL) ?: ADOPT_DEFAULTS_FILE_URL
 
-node('worker') {
+node('sw.os.linux&&hw.arch.x86') {
     // Retrieve Adopt Defaults
     def getAdopt = new URL(ADOPT_DEFAULTS_FILE_URL).openConnection()
     Map<String, ?> ADOPT_DEFAULTS_JSON = new JsonSlurper().parseText(getAdopt.getInputStream().getText()) as Map
