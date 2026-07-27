@@ -2633,7 +2633,7 @@ class Build {
 
                         // Provision an EBC node on-demand when NODE_LABEL is 'EBC'
                         if (buildConfig.NODE_LABEL == 'EBC') {
-                            ebcGroupLabel = 'EBC_' + UUID.randomUUID().toString()
+                            ebcGroupLabel = "EBC_Semeru_build_windows25_${UUID.randomUUID().toString()}"
                             context.println "[EBC] Provisioning on-demand Windows build node (group_label=${ebcGroupLabel})..."
                             context.build job: 'EBC/EBC_Create_Node', parameters: [
                                 context.string(name: 'GROUP_LABEL',      value: ebcGroupLabel),
@@ -2645,7 +2645,7 @@ class Build {
                                 context.string(name: 'EBC_ENV',          value: 'prod'),
                                 context.booleanParam(name: 'WAIT',       value: true)
                             ], wait: true, propagate: true
-                            effectiveNodeLabel = "EBC.hw.arch.x86 && EBC && ${ebcGroupLabel}"
+                            effectiveNodeLabel = ebcGroupLabel
                             context.println "[EBC] Node ready — using label: ${effectiveNodeLabel}"
                         } else {
                             waitForANodeToBecomeActive(effectiveNodeLabel)
