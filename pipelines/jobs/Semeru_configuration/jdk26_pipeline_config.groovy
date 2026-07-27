@@ -128,7 +128,7 @@ class Config26 {
         x64Windows: [
                 os                  : 'windows',
                 arch                : 'x64',
-                additionalNodeLabels: 'hw.arch.x86 && sw.os.windows',
+                additionalNodeLabels: 'EBC',
                 cleanWorkspaceAfterBuild: true,
                 test                : [
                         nightly: [

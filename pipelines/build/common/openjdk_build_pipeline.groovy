@@ -2628,9 +2628,32 @@ class Build {
 
                     // Build the jdk outside of docker container...
                     } else {
-                        waitForANodeToBecomeActive(buildConfig.NODE_LABEL)
-                        context.println "[NODE SHIFT] MOVING INTO JENKINS NODE MATCHING LABELNAME ${buildConfig.NODE_LABEL}..."
-                        context.node(buildConfig.NODE_LABEL) {
+                        def effectiveNodeLabel = buildConfig.NODE_LABEL
+                        def ebcGroupLabel = ''
+
+                        // Provision an EBC node on-demand when NODE_LABEL is 'EBC'
+                        if (buildConfig.NODE_LABEL == 'EBC') {
+                            ebcGroupLabel = 'EBC_' + UUID.randomUUID().toString()
+                            context.println "[EBC] Provisioning on-demand Windows build node (group_label=${ebcGroupLabel})..."
+                            context.build job: 'EBC/EBC_Create_Node', parameters: [
+                                context.string(name: 'GROUP_LABEL',      value: ebcGroupLabel),
+                                context.string(name: 'NODE_TYPE',        value: 'semeru'),
+                                context.string(name: 'TYPE_USAGE',       value: 'build'),
+                                context.string(name: 'OS',               value: 'windows'),
+                                context.string(name: 'DISTRO',           value: 'windows25'),
+                                context.string(name: 'NUM_MACHINES',     value: '1'),
+                                context.string(name: 'EBC_ENV',          value: 'prod'),
+                                context.booleanParam(name: 'WAIT',       value: true)
+                            ], wait: true, propagate: true
+                            effectiveNodeLabel = "EBC.hw.arch.x86 && EBC && ${ebcGroupLabel}"
+                            context.println "[EBC] Node ready — using label: ${effectiveNodeLabel}"
+                        } else {
+                            waitForANodeToBecomeActive(effectiveNodeLabel)
+                        }
+
+                        context.println "[NODE SHIFT] MOVING INTO JENKINS NODE MATCHING LABELNAME ${effectiveNodeLabel}..."
+                        try {
+                        context.node(effectiveNodeLabel) {
                             addNodeToBuildDescription()
                             nonDockerNodeName = context.NODE_NAME
                             // This is to avoid windows path length issues.
@@ -2661,7 +2684,16 @@ class Build {
                                 )
                             }
                         }
-                        context.println "[NODE SHIFT] OUT OF JENKINS NODE (LABELNAME ${buildConfig.NODE_LABEL}!)"
+                        } finally {
+                            // Release EBC node after build completes (success or failure)
+                            if (ebcGroupLabel) {
+                                context.println "[EBC] Releasing node (group_label=${ebcGroupLabel})..."
+                                context.build job: 'EBC/EBC_Complete',
+                                    parameters: [context.string(name: 'LABEL', value: ebcGroupLabel)],
+                                    wait: false, propagate: false
+                            }
+                        }
+                        context.println "[NODE SHIFT] OUT OF JENKINS NODE (LABELNAME ${effectiveNodeLabel}!)"
                     }
                 }
 
