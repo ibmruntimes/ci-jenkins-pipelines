@@ -6,7 +6,7 @@ import groovy.json.JsonOutput
 file used as jenkinsfile to generator nightly and weekly pipeline
 */
 
-node('worker') {
+node('sw.os.linux&&hw.arch.x86') {
     try {
         // Pull in Adopt defaults
         String ADOPT_DEFAULTS_FILE_URL = 'https://raw.githubusercontent.com/adoptium/ci-jenkins-pipelines/master/pipelines/defaults.json'
