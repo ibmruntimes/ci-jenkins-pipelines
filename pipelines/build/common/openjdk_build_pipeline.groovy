@@ -2631,29 +2631,94 @@ class Build {
                         def effectiveNodeLabel = buildConfig.NODE_LABEL
                         def ebcGroupLabel = ''
 
-                        // Provision an EBC node on-demand when NODE_LABEL is 'EBC'
-                        if (buildConfig.NODE_LABEL == 'EBC') {
-                            ebcGroupLabel = "EBC_Semeru_build_windows25_${UUID.randomUUID().toString()}"
-                            context.println "[EBC] Provisioning on-demand Windows build node (group_label=${ebcGroupLabel})..."
-                            context.build job: 'EBC/EBC_Create_Node', parameters: [
-                                context.string(name: 'GROUP_LABEL',      value: ebcGroupLabel),
-                                context.string(name: 'NODE_TYPE',        value: 'semeru'),
-                                context.string(name: 'TYPE_USAGE',       value: 'build'),
-                                context.string(name: 'OS',               value: 'windows'),
-                                context.string(name: 'DISTRO',           value: 'windows25'),
-                                context.string(name: 'NUM_MACHINES',     value: '1'),
-                                context.string(name: 'EBC_ENV',          value: 'prod'),
-                                context.booleanParam(name: 'WAIT',       value: true)
-                            ], wait: true, propagate: true
+                        // Provision an EBC node on-demand when NODE_LABEL starts with 'EBC:'
+                        // Format: EBC:os=<os>,arch=<arch>[,distro=<distro>]
+                        // e.g.  EBC:os=windows,arch=x86-64,distro=windows2025
+                        //       EBC:os=linux,arch=s390x,distro=rhel9
+                        //       EBC:os=aix,arch=p9
+                        if (buildConfig.NODE_LABEL.startsWith('EBC:')) {
+                            context.println "[EBC] Parsing NODE_LABEL: '${buildConfig.NODE_LABEL}'"
+                            def ebcParams = [:]
+                            buildConfig.NODE_LABEL.substring(4).split(',').each { token ->
+                                def kv = token.trim().split('=', 2)
+                                if (kv.length == 2) ebcParams[kv[0].trim()] = kv[1].trim()
+                            }
+                            def ebcOs     = ebcParams.get('os',     '')
+                            def ebcArch   = ebcParams.get('arch',   '')
+                            def ebcDistro = ebcParams.get('distro', '')
+                            context.println "[EBC] Parsed params — os=${ebcOs}, arch=${ebcArch}, distro=${ebcDistro ?: '(none)'}"
+
+                            // Validate required parameters
+                            def ebcErrors = []
+                            if (!ebcOs)   ebcErrors << "'os' is required"
+                            if (!ebcArch) ebcErrors << "'arch' is required"
+                            if (ebcOs == 'linux' && !ebcDistro) ebcErrors << "'distro' is required when os=linux"
+                            if (ebcErrors) {
+                                error("[EBC] Invalid NODE_LABEL '${buildConfig.NODE_LABEL}': ${ebcErrors.join('; ')}")
+                            }
+
+                            def labelSuffix = ebcDistro ? "${ebcDistro}_${ebcArch}" : "${ebcOs}_${ebcArch}"
+                            ebcGroupLabel = "EBC_Semeru_build_${labelSuffix}_${UUID.randomUUID().toString()}"
+                            context.println "[EBC] group_label=${ebcGroupLabel}"
+
+                            context.println "[EBC] Calling EBC_Create_Node (env=dev, node_type=semeru, type_usage=build)..."
+                            def ebcCreateParams = [
+                                context.string(name: 'GROUP_LABEL',  value: ebcGroupLabel),
+                                context.string(name: 'NODE_TYPE',    value: 'semeru'),
+                                context.string(name: 'TYPE_USAGE',   value: 'build'),
+                                context.string(name: 'OS',           value: ebcOs),
+                                context.string(name: 'ARCH',         value: ebcArch),
+                                context.string(name: 'NUM_MACHINES', value: '1'),
+                                context.string(name: 'EBC_ENV',      value: 'dev'),
+                                context.booleanParam(name: 'WAIT',   value: true)
+                            ]
+                            if (ebcDistro) ebcCreateParams << context.string(name: 'DISTRO', value: ebcDistro)
+
+                            context.build job: 'EBC/EBC_Create_Node', parameters: ebcCreateParams,
+                                wait: true, propagate: true
+                            context.println "[EBC] EBC_Create_Node completed — node provisioned with label: ${ebcGroupLabel}"
+
                             effectiveNodeLabel = ebcGroupLabel
-                            context.println "[EBC] Node ready — using label: ${effectiveNodeLabel}"
+
+                            // Poll the node's online status via Jenkins API for up to 2 minutes
+                            // before connecting, to ensure it is fully booted and stable.
+                            def jenkinsUrl = context.env.JENKINS_URL?.replaceAll('/+$', '') ?: 'https://hyc-runtimes-jenkins.swg-devops.com'
+                            def pollDeadline = System.currentTimeMillis() + 2 * 60 * 1000
+                            def pollInterval = 10  // seconds
+                            def nodeOnline = false
+                            context.println "[EBC] Polling node online status (up to 2 min, every ${pollInterval}s)..."
+                            while (System.currentTimeMillis() < pollDeadline) {
+                                try {
+                                    def apiUrl = "${jenkinsUrl}/computer/${ebcGroupLabel}/api/json?tree=offline,temporarilyOffline"
+                                    def response = new URL(apiUrl).getText(
+                                        connectTimeout: 5000,
+                                        readTimeout:    5000,
+                                        requestProperties: ['Authorization': "Basic ${"${context.env.JENKINS_USER_ID}:${context.env.JENKINS_API_TOKEN}".bytes.encodeBase64()}"]
+                                    )
+                                    def json = new groovy.json.JsonSlurper().parseText(response)
+                                    def isOnline = !json.offline && !json.temporarilyOffline
+                                    context.println "[EBC] Node status — offline=${json.offline}, temporarilyOffline=${json.temporarilyOffline} → ${isOnline ? 'ONLINE' : 'not ready yet'}"
+                                    if (isOnline) {
+                                        nodeOnline = true
+                                        break
+                                    }
+                                } catch (Exception pollEx) {
+                                    context.println "[EBC] Poll attempt failed (node may not be registered yet): ${pollEx.message}"
+                                }
+                                context.sleep(time: pollInterval, unit: 'SECONDS')
+                            }
+                            if (nodeOnline) {
+                                context.println "[EBC] Node is online and stable — proceeding to connect."
+                            } else {
+                                context.println "[EBC] WARNING: Node did not report online within 2 minutes — attempting to connect anyway."
+                            }
                         } else {
                             waitForANodeToBecomeActive(effectiveNodeLabel)
                         }
 
                         context.println "[NODE SHIFT] MOVING INTO JENKINS NODE MATCHING LABELNAME ${effectiveNodeLabel}..."
-                        try {
                         context.node(effectiveNodeLabel) {
+                            context.println "[EBC] Connected to node: ${context.NODE_NAME}"
                             addNodeToBuildDescription()
                             nonDockerNodeName = context.NODE_NAME
                             // This is to avoid windows path length issues.
@@ -2665,7 +2730,9 @@ class Build {
                                     workspace = env.CYGWIN_WORKSPACE
                                 }
                                 context.echo("Switched to using non-default workspace path ${workspace}")
+                                context.println "[EBC] Entering ws(${workspace})..."
                                 context.ws(workspace) {
+                                    context.println "[EBC] Inside ws block — calling buildScripts..."
                                     buildScripts(
                                         cleanWorkspace,
                                         cleanWorkspaceAfter,
@@ -2673,8 +2740,10 @@ class Build {
                                         filename,
                                         useAdoptShellScripts
                                     )
+                                    context.println "[EBC] buildScripts returned successfully."
                                 }
                             } else {
+                                context.println "[EBC] Non-windows — calling buildScripts..."
                                 buildScripts(
                                     cleanWorkspace,
                                     cleanWorkspaceAfter,
@@ -2682,17 +2751,12 @@ class Build {
                                     filename,
                                     useAdoptShellScripts
                                 )
+                                context.println "[EBC] buildScripts returned successfully."
                             }
+                            context.println "[EBC] Exiting node block normally."
                         }
-                        } finally {
-                            // Release EBC node after build completes (success or failure)
-                            if (ebcGroupLabel) {
-                                context.println "[EBC] Releasing node (group_label=${ebcGroupLabel})..."
-                                context.build job: 'EBC/EBC_Complete',
-                                    parameters: [context.string(name: 'LABEL', value: ebcGroupLabel)],
-                                    wait: false, propagate: false
-                            }
-                        }
+                        // NOTE: EBC_Complete (node release) intentionally omitted for debugging.
+                        // Restore once node stability is confirmed.
                         context.println "[NODE SHIFT] OUT OF JENKINS NODE (LABELNAME ${effectiveNodeLabel}!)"
                     }
                 }

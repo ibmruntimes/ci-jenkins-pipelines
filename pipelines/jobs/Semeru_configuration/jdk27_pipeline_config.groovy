@@ -128,7 +128,7 @@ class Config27 {
         x64Windows: [
                 os                  : 'windows',
                 arch                : 'x64',
-                additionalNodeLabels: 'EBC',
+                additionalNodeLabels: 'EBC:os=windows,arch=x86-64,distro=windows2025',
                 cleanWorkspaceAfterBuild: true,
                 test                : [
                         nightly: [

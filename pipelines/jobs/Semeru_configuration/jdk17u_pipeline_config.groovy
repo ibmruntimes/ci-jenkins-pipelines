@@ -47,7 +47,7 @@ class Config17 {
                 os                  : 'windows',
                 arch                : 'x64',
                 additionalNodeLabels: [
-                        openj9 : 'EBC',
+                        openj9 : 'EBC:os=windows,arch=x86-64,distro=windows2025',
                         temurin : 'win2022&&vs2019'
                 ],
                 cleanWorkspaceAfterBuild: true,
