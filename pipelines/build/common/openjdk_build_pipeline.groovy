@@ -2717,22 +2717,30 @@ class Build {
                         }
 
                         context.println "[NODE SHIFT] MOVING INTO JENKINS NODE MATCHING LABELNAME ${effectiveNodeLabel}..."
-                        context.node(effectiveNodeLabel) {
-                            context.println "[EBC] Connected to node: ${context.NODE_NAME}"
-                            addNodeToBuildDescription()
-                            nonDockerNodeName = context.NODE_NAME
-                            // This is to avoid windows path length issues.
-                            context.echo("checking ${buildConfig.TARGET_OS}")
-                            if (buildConfig.TARGET_OS == 'windows') {
-                                // See https://github.com/adoptium/infrastucture/issues/1284#issuecomment-621909378 for justification of the below path
-                                def workspace = 'C:/workspace/openjdk-build/'
-                                if (env.CYGWIN_WORKSPACE) {
-                                    workspace = env.CYGWIN_WORKSPACE
-                                }
-                                context.echo("Switched to using non-default workspace path ${workspace}")
-                                context.println "[EBC] Entering ws(${workspace})..."
-                                context.ws(workspace) {
-                                    context.println "[EBC] Inside ws block — calling buildScripts..."
+                        try {
+                            context.node(effectiveNodeLabel) {
+                                context.println "[EBC] Connected to node: ${context.NODE_NAME}"
+                                addNodeToBuildDescription()
+                                nonDockerNodeName = context.NODE_NAME
+                                // This is to avoid windows path length issues.
+                                context.echo("checking ${buildConfig.TARGET_OS}")
+                                if (buildConfig.TARGET_OS == 'windows') {
+                                    // See https://github.com/adoptium/infrastucture/issues/1284#issuecomment-621909378 for justification of the below path
+                                    def workspace = 'C:/workspace/openjdk-build/'
+                                    if (env.CYGWIN_WORKSPACE) {
+                                        workspace = env.CYGWIN_WORKSPACE
+                                    }
+                                    context.echo("Switched to using non-default workspace path ${workspace}")
+                                    context.ws(workspace) {
+                                        buildScripts(
+                                            cleanWorkspace,
+                                            cleanWorkspaceAfter,
+                                            cleanWorkspaceBuildOutputAfter,
+                                            filename,
+                                            useAdoptShellScripts
+                                        )
+                                    }
+                                } else {
                                     buildScripts(
                                         cleanWorkspace,
                                         cleanWorkspaceAfter,
@@ -2740,23 +2748,16 @@ class Build {
                                         filename,
                                         useAdoptShellScripts
                                     )
-                                    context.println "[EBC] buildScripts returned successfully."
                                 }
-                            } else {
-                                context.println "[EBC] Non-windows — calling buildScripts..."
-                                buildScripts(
-                                    cleanWorkspace,
-                                    cleanWorkspaceAfter,
-                                    cleanWorkspaceBuildOutputAfter,
-                                    filename,
-                                    useAdoptShellScripts
-                                )
-                                context.println "[EBC] buildScripts returned successfully."
                             }
-                            context.println "[EBC] Exiting node block normally."
+                        } finally {
+                            if (ebcGroupLabel) {
+                                context.println "[EBC] Calling EBC_Complete to release node (group_label=${ebcGroupLabel})..."
+                                context.build job: 'EBC/EBC_Complete', wait: false, propagate: false,
+                                    parameters: [context.string(name: 'GROUP_LABEL', value: ebcGroupLabel)]
+                                context.println "[EBC] EBC_Complete triggered."
+                            }
                         }
-                        // NOTE: EBC_Complete (node release) intentionally omitted for debugging.
-                        // Restore once node stability is confirmed.
                         context.println "[NODE SHIFT] OUT OF JENKINS NODE (LABELNAME ${effectiveNodeLabel}!)"
                     }
                 }
