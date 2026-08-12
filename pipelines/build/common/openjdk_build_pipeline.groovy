@@ -2661,7 +2661,10 @@ class Build {
                             ebcGroupLabel = "EBC_Semeru_build_${labelSuffix}_${UUID.randomUUID().toString()}"
                             context.println "[EBC] group_label=${ebcGroupLabel}"
 
-                            context.println "[EBC] Calling EBC_Create_Node (env=dev, node_type=semeru, type_usage=build)..."
+                            // TIME_LIMIT must be > 0: passing 0 sets ebc_autoCompleteAfterXHours=0
+                            // which causes EBC to auto-release the node the moment it goes LIVE.
+                            // Use 6h — enough headroom for a full Windows build (~3h) plus retries.
+                            context.println "[EBC] Calling EBC_Create_Node (env=dev, node_type=semeru, type_usage=build, TIME_LIMIT=6)..."
                             def ebcCreateParams = [
                                 context.string(name: 'GROUP_LABEL',  value: ebcGroupLabel),
                                 context.string(name: 'NODE_TYPE',    value: 'semeru'),
@@ -2669,6 +2672,7 @@ class Build {
                                 context.string(name: 'OS',           value: ebcOs),
                                 context.string(name: 'ARCH',         value: ebcArch),
                                 context.string(name: 'NUM_MACHINES', value: '1'),
+                                context.string(name: 'TIME_LIMIT',   value: '6'),
                                 context.string(name: 'EBC_ENV',      value: 'dev'),
                                 context.booleanParam(name: 'WAIT',   value: true)
                             ]
@@ -2752,9 +2756,9 @@ class Build {
                             }
                         } finally {
                             if (ebcGroupLabel) {
-                                context.println "[EBC] Calling EBC_Complete to release node (group_label=${ebcGroupLabel})..."
+                                context.println "[EBC] Calling EBC_Complete to release node (label=${ebcGroupLabel})..."
                                 context.build job: 'EBC/EBC_Complete', wait: false, propagate: false,
-                                    parameters: [context.string(name: 'GROUP_LABEL', value: ebcGroupLabel)]
+                                    parameters: [context.string(name: 'LABEL', value: ebcGroupLabel)]
                                 context.println "[EBC] EBC_Complete triggered."
                             }
                         }
