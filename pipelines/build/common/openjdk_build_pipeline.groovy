@@ -2628,21 +2628,92 @@ class Build {
 
                     // Build the jdk outside of docker container...
                     } else {
-                        waitForANodeToBecomeActive(buildConfig.NODE_LABEL)
-                        context.println "[NODE SHIFT] MOVING INTO JENKINS NODE MATCHING LABELNAME ${buildConfig.NODE_LABEL}..."
-                        context.node(buildConfig.NODE_LABEL) {
-                            addNodeToBuildDescription()
-                            nonDockerNodeName = context.NODE_NAME
-                            // This is to avoid windows path length issues.
-                            context.echo("checking ${buildConfig.TARGET_OS}")
-                            if (buildConfig.TARGET_OS == 'windows') {
-                                // See https://github.com/adoptium/infrastucture/issues/1284#issuecomment-621909378 for justification of the below path
-                                def workspace = 'C:/workspace/openjdk-build/'
-                                if (env.CYGWIN_WORKSPACE) {
-                                    workspace = env.CYGWIN_WORKSPACE
-                                }
-                                context.echo("Switched to using non-default workspace path ${workspace}")
-                                context.ws(workspace) {
+                        def effectiveNodeLabel = buildConfig.NODE_LABEL
+                        def ebcGroupLabel = ''
+
+                        // Provision an EBC node on-demand when NODE_LABEL starts with 'EBC:'
+                        // Format: EBC:os=<os>,arch=<arch>[,distro=<distro>]
+                        // e.g.  EBC:os=windows,arch=x86-64,distro=windows2025
+                        //       EBC:os=linux,arch=s390x,distro=rhel9
+                        //       EBC:os=aix,arch=p9
+                        if (buildConfig.NODE_LABEL.startsWith('EBC:')) {
+                            context.println "[EBC] Parsing NODE_LABEL: '${buildConfig.NODE_LABEL}'"
+                            def ebcParams = [:]
+                            buildConfig.NODE_LABEL.substring(4).split(',').each { token ->
+                                def kv = token.trim().split('=', 2)
+                                if (kv.length == 2) ebcParams[kv[0].trim()] = kv[1].trim()
+                            }
+                            def ebcOs     = ebcParams.get('os',     '')
+                            def ebcArch   = ebcParams.get('arch',   '')
+                            def ebcDistro = ebcParams.get('distro', '')
+                            context.println "[EBC] Parsed params — os=${ebcOs}, arch=${ebcArch}, distro=${ebcDistro ?: '(none)'}"
+
+                            // Validate required parameters
+                            def ebcErrors = []
+                            if (!ebcOs)   ebcErrors << "'os' is required"
+                            if (!ebcArch) ebcErrors << "'arch' is required"
+                            if (ebcOs == 'linux' && !ebcDistro) ebcErrors << "'distro' is required when os=linux"
+                            if (ebcErrors) {
+                                error("[EBC] Invalid NODE_LABEL '${buildConfig.NODE_LABEL}': ${ebcErrors.join('; ')}")
+                            }
+
+                            def labelSuffix = ebcDistro ? "${ebcDistro}_${ebcArch}" : "${ebcOs}_${ebcArch}"
+                            ebcGroupLabel = "EBC_Semeru_build_${labelSuffix}_${UUID.randomUUID().toString()}"
+                            context.println "[EBC] group_label=${ebcGroupLabel}"
+
+                            // TIME_LIMIT must be > 0: passing 0 sets ebc_autoCompleteAfterXHours=0
+                            // which causes EBC to auto-release the node the moment it goes LIVE.
+                            // Use 6h — enough headroom for a full Windows build (~3h) plus retries.
+                            context.println "[EBC] Calling EBC_Create_Node (env=dev, node_type=semeru, type_usage=build, TIME_LIMIT=6)..."
+                            def ebcCreateParams = [
+                                context.string(name: 'GROUP_LABEL',  value: ebcGroupLabel),
+                                context.string(name: 'NODE_TYPE',    value: 'semeru'),
+                                context.string(name: 'TYPE_USAGE',   value: 'build'),
+                                context.string(name: 'OS',           value: ebcOs),
+                                context.string(name: 'ARCH',         value: ebcArch),
+                                context.string(name: 'NUM_MACHINES', value: '1'),
+                                context.string(name: 'TIME_LIMIT',   value: '6'),
+                                context.string(name: 'EBC_ENV',      value: 'dev'),
+                                context.booleanParam(name: 'WAIT',   value: true)
+                            ]
+                            if (ebcDistro) ebcCreateParams << context.string(name: 'DISTRO', value: ebcDistro)
+
+                            context.build job: 'EBC/EBC_Create_Node', parameters: ebcCreateParams,
+                                wait: true, propagate: true
+                            context.println "[EBC] EBC_Create_Node completed — node provisioned with label: ${ebcGroupLabel}"
+
+                            effectiveNodeLabel = ebcGroupLabel
+                            // WAIT:true in EBC_Create_Node already ensures the node is online
+                            // before returning — no extra polling needed here.
+                        } else {
+                            waitForANodeToBecomeActive(effectiveNodeLabel)
+                        }
+
+                        context.println "[NODE SHIFT] MOVING INTO JENKINS NODE MATCHING LABELNAME ${effectiveNodeLabel}..."
+                        try {
+                            context.node(effectiveNodeLabel) {
+                                context.println "[EBC] Connected to node: ${context.NODE_NAME}"
+                                addNodeToBuildDescription()
+                                nonDockerNodeName = context.NODE_NAME
+                                // This is to avoid windows path length issues.
+                                context.echo("checking ${buildConfig.TARGET_OS}")
+                                if (buildConfig.TARGET_OS == 'windows') {
+                                    // See https://github.com/adoptium/infrastucture/issues/1284#issuecomment-621909378 for justification of the below path
+                                    def workspace = 'C:/workspace/openjdk-build/'
+                                    if (env.CYGWIN_WORKSPACE) {
+                                        workspace = env.CYGWIN_WORKSPACE
+                                    }
+                                    context.echo("Switched to using non-default workspace path ${workspace}")
+                                    context.ws(workspace) {
+                                        buildScripts(
+                                            cleanWorkspace,
+                                            cleanWorkspaceAfter,
+                                            cleanWorkspaceBuildOutputAfter,
+                                            filename,
+                                            useAdoptShellScripts
+                                        )
+                                    }
+                                } else {
                                     buildScripts(
                                         cleanWorkspace,
                                         cleanWorkspaceAfter,
@@ -2651,17 +2722,16 @@ class Build {
                                         useAdoptShellScripts
                                     )
                                 }
-                            } else {
-                                buildScripts(
-                                    cleanWorkspace,
-                                    cleanWorkspaceAfter,
-                                    cleanWorkspaceBuildOutputAfter,
-                                    filename,
-                                    useAdoptShellScripts
-                                )
+                            }
+                        } finally {
+                            if (ebcGroupLabel) {
+                                context.println "[EBC] Calling EBC_Complete to release node (label=${ebcGroupLabel})..."
+                                context.build job: 'EBC/EBC_Complete', wait: false, propagate: false,
+                                    parameters: [context.string(name: 'LABEL', value: ebcGroupLabel)]
+                                context.println "[EBC] EBC_Complete triggered."
                             }
                         }
-                        context.println "[NODE SHIFT] OUT OF JENKINS NODE (LABELNAME ${buildConfig.NODE_LABEL}!)"
+                        context.println "[NODE SHIFT] OUT OF JENKINS NODE (LABELNAME ${effectiveNodeLabel}!)"
                     }
                 }
 

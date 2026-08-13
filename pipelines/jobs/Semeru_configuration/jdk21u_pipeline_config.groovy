@@ -52,7 +52,7 @@ class Config21 {
                 os                  : 'windows',
                 arch                : 'x64',
                 additionalNodeLabels: [
-                        openj9      : 'hw.arch.x86 && sw.os.windows',
+                        openj9      : 'EBC:os=windows,arch=x86-64,distro=windows2025',
                         temurin     : 'win2022&&vs2022'
                 ],
                 cleanWorkspaceAfterBuild: true,
@@ -258,7 +258,7 @@ class Config21 {
         x64WindowsIBM: [
                 os                  : 'windows',
                 arch                : 'x64',
-                additionalNodeLabels: 'hw.arch.x86 && sw.os.windows',
+                additionalNodeLabels: 'EBC:os=windows,arch=x86-64,distro=windows2025',
                 cleanWorkspaceAfterBuild: true,
                 test                : 'default',
                 configureArgs       : '--with-jdk-rc-name="IBM Semeru Runtime"',

@@ -604,7 +604,13 @@ class Builder implements Serializable {
             }
 
             if (additionalNodeLabels != null) {
-                labels = "${additionalNodeLabels}&&${labels}"
+                // EBC: prefixed values are provisioning directives, not Jenkins label
+                // expressions — do not append the static buildTag suffix to them.
+                if (additionalNodeLabels.toString().startsWith('EBC:')) {
+                    labels = additionalNodeLabels
+                } else {
+                    labels = "${additionalNodeLabels}&&${labels}"
+                }
             }
         }
 
