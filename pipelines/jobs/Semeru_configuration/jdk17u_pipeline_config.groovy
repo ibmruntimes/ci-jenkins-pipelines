@@ -8,7 +8,7 @@ class Config17 {
                 additionalTestLabels: [
                         openj9      : ''
                 ],
-                test                : 'default',
+                test                : false,
                 cleanWorkspaceAfterBuild: true,
                 buildArgs           : [
                         'openj9'      : '--create-jre-image --ssh'
@@ -30,7 +30,7 @@ class Config17 {
                         openj9  : 'pipelines/build/dockerFiles/cuda.dockerfile'
                 ],
                 dockerNode          : 'sw.tool.docker',
-                test                : 'default',
+                test                : false,
                 cleanWorkspaceAfterBuild: true,
                 additionalTestLabels: [
                         openj9      : '!(sw.os.cent.6||sw.os.rhel.6)'
@@ -55,7 +55,7 @@ class Config17 {
                         'openj9'    : '--create-jre-image --ssh'
                         ],
                 configureArgs: '--with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition" --with-jdk-rc-name="IBM Semeru Runtime"',
-                test                : 'default'
+                test                : false
         ],
 
         ppc64Aix    : [
@@ -65,7 +65,7 @@ class Config17 {
                         temurin: 'xlc13&&aix720',
                         openj9:  'hw.arch.ppc64 && sw.os.aix.7_2 && sw.tool.c++runtime.16_1'
                 ],
-                test                : 'default',
+                test                : false,
                 additionalTestLabels:  [
                         temurin: 'sw.os.aix.7_2'
                 ],
@@ -81,7 +81,7 @@ class Config17 {
         s390xLinux    : [
                 os                  : 'linux',
                 arch                : 's390x',
-                test                : 'default',
+                test                : false,
                 cleanWorkspaceAfterBuild: true,
                 additionalNodeLabels: [
                         openj9:  'ci.project.openj9 && hw.arch.s390x'
@@ -104,7 +104,7 @@ class Config17 {
                 dockerImage         : 'ghcr.io/adoptium/adoptium_build_image:centos7',
                 dockerRegistry      : 'https://ghcr.io/',
                 dockerCredential    : 'f5a0bd2f-093e-41ea-bd6f-875936334a63',
-                test                : 'default',
+                test                : false,
                 cleanWorkspaceAfterBuild: true,
                 additionalNodeLabels: [
                     openj9:  'ci.project.openj9 && hw.arch.ppc64le && sw.os.linux'
@@ -128,7 +128,7 @@ class Config17 {
                 dockerRegistry      : 'https://ghcr.io/',
                 dockerCredential    : 'f5a0bd2f-093e-41ea-bd6f-875936334a63',
                 dockerNode         : 'sw.tool.docker',
-                test                : 'default',
+                test                : false,
                 additionalNodeLabels: [
                         openj9:  'hw.arch.aarch64 && sw.os.linux'
                 ],
@@ -153,7 +153,7 @@ class Config17 {
                 ],
                 test                : [
                         temurin : 'default',
-                        openj9 : 'default'
+                        openj9 : false
                 ],
                 buildArgs           : [
                         'openj9'    : '--create-jre-image --ssh'
@@ -166,7 +166,7 @@ class Config17 {
                 dockerImage         : 'adoptopenjdk/ubuntu2004_build_image:linux-riscv64',
                 crossCompile        : 'qemustatic',
                 dockerArgs          : '--platform linux/riscv64',
-                test                : 'default',
+                test                : false,
                 configureArgs       : '--enable-headless-only=yes --enable-dtrace',
                 buildArgs           : [
                         ]
