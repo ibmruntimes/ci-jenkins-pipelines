@@ -283,7 +283,7 @@ class Config11 {
             os                  : 'windows',
             arch                : 'x64',
             additionalNodeLabels: [
-                    openj9:     'ci.project.openj9 && hw.arch.x86 && sw.os.windows'
+                    openj9:     'EBC:os=windows,arch=x86-64,distro=windows2025'
             ],
             buildArgs : [
                     openj9 : '--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk11 -b ibm_sdk'
