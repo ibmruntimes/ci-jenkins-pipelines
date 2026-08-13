@@ -2683,39 +2683,8 @@ class Build {
                             context.println "[EBC] EBC_Create_Node completed — node provisioned with label: ${ebcGroupLabel}"
 
                             effectiveNodeLabel = ebcGroupLabel
-
-                            // Poll the node's online status via Jenkins API for up to 2 minutes
-                            // before connecting, to ensure it is fully booted and stable.
-                            def jenkinsUrl = context.env.JENKINS_URL?.replaceAll('/+$', '') ?: 'https://hyc-runtimes-jenkins.swg-devops.com'
-                            def pollDeadline = System.currentTimeMillis() + 2 * 60 * 1000
-                            def pollInterval = 10  // seconds
-                            def nodeOnline = false
-                            context.println "[EBC] Polling node online status (up to 2 min, every ${pollInterval}s)..."
-                            while (System.currentTimeMillis() < pollDeadline) {
-                                try {
-                                    def apiUrl = "${jenkinsUrl}/computer/${ebcGroupLabel}/api/json?tree=offline,temporarilyOffline"
-                                    def response = new URL(apiUrl).getText(
-                                        connectTimeout: 5000,
-                                        readTimeout:    5000,
-                                        requestProperties: ['Authorization': "Basic ${"${context.env.JENKINS_USER_ID}:${context.env.JENKINS_API_TOKEN}".bytes.encodeBase64()}"]
-                                    )
-                                    def json = new groovy.json.JsonSlurper().parseText(response)
-                                    def isOnline = !json.offline && !json.temporarilyOffline
-                                    context.println "[EBC] Node status — offline=${json.offline}, temporarilyOffline=${json.temporarilyOffline} → ${isOnline ? 'ONLINE' : 'not ready yet'}"
-                                    if (isOnline) {
-                                        nodeOnline = true
-                                        break
-                                    }
-                                } catch (Exception pollEx) {
-                                    context.println "[EBC] Poll attempt failed (node may not be registered yet): ${pollEx.message}"
-                                }
-                                context.sleep(time: pollInterval, unit: 'SECONDS')
-                            }
-                            if (nodeOnline) {
-                                context.println "[EBC] Node is online and stable — proceeding to connect."
-                            } else {
-                                context.println "[EBC] WARNING: Node did not report online within 2 minutes — attempting to connect anyway."
-                            }
+                            // WAIT:true in EBC_Create_Node already ensures the node is online
+                            // before returning — no extra polling needed here.
                         } else {
                             waitForANodeToBecomeActive(effectiveNodeLabel)
                         }
