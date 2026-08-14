@@ -5,7 +5,7 @@ class Config11 {
             os                  : 'mac',
             arch                : 'x64',
             additionalNodeLabels : 'ci.project.openj9 && hw.arch.x86 && sw.os.mac',
-            test                : 'default',
+            test                : false,
             configureArgs       : [
                     'openj9'      : '--enable-dtrace=auto  --with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition"'
                     ],
@@ -25,7 +25,7 @@ class Config11 {
             ],
             additionalNodeLabels : 'ci.project.openj9 && hw.arch.x86 && sw.os.linux',
             dockerNode          : 'sw.tool.docker',
-            test                : 'default',
+            test                : false,
             configureArgs       : [
                     'openj9'      : '--disable-ccache --enable-dtrace=auto --with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition"',
                     'corretto'    : '--enable-dtrace=auto',
@@ -47,7 +47,7 @@ class Config11 {
                     temurin:    'win2022&&vs2019',
                     dragonwell: 'win2012'
             ],
-            test                : 'default',
+            test                : false,
             buildArgs : [
                 'openj9'    : '--ssh'
             ],
@@ -63,7 +63,7 @@ class Config11 {
                     openj9:  'hw.arch.ppc64 && sw.os.aix.7_2 && sw.tool.c++runtime.16_1',
                     temurin: 'xlc13&&aix720'
             ],
-            test                : 'default',
+            test                : false,
             additionalTestLabels: [
                     temurin: 'sw.os.aix.7_2'
             ],
@@ -79,7 +79,7 @@ class Config11 {
         s390xLinux    : [
             os                  : 'linux',
             arch                : 's390x',
-            test                : 'default',
+            test                : false,
             additionalNodeLabels: [
                     openj9:  'ci.project.openj9 && hw.arch.s390x'
             ],
@@ -96,7 +96,7 @@ class Config11 {
         ppc64leLinux    : [
             os                  : 'linux',
             arch                : 'ppc64le',
-            test                : 'default',
+            test                : false,
             dockerImage         : 'ghcr.io/adoptium/adoptium_build_image:centos7',
             dockerRegistry      : 'https://ghcr.io/',
             dockerCredential    : 'f5a0bd2f-093e-41ea-bd6f-875936334a63',
@@ -125,7 +125,7 @@ class Config11 {
             additionalNodeLabels: [
                     openj9:  'hw.arch.aarch64 && sw.os.linux'
             ],
-            test                : 'default',
+            test                : false,
             configureArgs       : [
                     'openj9' : '--enable-dtrace=auto  --without-version-opt  --with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition"',
                     'corretto' : '--enable-dtrace=auto',
@@ -191,7 +191,7 @@ class Config11 {
                         'bisheng'   : '--enable-dtrace=auto --with-extra-cflags=-fstack-protector-strong --with-extra-cxxflags=-fstack-protector-strong --with-jvm-variants=server'
                 ],
                 test                : [
-                        openj9 : 'default'
+                        openj9 : false
                 ],
                 buildArgs           : [
                         'openj9'    : '--ssh'

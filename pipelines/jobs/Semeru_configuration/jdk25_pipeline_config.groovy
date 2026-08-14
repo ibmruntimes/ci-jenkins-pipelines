@@ -6,7 +6,7 @@ class Config25 {
                 arch                : 'x64',
                 additionalNodeLabels: 'ci.project.openj9 && hw.arch.x86 && sw.os.mac',
                 additionalTestLabels: '!sw.os.osx.10_15',
-                test                : 'default',
+                test                : false,
                 configureArgs       : '--enable-dtrace --with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition"',
                 buildArgs           : '--create-jre-image --ssh'
         ],
@@ -19,7 +19,7 @@ class Config25 {
                 dockerCredential    : 'f5a0bd2f-093e-41ea-bd6f-875936334a63',
                 dockerFile          : 'pipelines/build/dockerFiles/cuda.dockerfile',
                 dockerNode          : 'sw.tool.docker',
-                test                : 'default',
+                test                : false,
                 cleanWorkspaceAfterBuild: true,
                 additionalNodeLabels: 'hw.arch.x86 && sw.os.linux',
                 configureArgs       : '--enable-dtrace --with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition"',
@@ -31,7 +31,7 @@ class Config25 {
                 arch                : 'x64',
                 additionalNodeLabels: 'EBC:os=windows,arch=x86-64,distro=windows2025',
                 cleanWorkspaceAfterBuild: true,
-                test                : 'default',
+                test                : false,
                 configureArgs       : '--with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition" --with-jdk-rc-name="IBM Semeru Runtime"',
                 buildArgs           : '--create-jre-image --ssh'
         ],
@@ -40,7 +40,7 @@ class Config25 {
                 os                  : 'aix',
                 arch                : 'ppc64',
                 additionalNodeLabels: 'hw.arch.ppc64 && sw.os.aix.7_2 && sw.tool.c++runtime.17_1',
-                test                : 'default',
+                test                : false,
                 cleanWorkspaceAfterBuild: true,
                 configureArgs       : '--disable-ccache --with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition"',
                 buildArgs           : '--create-jre-image --ssh'
@@ -49,7 +49,7 @@ class Config25 {
         s390xLinux    : [
                 os                  : 'linux',
                 arch                : 's390x',
-                test                : 'default',
+                test                : false,
                 cleanWorkspaceAfterBuild: true,
                 additionalNodeLabels: 'ci.project.openj9 && hw.arch.s390x',
                 dockerImage: 'runtimes/ibm-java-8/s390x-redhat7:gcc14_semeru',
@@ -68,7 +68,7 @@ class Config25 {
                 dockerCredential    : 'f5a0bd2f-093e-41ea-bd6f-875936334a63',
                 dockerFile          : 'pipelines/build/dockerFiles/cuda.dockerfile',
                 dockerNode         : 'sw.tool.docker',
-                test                : 'default',
+                test                : false,
                 cleanWorkspaceAfterBuild: true,
                 additionalNodeLabels: 'ci.project.openj9 && hw.arch.ppc64le && sw.os.linux',
                 configureArgs       : '--with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition"',
@@ -83,7 +83,7 @@ class Config25 {
                 dockerCredential    : 'f5a0bd2f-093e-41ea-bd6f-875936334a63',
                 dockerNode          : 'sw.tool.docker',
                 additionalNodeLabels: 'hw.arch.aarch64 && sw.os.linux',
-                test                : 'default',
+                test                : false,
                 configureArgs       : '--enable-dtrace --with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition"',
                 cleanWorkspaceAfterBuild : true,
                 buildArgs           : '--create-jre-image --ssh'
@@ -94,7 +94,7 @@ class Config25 {
                 arch                : 'aarch64',
                 additionalNodeLabels: 'ci.project.openj9 && hw.arch.aarch64 && sw.os.mac',
                 cleanWorkspaceAfterBuild: true,
-                test                : 'default',
+                test                : false,
                 configureArgs       : '--enable-dtrace --disable-warnings-as-errors --with-noncompressedrefs --with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition"',
                 buildArgs           : '--create-jre-image --ssh'
         ],
