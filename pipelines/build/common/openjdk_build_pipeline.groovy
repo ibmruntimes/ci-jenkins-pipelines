@@ -157,16 +157,6 @@ class Build {
         def vendorTestDirs = ADOPT_DEFAULTS_JSON['repository']['test_dirs']
         def vendorTestBranches = ADOPT_DEFAULTS_JSON['repository']['build_branch']
 
-        // add internal repos/branch
-        def aqaBranch = "master"
-        if (buildConfig.SCM_REF && buildConfig.AQA_REF) {
-            aqaBranch = buildConfig.AQA_REF
-        }
-
-        vendorTestRepos += ",git@github.ibm.com:runtimes/test.git"
-        vendorTestBranches += "," + aqaBranch
-        vendorTestDirs += ",functional"
-
         jobParams.put('VENDOR_TEST_REPOS', vendorTestRepos)
         jobParams.put('VENDOR_TEST_DIRS', vendorTestDirs)
         jobParams.put('VENDOR_TEST_BRANCHES', vendorTestBranches)
@@ -392,9 +382,20 @@ class Build {
         def vendorTestBranches = useAdoptShellScripts ? ADOPT_DEFAULTS_JSON['repository']['build_branch'] : DEFAULTS_JSON['repository']['build_branch']
         def vendorTestRepos = useAdoptShellScripts ? ADOPT_DEFAULTS_JSON['repository']['build_url'] :  DEFAULTS_JSON['repository']['build_url']
         vendorTestRepos = vendorTestRepos - ('.git')
+        def vendorTestDirs = ADOPT_DEFAULTS_JSON['repository']['test_dirs']
 
         // Use BUILD_REF override if specified
         vendorTestBranches = buildConfig.BUILD_REF ?: vendorTestBranches
+
+        // add internal repos/branch
+        def aqaBranch = "master"
+        if (buildConfig.SCM_REF && buildConfig.AQA_REF) {
+            aqaBranch = buildConfig.AQA_REF
+        }
+
+        vendorTestRepos += ",git@github.ibm.com:runtimes/test.git"
+        vendorTestBranches += "," + aqaBranch
+        vendorTestDirs += ",functional"
 
         try {
             context.println 'Running smoke test'
@@ -422,9 +423,11 @@ class Build {
                             context.string(name: 'LABEL_ADDITION', value: additionalTestLabel),
                             context.booleanParam(name: 'KEEP_REPORTDIR', value: buildConfig.KEEP_TEST_REPORTDIR),
                             context.string(name: 'ACTIVE_NODE_TIMEOUT', value: "${buildConfig.ACTIVE_NODE_TIMEOUT}"),
+                            context.string(name: 'BUILD_LIST', value: 'functional/buildAndPackage,functional/smokeTests'),
                             context.booleanParam(name: 'DYNAMIC_COMPILE', value: true),
                             context.string(name: 'VENDOR_TEST_REPOS', value: vendorTestRepos),
                             context.string(name: 'VENDOR_TEST_BRANCHES', value: vendorTestBranches),
+                            context.string(name: 'VENDOR_TEST_DIRS', value: vendorTestDirs),
                             context.string(name: 'TIME_LIMIT', value: '1')
                     ]
                 currentBuild.result = testJob.getResult()
