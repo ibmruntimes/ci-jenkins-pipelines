@@ -1077,6 +1077,11 @@ class Build {
                 if (variantTokens.size() > 2) {
                     variantTags = variantTokens[2]
                 }
+
+                // For nightly/weekly builds spec_version is not passed by the release path.
+                // Use the upstream version string as-is (e.g. "25.0.5+3") — temurin-build
+                // keeps the "jdk-{upstream}" directory name for builds without a vendor version.
+                specVersion = version
             }
 
             // launch job to build the RPM package distribution
