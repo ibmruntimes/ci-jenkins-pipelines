@@ -1060,6 +1060,7 @@ class Build {
             String additionalFileNameTag = buildConfig.ADDITIONAL_FILE_NAME_TAG
 
             if ((buildConfig.RELEASE) && (buildConfig.CONFIGURE_ARGS.contains('--with-vendor-version-string') || buildConfig.BUILD_ARGS?.contains('--vendor-version'))) {
+                // GA / mX / rcX: vendor version string drives the RPM spec_version (e.g. "25.0.4.10", "25.0.4.15-rc1").
                 specVersion = getVendorVersion()
             } else if (buildConfig.PUBLISH_NAME && buildConfig.PUBLISH_NAME.contains(buildConfig.VARIANT)) {
                 // expected publishName:  jdk[-]<version>_<variant>-<variant_version>[-<variant_tag>]
@@ -1078,9 +1079,12 @@ class Build {
                     variantTags = variantTokens[2]
                 }
 
-                // For nightly/weekly builds spec_version is not passed by the release path.
-                // Use the upstream version string as-is (e.g. "25.0.5+3") — temurin-build
-                // keeps the "jdk-{upstream}" directory name for builds without a vendor version.
+                specVersion = version
+            } else {
+                // Nightly / weekly: no PUBLISH_NAME and no vendor-version-string.
+                // temurin-build names the archive dir "jdk-{major}+{build}" in this case,
+                // so specVersion must match that to let %setup find the directory.
+                version = "${versionData.major}+${versionData.build}"
                 specVersion = version
             }
 
