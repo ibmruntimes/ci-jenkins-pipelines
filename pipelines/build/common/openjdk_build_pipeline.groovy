@@ -1060,6 +1060,7 @@ class Build {
             String additionalFileNameTag = buildConfig.ADDITIONAL_FILE_NAME_TAG
 
             if ((buildConfig.RELEASE) && (buildConfig.CONFIGURE_ARGS.contains('--with-vendor-version-string') || buildConfig.BUILD_ARGS?.contains('--vendor-version'))) {
+                // GA / mX / rcX: vendor version string drives the RPM spec_version (e.g. "25.0.4.10", "25.0.4.15-rc1").
                 specVersion = getVendorVersion()
             } else if (buildConfig.PUBLISH_NAME && buildConfig.PUBLISH_NAME.contains(buildConfig.VARIANT)) {
                 // expected publishName:  jdk[-]<version>_<variant>-<variant_version>[-<variant_tag>]
@@ -1077,6 +1078,20 @@ class Build {
                 if (variantTokens.size() > 2) {
                     variantTags = variantTokens[2]
                 }
+
+                specVersion = version
+            } else {
+                // Nightly / weekly: no PUBLISH_NAME and no vendor-version-string.
+                // temurin-build names the archive dir after the git tag, e.g.:
+                //   jdk27 EA:  jdk-27+35     (major=27, security=0)
+                //   jdk25 GA:  jdk-25.0.5+3  (major=25, security=5)
+                // Reconstruct by dropping trailing zero components before the '+'.
+                if (versionData.security > 0) {
+                    version = "${versionData.major}.${versionData.minor}.${versionData.security}+${versionData.build}"
+                } else {
+                    version = "${versionData.major}+${versionData.build}"
+                }
+                specVersion = version
             }
 
             // launch job to build the RPM package distribution
