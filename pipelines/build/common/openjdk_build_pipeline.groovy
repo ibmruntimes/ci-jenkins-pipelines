@@ -1060,11 +1060,11 @@ class Build {
             String additionalFileNameTag = buildConfig.ADDITIONAL_FILE_NAME_TAG
 
             if ((buildConfig.RELEASE) && (buildConfig.CONFIGURE_ARGS.contains('--with-vendor-version-string') || buildConfig.BUILD_ARGS?.contains('--vendor-version'))) {
-                // GA / mX / rcX: vendor version string drives the RPM spec_version.
-                // Strip any release postfix (e.g. -rc1, -m1) because temurin-build names
-                // the archive dir after the upstream git tag which never includes the postfix.
-                // e.g. "25.0.4.10" → "25.0.4.10", "27.0.0.0-rc1" → "27.0.0.0", "25.0.4.15-m1" → "25.0.4.15"
-                specVersion = getVendorVersion().replaceAll(/-[^0-9].*$/, '')
+                // GA / mX / rcX: pass the full vendor version (including any postfix e.g. -rc1, -m1)
+                // as spec_version. package_binaries now always passes source_${arch} from the
+                // actual filename on disk, so the spec never uses spec_version to construct the
+                // tarball filename. The postfix is preserved in the RPM package version (- → _).
+                specVersion = getVendorVersion()
             } else if (buildConfig.PUBLISH_NAME && buildConfig.PUBLISH_NAME.contains(buildConfig.VARIANT)) {
                 // expected publishName:  jdk[-]<version>_<variant>-<variant_version>[-<variant_tag>]
                 //e.g.
