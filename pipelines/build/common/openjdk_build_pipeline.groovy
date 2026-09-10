@@ -1203,8 +1203,7 @@ class Build {
                         context.string(name: 'PRODUCT_CATEGORY', value: "${category}"),
                         context.string(name: 'JVM', value: "${INSTALLER_JVM}"),
                         context.string(name: 'ARCH', value: "${INSTALLER_ARCH}"),
-                        context.string(name: 'SIGNING_CERTIFICATE', value: ""), //will disable signing for windows to do it via linux nodes
-                        ['$class': 'LabelParameterValue', name: 'NODE_LABEL', label: "${nodeFilter}"]
+                        context.string(name: 'SIGNING_CERTIFICATE', value: "") //will disable signing for windows to do it via linux nodes
                 ]
         context.copyArtifacts(
                 projectName: 'build-scripts/release/create_installer_windows',
