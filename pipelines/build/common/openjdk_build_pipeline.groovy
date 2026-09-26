@@ -193,6 +193,21 @@ class Build {
         return jobParams
     }
 
+    def getAQATestJobSuffix(testFlag) {
+		if (!testFlag) return ''
+
+		if (testFlag == 'FIPS140_2') {
+			return '_f2'
+		} else if (testFlag == 'FIPS140_3_OpenJCEPlusFIPS.FIPS140-3-Strongly-Enforced') {
+			return '_f3_strong'
+		} else if (testFlag == 'FIPS140_3_OpenJCEPlusFIPS.FIPS140-3') {
+			return '_f3_strict'
+		} else if (testFlag == 'FIPS140_3_OpenJCEPlusFIPS') {
+			return '_f3_weak'
+		}
+		return "_${testFlag.toLowerCase()}"
+	}
+
     def getCommonTestJobParams() {
         def jobParams = [:]
         String jdk_Version = getJavaVersionNumber() as String
@@ -617,8 +632,7 @@ class Build {
                         def testFlag = ''
                         if (fipsTestBuildSuffix.trim()) {
                             testFlag = fipsTestBuildSuffix.replace("fips", "FIPS")
-                            fipsTestBuildSuffix = fipsTestBuildSuffix.toLowerCase()
-                            jobParams.put('TEST_JOB_NAME', "${jobParams.TEST_JOB_NAME}_${fipsTestBuildSuffix}")
+                            jobParams.put('TEST_JOB_NAME', "${jobParams.TEST_JOB_NAME}${getAQATestJobSuffix(testFlag)}")
                         }
 
                         def jobName = jobParams.TEST_JOB_NAME
