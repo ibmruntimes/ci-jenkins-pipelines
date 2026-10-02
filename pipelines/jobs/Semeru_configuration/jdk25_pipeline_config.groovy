@@ -29,7 +29,7 @@ class Config25 {
         x64Windows: [
                 os                  : 'windows',
                 arch                : 'x64',
-                additionalNodeLabels: 'EBC:os=windows,arch=x86-64,distro=windows2025',
+                additionalNodeLabels: 'ci.project.openj9 && hw.arch.x86 && sw.os.windows',
                 cleanWorkspaceAfterBuild: true,
                 test                : false,
                 configureArgs       : '--with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition" --with-jdk-rc-name="IBM Semeru Runtime"',
@@ -179,7 +179,7 @@ class Config25 {
         x64WindowsIBM: [
                 os                  : 'windows',
                 arch                : 'x64',
-                additionalNodeLabels: 'EBC:os=windows,arch=x86-64,distro=windows2025',
+                additionalNodeLabels: 'ci.project.openj9 && hw.arch.x86 && sw.os.windows',
                 cleanWorkspaceAfterBuild: true,
                 test                : 'default',
                 configureArgs       : '--with-jdk-rc-name="IBM Semeru Runtime"',
