@@ -91,7 +91,7 @@ class Config8 {
                 additionalNodeLabels: [
                         temurin : 'win2022&&vs2017',
                         corretto: 'win2012',
-                        openj9  : 'ci.project.openj9 && hw.arch.x86 && sw.os.windows',
+                        openj9  : 'EBC:os=windows,arch=x86-64,distro=windows2025',
                         dragonwell: 'win2012'
                 ],
                 test                : [
@@ -129,7 +129,7 @@ class Config8 {
                 additionalNodeLabels: [
                         temurin : 'win2022',
                         corretto: 'win2012',
-                        openj9  : 'ci.project.openj9 && hw.arch.x86 && sw.os.windows'
+                        openj9  : 'EBC:os=windows,arch=x86-64,distro=windows2025'
                 ],
                 buildArgs : [
                         temurin : '--jvm-variant client,server --create-sbom --use-adoptium-devkit vs2022_redist_14.40.33807_10.0.26100.0',
