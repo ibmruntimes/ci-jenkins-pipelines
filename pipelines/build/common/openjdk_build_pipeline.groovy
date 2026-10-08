@@ -463,7 +463,7 @@ class Build {
         def testStages = [:]
         def jdkBranch = getJDKBranch()
         def jdkRepo = getJDKRepo()
-        def openj9Branch = (buildConfig.SCM_REF && buildConfig.VARIANT == 'openj9') ? buildConfig.SCM_REF : 'master'
+        def openj9Branch = (buildConfig.SCM_REF && buildConfig.VARIANT == 'openj9') ? buildConfig.SCM_REF : 'main'
 
         def vendorTestRepos = ''
         def vendorTestBranches = ''
