@@ -425,6 +425,7 @@ class Build {
                             context.booleanParam(name: 'DYNAMIC_COMPILE', value: true),
                             context.string(name: 'VENDOR_TEST_REPOS', value: vendorTestRepos),
                             context.string(name: 'VENDOR_TEST_BRANCHES', value: vendorTestBranches),
+                            context.string(name: 'OPENJ9_BRANCH', value: 'main'),
                             context.string(name: 'TIME_LIMIT', value: '1')
                     ]
                 currentBuild.result = testJob.getResult()
