@@ -49,7 +49,7 @@ class Config8 {
                         dragonwell: 'pipelines/build/dockerFiles/dragonwell.dockerfile'
                 ],
                 dockerNode          : 'sw.tool.docker',
-                additionalNodeLabels : 'ci.project.openj9 && hw.arch.x86 && sw.os.linux',
+                additionalNodeLabels : 'EBC:os=linux,arch=x86-64,distro=rhel10',
                 test                : [
                     weekly : [
                         "sanity.external",
