@@ -135,31 +135,31 @@
                 "27" : []
             },
             "linux_aarch64" : {
-                "8" :  [],
-                "11" : [],
-                "17" : [],
-                "21" : [],
-                "25" : [],
+                "8" :  ["sanity.perf"],
+                "11" : ["sanity.perf"],
+                "17" : ["sanity.perf"],
+                "21" : ["sanity.perf"],
+                "25" : ["sanity.perf"],
                 "26" : [],
-                "27" : []
+                "27" : ["sanity.perf"]
             },
             "linux_ppc64le" : {
-                "8" :  [],
-                "11" : [],
-                "17" : [],
-                "21" : [],
-                "25" : [],
+                "8" :  ["sanity.perf"],
+                "11" : ["sanity.perf"],
+                "17" : ["sanity.perf"],
+                "21" : ["sanity.perf"],
+                "25" : ["sanity.perf"],
                 "26" : [],
-                "27" : []
+                "27" : ["sanity.perf"]
             },
             "linux_s390x" : {
-                "8" :  [],
-                "11" : [],
-                "17" : [],
-                "21" : [],
-                "25" : [],
+                "8" :  ["sanity.perf"],
+                "11" : ["sanity.perf"],
+                "17" : ["sanity.perf"],
+                "21" : ["sanity.perf"],
+                "25" : ["sanity.perf"],
                 "26" : [],
-                "27" : []
+                "27" : ["sanity.perf"]
             },
             "mac_aarch64" : {
                 "8" :  [],
