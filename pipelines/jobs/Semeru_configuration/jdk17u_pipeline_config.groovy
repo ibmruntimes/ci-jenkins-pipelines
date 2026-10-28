@@ -25,7 +25,7 @@ class Config17 {
                 ],
                 dockerRegistry: 'https://ghcr.io/',
                 dockerCredential    : 'f5a0bd2f-093e-41ea-bd6f-875936334a63',
-                additionalNodeLabels : 'ci.project.openj9 && hw.arch.x86 && sw.os.linux',
+                additionalNodeLabels : 'EBC:os=linux,arch=x86-64,distro=rhel10',
                 dockerFile: [
                         openj9  : 'pipelines/build/dockerFiles/cuda.dockerfile'
                 ],
@@ -191,7 +191,7 @@ class Config17 {
                 dockerImage         : 'ghcr.io/adoptium/adoptium_build_image:centos7',
                 dockerRegistry      : 'https://ghcr.io/',
                 dockerCredential    : 'f5a0bd2f-093e-41ea-bd6f-875936334a63',
-                additionalNodeLabels : 'ci.project.openj9 && hw.arch.x86 && sw.os.linux',
+                additionalNodeLabels : 'EBC:os=linux,arch=x86-64,distro=rhel10',
                 dockerFile: [
                         'openj9'  : 'pipelines/build/dockerFiles/cuda.dockerfile'
                 ],

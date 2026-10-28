@@ -21,7 +21,7 @@ class Config25 {
                 dockerNode          : 'sw.tool.docker',
                 test                : false,
                 cleanWorkspaceAfterBuild: true,
-                additionalNodeLabels: 'hw.arch.x86 && sw.os.linux',
+                additionalNodeLabels: 'EBC:os=linux,arch=x86-64,distro=rhel10',
                 configureArgs       : '--enable-dtrace --with-product-name="IBM Semeru Runtime" --with-product-suffix="Open Edition"',
                 buildArgs           : '--create-jre-image --ssh'
         ],
@@ -170,7 +170,7 @@ class Config25 {
                     ]
                 ],
                 cleanWorkspaceAfterBuild: true,
-                additionalNodeLabels: 'hw.arch.x86 && sw.os.linux',
+                additionalNodeLabels: 'EBC:os=linux,arch=x86-64,distro=rhel10',
                 configureArgs       : '--enable-dtrace',
                 additionalFileNameTag: 'IBM',
                 buildArgs           : '--create-jre-image --ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk25 -b ibm_sdk'

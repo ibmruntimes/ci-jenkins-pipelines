@@ -112,7 +112,7 @@ class Config27 {
                 ],
                 cleanWorkspaceAfterBuild: true,
                 additionalNodeLabels: [
-                        openj9      : 'hw.arch.x86 && sw.os.linux'
+                        openj9      : 'EBC:os=linux,arch=x86-64,distro=rhel10'
                 ],
                 additionalTestLabels: [
                         openj9      : '!(sw.os.cent.6||sw.os.rhel.6)',

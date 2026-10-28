@@ -2505,11 +2505,56 @@ class Build {
                         if (buildConfig.CODEBUILD) {
                             label = 'codebuild'
                         }
+
+                        // EBC: prefixed NODE_LABEL — provision on-demand node first, then use its
+                        // UUID label as the Docker host. Same EBC: format as the non-Docker path:
+                        //   EBC:os=linux,arch=x86-64,distro=rhel10
+                        def dockerEbcGroupLabel = ''
+                        if (buildConfig.NODE_LABEL.startsWith('EBC:')) {
+                            context.println "[EBC] Parsing NODE_LABEL for Docker host: '${buildConfig.NODE_LABEL}'"
+                            def ebcParams = [:]
+                            buildConfig.NODE_LABEL.substring(4).split(',').each { token ->
+                                def kv = token.trim().split('=', 2)
+                                if (kv.length == 2) ebcParams[kv[0].trim()] = kv[1].trim()
+                            }
+                            def ebcOs     = ebcParams.get('os',     '')
+                            def ebcArch   = ebcParams.get('arch',   '')
+                            def ebcDistro = ebcParams.get('distro', '')
+                            def ebcErrors = []
+                            if (!ebcOs)   ebcErrors << "'os' is required"
+                            if (!ebcArch) ebcErrors << "'arch' is required"
+                            if (ebcOs == 'linux' && !ebcDistro) ebcErrors << "'distro' is required when os=linux"
+                            if (ebcErrors) {
+                                error("[EBC] Invalid NODE_LABEL '${buildConfig.NODE_LABEL}': ${ebcErrors.join('; ')}")
+                            }
+                            def labelSuffix = ebcDistro ? "${ebcDistro}_${ebcArch}" : "${ebcOs}_${ebcArch}"
+                            dockerEbcGroupLabel = "EBC_Semeru_build_${labelSuffix}_${UUID.randomUUID().toString()}"
+                            def ebcNodeType = (ebcOs == 'linux') ? 'semeruDocker' : 'semeru'
+                            context.println "[EBC] Calling EBC_Create_Node for Docker host (env=prod, node_type=${ebcNodeType}, TIME_LIMIT=6)..."
+                            def ebcCreateParams = [
+                                context.string(name: 'GROUP_LABEL',  value: dockerEbcGroupLabel),
+                                context.string(name: 'NODE_TYPE',    value: ebcNodeType),
+                                context.string(name: 'TYPE_USAGE',   value: 'build'),
+                                context.string(name: 'OS',           value: ebcOs),
+                                context.string(name: 'ARCH',         value: ebcArch),
+                                context.string(name: 'NUM_MACHINES', value: '1'),
+                                context.string(name: 'TIME_LIMIT',   value: '6'),
+                                context.string(name: 'EBC_ENV',      value: 'prod'),
+                                context.booleanParam(name: 'WAIT',   value: true)
+                            ]
+                            if (ebcDistro) ebcCreateParams << context.string(name: 'DISTRO', value: ebcDistro)
+                            context.build job: 'EBC/EBC_Create_Node', parameters: ebcCreateParams,
+                                wait: true, propagate: true
+                            context.println "[EBC] EBC_Create_Node completed — Docker host provisioned with label: ${dockerEbcGroupLabel}"
+                            label = dockerEbcGroupLabel
+                        }
+
                         context.println "[NODE SHIFT] MOVING INTO DOCKER NODE MATCHING LABELNAME ${label}..."
                         if ( ! ( "${buildConfig.DOCKER_IMAGE}" ==~ /^[A-Za-z0-9\/\.\-_:]*$/ ) ||
                              ! ( "${buildConfig.DOCKER_ARGS}"  ==~ /^[A-Za-z0-9\/\.\-_=\ ]*$/ ) ) {
                              throw new Exception("[ERROR] Dubious characters in DOCKER* image or parameters: ${buildConfig.DOCKER_IMAGE} ${buildConfig.DOCKER_ARGS} - aborting");
                         }
+                        try {
                         context.node(label) {
                             addNodeToBuildDescription()
                             // Cannot clean workspace from inside docker container
@@ -2639,6 +2684,14 @@ class Build {
                                 }
                             }
                         }
+                        } finally {
+                            if (dockerEbcGroupLabel) {
+                                context.println "[EBC] Calling EBC_Complete for Docker host (label=${dockerEbcGroupLabel})..."
+                                context.build job: 'EBC/EBC_Complete', wait: false, propagate: false,
+                                    parameters: [context.string(name: 'LABEL', value: dockerEbcGroupLabel)]
+                                context.println "[EBC] EBC_Complete triggered."
+                            }
+                        }
                         context.println "[NODE SHIFT] OUT OF DOCKER NODE (LABELNAME ${label}!)"
 
                     // Build the jdk outside of docker container...
@@ -2679,16 +2732,19 @@ class Build {
                             // TIME_LIMIT must be > 0: passing 0 sets ebc_autoCompleteAfterXHours=0
                             // which causes EBC to auto-release the node the moment it goes LIVE.
                             // Use 6h — enough headroom for a full Windows build (~3h) plus retries.
-                            context.println "[EBC] Calling EBC_Create_Node (env=dev, node_type=semeru, type_usage=build, TIME_LIMIT=6)..."
+                            // NODE_TYPE: linux builds run inside Docker containers → 'semeruDocker';
+                            // Windows/AIX builds run natively → 'semeru'.
+                            def ebcNodeType = (ebcOs == 'linux') ? 'semeruDocker' : 'semeru'
+                            context.println "[EBC] Calling EBC_Create_Node (env=prod, node_type=${ebcNodeType}, type_usage=build, TIME_LIMIT=6)..."
                             def ebcCreateParams = [
                                 context.string(name: 'GROUP_LABEL',  value: ebcGroupLabel),
-                                context.string(name: 'NODE_TYPE',    value: 'semeru'),
+                                context.string(name: 'NODE_TYPE',    value: ebcNodeType),
                                 context.string(name: 'TYPE_USAGE',   value: 'build'),
                                 context.string(name: 'OS',           value: ebcOs),
                                 context.string(name: 'ARCH',         value: ebcArch),
                                 context.string(name: 'NUM_MACHINES', value: '1'),
                                 context.string(name: 'TIME_LIMIT',   value: '6'),
-                                context.string(name: 'EBC_ENV',      value: 'dev'),
+                                context.string(name: 'EBC_ENV',      value: 'prod'),
                                 context.booleanParam(name: 'WAIT',   value: true)
                             ]
                             if (ebcDistro) ebcCreateParams << context.string(name: 'DISTRO', value: ebcDistro)

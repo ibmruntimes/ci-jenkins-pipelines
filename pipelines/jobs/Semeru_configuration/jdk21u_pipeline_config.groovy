@@ -34,7 +34,7 @@ class Config21 {
                 test                : false,
                 cleanWorkspaceAfterBuild: true,
                 additionalNodeLabels: [
-                        openj9      : 'hw.arch.x86 && sw.os.linux'
+                        openj9      : 'EBC:os=linux,arch=x86-64,distro=rhel10'
                 ],
                 additionalTestLabels: [
                         openj9      : '!(sw.os.cent.6||sw.os.rhel.6)',
@@ -248,7 +248,7 @@ class Config21 {
                     ]
                 ],
                 cleanWorkspaceAfterBuild: true,
-                additionalNodeLabels: 'hw.arch.x86 && sw.os.linux',
+                additionalNodeLabels: 'EBC:os=linux,arch=x86-64,distro=rhel10',
                 additionalTestLabels: '!(sw.os.cent.6||sw.os.rhel.6)',
                 configureArgs       : '--enable-dtrace',
                 additionalFileNameTag: 'IBM',

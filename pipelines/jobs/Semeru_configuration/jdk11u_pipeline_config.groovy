@@ -23,7 +23,7 @@ class Config11 {
             dockerFile: [
                     openj9  : 'pipelines/build/dockerFiles/cuda.dockerfile'
             ],
-            additionalNodeLabels : 'ci.project.openj9 && hw.arch.x86 && sw.os.linux',
+            additionalNodeLabels : 'EBC:os=linux,arch=x86-64,distro=rhel10',
             dockerNode          : 'sw.tool.docker',
             test                : false,
             configureArgs       : [
@@ -220,7 +220,7 @@ class Config11 {
                     'openj9'  : 'pipelines/build/dockerFiles/cuda.dockerfile'
             ],
             dockerNode          : 'sw.tool.docker',
-            additionalNodeLabels : 'ci.project.openj9 && hw.arch.x86 && sw.os.linux',
+            additionalNodeLabels : 'EBC:os=linux,arch=x86-64,distro=rhel10',
             test                : [
                     weekly : [
                         "sanity.external",
