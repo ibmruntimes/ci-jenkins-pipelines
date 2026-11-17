@@ -163,7 +163,7 @@ class Build {
             aqaBranch = buildConfig.AQA_REF
         }
 
-        vendorTestRepos += ",git@github.ibm.com:runtimes/test.git"
+        vendorTestRepos += ",https://github.ibm.com/runtimes/test.git"
         vendorTestBranches += "," + aqaBranch
         vendorTestDirs += ",functional"
 
@@ -353,7 +353,7 @@ class Build {
                 openj9JavaToBuild = openj9JavaToBuild[0..-2]
             }
             def suffix = "runtimes/openj9-openjdk-${openj9JavaToBuild}"
-            def jdkRepo = "git@github.ibm.com:${suffix}"
+            def jdkRepo = "https://github.ibm.com/${suffix}"
             def jobName = "SonarQube/SonarQube_Scan"
             def branch = 'ibm_sdk'
             // Extract branch from BUILD_ARGS if present and safe to do so
@@ -543,7 +543,7 @@ class Build {
                         def VENDOR_TEST_BRANCHES = ''
                         def VENDOR_TEST_DIRS = ''
                         if ("${testType}".contains('functional')) {
-                            VENDOR_TEST_REPOS = 'git@github.ibm.com:runtimes/test.git'
+                            VENDOR_TEST_REPOS = 'https://github.ibm.com/runtimes/test.git'
                             VENDOR_TEST_BRANCHES = aqaBranch
                             VENDOR_TEST_DIRS = 'functional'
                             // do not set functional vendor repo for FIPS
@@ -555,11 +555,11 @@ class Build {
                             }
                             customizedSdkUrl += " " + testimageUrl
                         } else if ("${testType}".contains('jck')) {
-                            VENDOR_TEST_REPOS = 'git@github.ibm.com:runtimes/jck.git'
+                            VENDOR_TEST_REPOS = 'https://github.ibm.com/runtimes/jck.git'
                             VENDOR_TEST_BRANCHES = "main"
                             VENDOR_TEST_DIRS = 'jck'
                         } else if ("${testType}".contains('special.openjdk')) {
-                            VENDOR_TEST_REPOS = 'git@github.ibm.com:runtimes/osb-tests.git'
+                            VENDOR_TEST_REPOS = 'https://github.ibm.com/runtimes/osb-tests.git'
                             VENDOR_TEST_BRANCHES = "ibm_tlda"
                             VENDOR_TEST_DIRS = 'openjdk'
                             // do not set openjdk vendor repo for FIPS

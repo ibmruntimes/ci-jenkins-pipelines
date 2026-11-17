@@ -5,7 +5,7 @@
         "build_branch"       : "ibm",
         "pipeline_url"       : "https://github.com/ibmruntimes/ci-jenkins-pipelines.git",
         "pipeline_branch"    : "ibm",
-        "installer_url"      : "git@github.ibm.com:runtimes/adoptium-installer.git",
+        "installer_url"      : "https://github.ibm.com/runtimes/adoptium-installer.git",
         "installer_branch"   : "ibm",
         "helper_ref"         : "ibm"
     },

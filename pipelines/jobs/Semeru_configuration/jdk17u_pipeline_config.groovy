@@ -182,7 +182,7 @@ class Config17 {
                         'openj9'      : '--enable-dtrace'
                 ],
                 additionalFileNameTag: 'IBM',
-                buildArgs : '--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk17 -b ibm_sdk --create-jre-image'
+                buildArgs : '--ssh --disable-adopt-branch-safety -r https://github.ibm.com/runtimes/openj9-openjdk-jdk17 -b ibm_sdk --create-jre-image'
         ],
 
         x64LinuxIBM  : [
@@ -254,7 +254,7 @@ class Config17 {
                         'openj9'      : '--enable-dtrace'
                 ],
                 additionalFileNameTag: 'IBM',
-                buildArgs : '--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk17 -b ibm_sdk --create-jre-image'
+                buildArgs : '--ssh --disable-adopt-branch-safety -r https://github.ibm.com/runtimes/openj9-openjdk-jdk17 -b ibm_sdk --create-jre-image'
         ],
 
         x64WindowsIBM: [
@@ -264,7 +264,7 @@ class Config17 {
                         openj9:     'EBC:os=windows,arch=x86-64,distro=windows2025'
                 ],
                 buildArgs : [
-                        'openj9' : '--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk17 -b ibm_sdk --create-jre-image'
+                        'openj9' : '--ssh --disable-adopt-branch-safety -r https://github.ibm.com/runtimes/openj9-openjdk-jdk17 -b ibm_sdk --create-jre-image'
                 ],
                 test                : 'default',
                 configureArgs       : [
@@ -284,7 +284,7 @@ class Config17 {
                         'openj9'      : '--disable-ccache'
                 ],
                 additionalFileNameTag: 'IBM',
-                buildArgs : '--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk17 -b ibm_sdk --create-jre-image'
+                buildArgs : '--ssh --disable-adopt-branch-safety -r https://github.ibm.com/runtimes/openj9-openjdk-jdk17 -b ibm_sdk --create-jre-image'
         ],
 
         s390xLinuxIBM    : [
@@ -350,7 +350,7 @@ class Config17 {
                 dockerNode : 'sw.tool.docker',
                 configureArgs       : '--enable-dtrace',
                 additionalFileNameTag: 'IBM',
-                buildArgs : '--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk17 -b ibm_sdk --create-jre-image'
+                buildArgs : '--ssh --disable-adopt-branch-safety -r https://github.ibm.com/runtimes/openj9-openjdk-jdk17 -b ibm_sdk --create-jre-image'
         ],
 
         ppc64leLinuxIBM    : [
@@ -421,7 +421,7 @@ class Config17 {
                         'openj9'      : ''
                 ],
                 additionalFileNameTag: 'IBM',
-                buildArgs : '--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk17 -b ibm_sdk --create-jre-image'
+                buildArgs : '--ssh --disable-adopt-branch-safety -r https://github.ibm.com/runtimes/openj9-openjdk-jdk17 -b ibm_sdk --create-jre-image'
         ],
 
         aarch64LinuxIBM    : [
@@ -485,7 +485,7 @@ class Config17 {
                 ],
                 additionalFileNameTag: 'IBM',
                 buildArgs : [
-                        'openj9'    : '--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk17 -b ibm_sdk --create-jre-image'
+                        'openj9'    : '--ssh --disable-adopt-branch-safety -r https://github.ibm.com/runtimes/openj9-openjdk-jdk17 -b ibm_sdk --create-jre-image'
                 ]
         ],
 
@@ -505,7 +505,7 @@ class Config17 {
                 ],
                 additionalFileNameTag: 'IBM',
                 buildArgs : [
-                        'openj9'    : '--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk17 -b ibm_sdk --create-jre-image'
+                        'openj9'    : '--ssh --disable-adopt-branch-safety -r https://github.ibm.com/runtimes/openj9-openjdk-jdk17 -b ibm_sdk --create-jre-image'
                 ]
         ]
   ]
