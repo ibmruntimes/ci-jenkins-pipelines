@@ -107,7 +107,7 @@ class Config25 {
                 test                : 'default',
                 configureArgs       : '--enable-dtrace',
                 additionalFileNameTag: 'IBM',
-                buildArgs           : '--create-jre-image --ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk25 -b ibm_sdk'
+                buildArgs           : '--create-jre-image --ssh --disable-adopt-branch-safety -r https://github.ibm.com/runtimes/openj9-openjdk-jdk25 -b ibm_sdk'
         ],
 
         x64LinuxIBM  : [
@@ -173,7 +173,7 @@ class Config25 {
                 additionalNodeLabels: 'hw.arch.x86 && sw.os.linux',
                 configureArgs       : '--enable-dtrace',
                 additionalFileNameTag: 'IBM',
-                buildArgs           : '--create-jre-image --ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk25 -b ibm_sdk'
+                buildArgs           : '--create-jre-image --ssh --disable-adopt-branch-safety -r https://github.ibm.com/runtimes/openj9-openjdk-jdk25 -b ibm_sdk'
         ],
 
         x64WindowsIBM: [
@@ -184,7 +184,7 @@ class Config25 {
                 test                : 'default',
                 configureArgs       : '--with-jdk-rc-name="IBM Semeru Runtime"',
                 additionalFileNameTag: 'IBM',
-                buildArgs           : '--create-jre-image --ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk25 -b ibm_sdk'
+                buildArgs           : '--create-jre-image --ssh --disable-adopt-branch-safety -r https://github.ibm.com/runtimes/openj9-openjdk-jdk25 -b ibm_sdk'
         ],
 
         ppc64AixIBM    : [
@@ -195,7 +195,7 @@ class Config25 {
                 cleanWorkspaceAfterBuild: true,
                 configureArgs       : '--disable-ccache',
                 additionalFileNameTag: 'IBM',
-                buildArgs           : '--create-jre-image --ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk25 -b ibm_sdk'
+                buildArgs           : '--create-jre-image --ssh --disable-adopt-branch-safety -r https://github.ibm.com/runtimes/openj9-openjdk-jdk25 -b ibm_sdk'
         ],
 
         s390xLinuxIBM    : [
@@ -259,7 +259,7 @@ class Config25 {
                 dockerCredential : 'ea4b3e98-4334-48d4-8211-98deb8767b55',
                 dockerNode : 'sw.tool.docker',
                 additionalFileNameTag: 'IBM',
-                buildArgs           : '--create-jre-image --ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk25 -b ibm_sdk'
+                buildArgs           : '--create-jre-image --ssh --disable-adopt-branch-safety -r https://github.ibm.com/runtimes/openj9-openjdk-jdk25 -b ibm_sdk'
         ],
 
         ppc64leLinuxIBM    : [
@@ -324,7 +324,7 @@ class Config25 {
                 cleanWorkspaceAfterBuild: true,
                 additionalNodeLabels: 'ci.project.openj9 && hw.arch.ppc64le && sw.os.linux',
                 additionalFileNameTag: 'IBM',
-                buildArgs           : '--create-jre-image --ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk25 -b ibm_sdk'
+                buildArgs           : '--create-jre-image --ssh --disable-adopt-branch-safety -r https://github.ibm.com/runtimes/openj9-openjdk-jdk25 -b ibm_sdk'
         ],
 
         aarch64LinuxIBM    : [
@@ -384,7 +384,7 @@ class Config25 {
                 configureArgs       : '--enable-dtrace',
                 cleanWorkspaceAfterBuild : true,
                 additionalFileNameTag: 'IBM',
-                buildArgs           : '--create-jre-image --ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk25 -b ibm_sdk'
+                buildArgs           : '--create-jre-image --ssh --disable-adopt-branch-safety -r https://github.ibm.com/runtimes/openj9-openjdk-jdk25 -b ibm_sdk'
         ],
 
         aarch64MacIBM: [
@@ -395,7 +395,7 @@ class Config25 {
                 test                : 'default',
                 configureArgs       : '--enable-dtrace --disable-warnings-as-errors --with-noncompressedrefs',
                 additionalFileNameTag: 'IBM',
-                buildArgs           : '--create-jre-image --ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk25 -b ibm_sdk'
+                buildArgs           : '--create-jre-image --ssh --disable-adopt-branch-safety -r https://github.ibm.com/runtimes/openj9-openjdk-jdk25 -b ibm_sdk'
         ]
   ]
 

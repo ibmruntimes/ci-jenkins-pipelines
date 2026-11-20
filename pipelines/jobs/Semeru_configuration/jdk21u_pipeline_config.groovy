@@ -185,7 +185,7 @@ class Config21 {
                 test                : 'default',
                 configureArgs       : '--enable-dtrace',
                 additionalFileNameTag: 'IBM',
-                buildArgs           : '--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk21 -b ibm_sdk --create-jre-image'
+                buildArgs           : '--ssh --disable-adopt-branch-safety -r https://github.ibm.com/runtimes/openj9-openjdk-jdk21 -b ibm_sdk --create-jre-image'
         ],
 
         x64LinuxIBM  : [
@@ -252,7 +252,7 @@ class Config21 {
                 additionalTestLabels: '!(sw.os.cent.6||sw.os.rhel.6)',
                 configureArgs       : '--enable-dtrace',
                 additionalFileNameTag: 'IBM',
-                buildArgs           : '--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk21 -b ibm_sdk --create-jre-image'
+                buildArgs           : '--ssh --disable-adopt-branch-safety -r https://github.ibm.com/runtimes/openj9-openjdk-jdk21 -b ibm_sdk --create-jre-image'
         ],
 
         x64WindowsIBM: [
@@ -263,7 +263,7 @@ class Config21 {
                 test                : 'default',
                 configureArgs       : '--with-jdk-rc-name="IBM Semeru Runtime"',
                 additionalFileNameTag: 'IBM',
-                buildArgs           : '--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk21 -b ibm_sdk --create-jre-image'
+                buildArgs           : '--ssh --disable-adopt-branch-safety -r https://github.ibm.com/runtimes/openj9-openjdk-jdk21 -b ibm_sdk --create-jre-image'
         ],
 
         ppc64AixIBM    : [
@@ -274,7 +274,7 @@ class Config21 {
                 cleanWorkspaceAfterBuild: true,
                 configureArgs       : '--disable-ccache',
                 additionalFileNameTag: 'IBM',
-                buildArgs           : '--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk21 -b ibm_sdk --create-jre-image'
+                buildArgs           : '--ssh --disable-adopt-branch-safety -r https://github.ibm.com/runtimes/openj9-openjdk-jdk21 -b ibm_sdk --create-jre-image'
         ],
 
         s390xLinuxIBM    : [
@@ -340,7 +340,7 @@ class Config21 {
                 dockerCredential : 'ea4b3e98-4334-48d4-8211-98deb8767b55',
                 dockerNode : 'sw.tool.docker',
                 additionalFileNameTag: 'IBM',
-                buildArgs           : '--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk21 -b ibm_sdk --create-jre-image'
+                buildArgs           : '--ssh --disable-adopt-branch-safety -r https://github.ibm.com/runtimes/openj9-openjdk-jdk21 -b ibm_sdk --create-jre-image'
         ],
 
         ppc64leLinuxIBM    : [
@@ -409,7 +409,7 @@ class Config21 {
                     openj9:  'ci.project.openj9 && hw.arch.ppc64le && sw.os.linux'
                 ],
                 additionalFileNameTag: 'IBM',
-                buildArgs           : '--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk21 -b ibm_sdk --create-jre-image'
+                buildArgs           : '--ssh --disable-adopt-branch-safety -r https://github.ibm.com/runtimes/openj9-openjdk-jdk21 -b ibm_sdk --create-jre-image'
         ],
 
         aarch64LinuxIBM    : [
@@ -469,7 +469,7 @@ class Config21 {
                 configureArgs       : '--enable-dtrace',
                 additionalFileNameTag: 'IBM',
                 cleanWorkspaceAfterBuild: true,
-                buildArgs           : '--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk21 -b ibm_sdk --create-jre-image'
+                buildArgs           : '--ssh --disable-adopt-branch-safety -r https://github.ibm.com/runtimes/openj9-openjdk-jdk21 -b ibm_sdk --create-jre-image'
         ],
 
         aarch64MacIBM: [
@@ -480,7 +480,7 @@ class Config21 {
                 test                : 'default',
                 configureArgs       : '--enable-dtrace --disable-warnings-as-errors --with-noncompressedrefs',
                 additionalFileNameTag: 'IBM',
-                buildArgs           : '--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk21 -b ibm_sdk --create-jre-image'
+                buildArgs           : '--ssh --disable-adopt-branch-safety -r https://github.ibm.com/runtimes/openj9-openjdk-jdk21 -b ibm_sdk --create-jre-image'
         ]
   ]
 

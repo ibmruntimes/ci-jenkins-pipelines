@@ -207,7 +207,7 @@ class Config11 {
                     'openj9'      : '--enable-dtrace=auto '
             ],
             additionalFileNameTag: 'IBM',
-            buildArgs : '--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk11 -b ibm_sdk'
+            buildArgs : '--ssh --disable-adopt-branch-safety -r https://github.ibm.com/runtimes/openj9-openjdk-jdk11 -b ibm_sdk'
         ],
 
         x64LinuxIBM  : [
@@ -276,7 +276,7 @@ class Config11 {
                     'openj9'      : '--disable-ccache --enable-dtrace=auto'
             ],
             additionalFileNameTag: 'IBM',
-            buildArgs : '--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk11 -b ibm_sdk'
+            buildArgs : '--ssh --disable-adopt-branch-safety -r https://github.ibm.com/runtimes/openj9-openjdk-jdk11 -b ibm_sdk'
         ],
 
         x64WindowsIBM: [
@@ -286,7 +286,7 @@ class Config11 {
                     openj9:     'EBC:os=windows,arch=x86-64,distro=windows2025'
             ],
             buildArgs : [
-                    openj9 : '--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk11 -b ibm_sdk'
+                    openj9 : '--ssh --disable-adopt-branch-safety -r https://github.ibm.com/runtimes/openj9-openjdk-jdk11 -b ibm_sdk'
             ],
             test                : 'default',
             configureArgs       : [
@@ -304,7 +304,7 @@ class Config11 {
             test                : 'default',
             additionalFileNameTag: 'IBM',
             cleanWorkspaceAfterBuild: true,
-            buildArgs : '--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk11 -b ibm_sdk'
+            buildArgs : '--ssh --disable-adopt-branch-safety -r https://github.ibm.com/runtimes/openj9-openjdk-jdk11 -b ibm_sdk'
         ],
 
         s390xLinuxIBM    : [
@@ -370,7 +370,7 @@ class Config11 {
             dockerNode : 'sw.tool.docker',
             configureArgs       : '--enable-dtrace=auto',
             additionalFileNameTag: 'IBM',
-            buildArgs : '--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk11 -b ibm_sdk'
+            buildArgs : '--ssh --disable-adopt-branch-safety -r https://github.ibm.com/runtimes/openj9-openjdk-jdk11 -b ibm_sdk'
         ],
 
         ppc64leLinuxIBM    : [
@@ -441,7 +441,7 @@ class Config11 {
                         'openj9'      : '--enable-dtrace=auto'
             ],
             additionalFileNameTag: 'IBM',
-            buildArgs : '--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk11 -b ibm_sdk'
+            buildArgs : '--ssh --disable-adopt-branch-safety -r https://github.ibm.com/runtimes/openj9-openjdk-jdk11 -b ibm_sdk'
         ],
 
         aarch64LinuxIBM    : [
@@ -507,7 +507,7 @@ class Config11 {
                     'bisheng' : '--enable-dtrace=auto --with-extra-cflags=-fstack-protector-strong --with-extra-cxxflags=-fstack-protector-strong --with-jvm-variants=server'
             ],
             additionalFileNameTag: 'IBM',
-            buildArgs : '--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk11 -b ibm_sdk'
+            buildArgs : '--ssh --disable-adopt-branch-safety -r https://github.ibm.com/runtimes/openj9-openjdk-jdk11 -b ibm_sdk'
         ],
 
         aarch64MacIBM: [
@@ -522,7 +522,7 @@ class Config11 {
                 ],
                 test                : 'default',
                 additionalFileNameTag: 'IBM',
-                buildArgs : '--ssh --disable-adopt-branch-safety -r git@github.ibm.com:runtimes/openj9-openjdk-jdk11 -b ibm_sdk'
+                buildArgs : '--ssh --disable-adopt-branch-safety -r https://github.ibm.com/runtimes/openj9-openjdk-jdk11 -b ibm_sdk'
         ]
   ]
 
